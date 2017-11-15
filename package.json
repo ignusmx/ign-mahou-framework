@@ -1,0 +1,26 @@
+{
+  "name": "ign-mahou-framework",
+  "version": "1.0.0",
+  "description": "IGNUS Framework for speed web app prototyping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masterkitano/ign-mahou-framework.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masterkitano/ign-mahou-framework/issues"
+  },
+  "homepage": "https://github.com/masterkitano/ign-mahou-framework#readme",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.11",
+    "angular": "^1.6.6",
+    "bootstrap": "^4.0.0-beta.2",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.8"
+  }
+}
