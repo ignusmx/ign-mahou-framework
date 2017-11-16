@@ -1,16 +1,9 @@
 angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
   return {
     restrict: 'E',
-    scope: { config: '=' },
-    templateUrl: function(elem,attrs)
-    {
-        if(attrs.templateUrl == null)
-        {
-            throw "mhDatagrid template not defined"; 
-        }
-        return attrs.templateUrl;
-    },
-    compile : function(elem, attrs)
+    scope: true,
+    transclude : true,
+    compile : function(elem, attrs, ctrl, transclude)
     {
         var row = elem.find(".mh-datagrid-row");
         row.attr("ng-repeat", "row in config.collection");
@@ -23,7 +16,7 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
 
         var rowData = elem.find(".mh-datagrid-row-text");
         rowData.attr("ng-if","column.type != 'image'")
-        rowData.html("{{ row[column.modelKey] }}");
+        rowData.html("{{controller.selectAllModel}}");
 
         var rowData = elem.find(".mh-datagrid-row-image");
         rowData.attr("ng-if","column.type == 'image'")
@@ -36,11 +29,108 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
         selectRow.attr("ng-if","config.enableRowSelect !== false");
 
         var selectAllCheckbox = elem.find(".mh-datagrid-select-all-checkbox");
-        selectAllCheckbox.attr("ng-click","controller.selectAll()");
+        selectAllCheckbox.attr("ng-model","asd");
+        selectAllCheckbox.attr("ng-change","controller.selectAll()");
 
         var selectCheckbox = elem.find(".mh-datagrid-select-checkbox");
-        selectCheckbox.attr("ng-click","controller.selectRow(row)");
+        
+        return {
+            post : function(scope, el, attrs, ctrl, transclude)
+            {
+                transclude(function(elem)
+                {
+                    var elem = angular.copy(elem);
+                    var row = elem.find(".mh-datagrid-row");
+                    row.attr("ng-repeat", "row in config.collection");
+
+                    var col = elem.find(".mh-datagrid-col");
+                    col.attr("ng-repeat", "column in config.columns");
+
+                    var columnName = elem.find(".mh-datagrid-col-name");
+                    columnName.html("{{column.name}}");
+
+                    var rowData = elem.find(".mh-datagrid-row-text");
+                    rowData.attr("ng-if","column.type != 'image'")
+                    rowData.html("{{controller.selectAllModel}}");
+
+                    var rowData = elem.find(".mh-datagrid-row-image");
+                    rowData.attr("ng-if","column.type == 'image'")
+                    rowData.attr("ng-src", "{{ row[column.modelKey] }}")
+
+                    var selectAll = elem.find(".mh-datagrid-col-select-all");
+                    selectAll.attr("ng-if","config.enableRowSelect !== false");
+
+                    var selectRow = elem.find(".mh-datagrid-col-select");
+                    selectRow.attr("ng-if","config.enableRowSelect !== false");
+
+                    var selectAllCheckbox = elem.find(".mh-datagrid-select-all-checkbox");
+                    selectAllCheckbox.attr("ng-model","asd");
+                    selectAllCheckbox.attr("ng-change","controller.selectAll()");
+
+                    var selectCheckbox = elem.find(".mh-datagrid-select-checkbox");
+                    $compile(elem)(scope);
+                    el.html(elem);
+                }); 
+            }
+        }
+
     },
-    controller: 'MHDatagridCtrl as controller'
+    controller: 'MHDatagridCtrl',
+    controllerAs : 'controller'
+  };
+});
+
+angular.module('mahou').directive('mhDatagridTemplate', function ( $compile ) {
+  return {
+    restrict: 'E',
+    transclude : true,
+    link : function(scope, el, attrs, ctrl, transclude)
+    {
+        console.log(scope);
+        transclude(function(elem)
+        {
+            var elem = angular.copy(elem);
+            var row = elem.find(".mh-datagrid-row");
+            row.attr("ng-repeat", "row in config.collection");
+
+            var col = elem.find(".mh-datagrid-col");
+            col.attr("ng-repeat", "column in config.columns");
+
+            var columnName = elem.find(".mh-datagrid-col-name");
+            columnName.html("{{column.name}}");
+
+            var rowData = elem.find(".mh-datagrid-row-text");
+            rowData.attr("ng-if","column.type != 'image'")
+            rowData.html("{{controller.selectAllModel}}");
+
+            var rowData = elem.find(".mh-datagrid-row-image");
+            rowData.attr("ng-if","column.type == 'image'")
+            rowData.attr("ng-src", "{{ row[column.modelKey] }}")
+
+            var selectAll = elem.find(".mh-datagrid-col-select-all");
+            selectAll.attr("ng-if","config.enableRowSelect !== false");
+
+            var selectRow = elem.find(".mh-datagrid-col-select");
+            selectRow.attr("ng-if","config.enableRowSelect !== false");
+
+            var selectAllCheckbox = elem.find(".mh-datagrid-select-all-checkbox");
+            selectAllCheckbox.attr("ng-model","asd");
+            selectAllCheckbox.attr("ng-change","controller.selectAll()");
+
+            var selectCheckbox = elem.find(".mh-datagrid-select-checkbox");
+            $compile(elem)(scope);
+            el.html(elem);
+        }); 
+    }
+  };
+});
+
+angular.module('mahou').directive('mhTemplateUrl', function ( $compile ) {
+  return {
+    restrict: 'A',
+    templateUrl : function(el, attrs)
+    {
+        return attrs.mhTemplateUrl;
+    }
   };
 });

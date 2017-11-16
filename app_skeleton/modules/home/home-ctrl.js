@@ -24,6 +24,11 @@
 				enableRowSelect : true
 			};
 
+			$scope.log = function()
+			{
+				console.log("asd");
+			}
+
 			$scope.updateCollection = function(){
 				$scope.config.collection = [
 								{id:"10", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail2@mail.com"},
