@@ -7,13 +7,25 @@ angular
 
         this.selectAllModel = false;
         
-        this.selectAll = function(){
+        this.selectAll = function()
+        {
             self.selectAllModel = true;
-        	console.log("select all rows!");
+
+            if($scope.mhSelectAllChange != null)
+            {
+                $scope.mhSelectAllChange();
+            }
         }
 
-        this.selectRow = function(model){
+        this.selectRow = function(model)
+        {
         	console.log("selected model is:", model);
+        }
+
+        this.evaluatePropertyExpression = function(model, expression)
+        {
+            console.log(expression, $scope.$eval(expression));
+            return $scope.$eval(expression);
         }
     }
 );
