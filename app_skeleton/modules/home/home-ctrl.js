@@ -51,11 +51,6 @@
 				console.log("a row was selected:", asd);
 			}
 
-			$scope.log = function()
-			{
-				console.log("asd");
-			}
-
 			$scope.updateCollection = function()
 			{
 				$scope.collection.push(

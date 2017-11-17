@@ -52,7 +52,6 @@ angular
         
         this.selectAll = function()
         {
-            console.log("select all!");
             if(self.allRowsSelected)
             {
                 self.selectedRows = [];
@@ -97,7 +96,6 @@ angular
 
         this.evaluatePropertyExpression = function(model, expression)
         {
-            console.log(expression, $scope.$eval(expression));
             return $scope.$eval(expression);
         }
 
