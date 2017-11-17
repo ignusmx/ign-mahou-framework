@@ -1,7 +1,6 @@
 <button ng-click="updateCollection()">boton</button>
 <mh-datagrid 
-config="config"
-mh-columns = "columns"
+mh-cells-config = "cellsConfig"
 mh-row-buttons = "rowButtons",
 mh-enable-row-buttons = "false",
 mh-collection = "collection"
@@ -11,9 +10,8 @@ mh-template-url="modules/home/grid-template.html">
 </mh-datagrid>
 
 <mh-datagrid 
-config="config"
 mh-enable-row-select = "false"
-mh-columns = "columns"
+mh-cells-config = "cellsConfig"
 mh-row-buttons = "rowButtons"
 mh-collection = "collection"
 mh-select-all-change="selectAllEvent(selectedRows)" 
@@ -22,9 +20,8 @@ mh-template-url="modules/home/grid-template.html">
 </mh-datagrid>
 
 <mh-datagrid 
-config="config"
 mh-enable-row-select = "true"
-mh-columns = "columns"
+mh-cells-config = "cellsConfig"
 mh-row-buttons = "rowButtons"
 mh-collection = "collection"
 mh-select-all-change="selectAllEvent(selectedRows)" 
@@ -33,9 +30,7 @@ mh-template-url="modules/home/grid-template.html">
 </mh-datagrid>
 
 <mh-datagrid 
-config="config"
-mh-enable-row-select = "true"
-mh-columns = "columns"
+mh-cells-config = "cellsConfig"
 mh-row-buttons = "rowButtons"
 mh-collection = "collection"
 mh-select-all-change="selectAllEvent(selectedRows)" 

@@ -25,18 +25,18 @@
 								{id:"12", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail@mail.com", address:"eee"}
 							];
 			$scope.status = "no se pudo";
-			$scope.columns = 
+			$scope.cellsConfig = 
 				[
-					{ name : "id", valueExpression : "row.model.id", type: "text"},
-					{ name : "nombre", valueExpression : "row.model.name", type: "image"},
-					{ name : "correo", valueExpression : "row.model.email", type: "text"},
-					{ name : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
+					{ name:"id", label : "id", valueExpression : "row.model.id", type: "text"},
+					{ name:"name", label : "nombre", valueExpression : "row.model.name", type: "image"},
+					{ name:"email", label : "correo", valueExpression : "row.model.email", type: "text"},
+					{ name:"address", label : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
 				]
 				
 			$scope.rowButtons = 
 				[
-					{ name : "edit", action : $scope.editClick },
-					{ name : "delete", action : $scope.deleteClick }
+					{ name: "edit", action : $scope.editClick },
+					{ name: "delete", action : $scope.deleteClick }
 				]
 			$scope.collection = collection;
 			$scope.enableRowSelect = true;		

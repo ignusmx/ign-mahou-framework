@@ -1,7 +1,7 @@
 angular
 .module('mahou')
 .controller('MHDatagridCtrl', 
-    function MHDatagridCtrl($scope, $element, $attrs) 
+    function MHDatagridCtrl($scope, $element, $attrs, $sce) 
     {
         var self = this;
 
@@ -99,6 +99,14 @@ angular
             return $scope.$eval(expression);
         }
 
+        this.getElementName = function(element)
+        {
+            console.log(element);
+        }
+
+        this.log = function(){
+            console.log("logeeed!");
+        }
         //private functions
         function updateAllRowsSelected()
         {

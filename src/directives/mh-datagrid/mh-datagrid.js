@@ -6,7 +6,7 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
             mhEnableRowSelect : "=",
             mhEnableRowButtons : "=",
             mhTemplateUrl : "=",
-            mhColumns : "=",
+            mhCellsConfig : "=",
             mhRowButtons : "=",
             mhCollection : "=",
             mhSelectAllChange : "&",
@@ -25,10 +25,18 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
                 selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
 
                 var dataHeader = elem.find(".mh-datagrid-data-header");
-                dataHeader.attr("ng-repeat", "column in mhColumns");
+                dataHeader.attr("ng-repeat", "cellConfig in mhCellsConfig");
+                var customHeaderContent = elem.find(".mh-datagrid-custom-content");
 
-                var headerName = elem.find(".mh-datagrid-header-name");
-                headerName.html("{{column.name}}");
+                for(var i=0; i < scope.mhCellsConfig.length; i++)
+                {
+                    var customContentElem = elem.find(".mh-datagrid-custom-content[name="+scope.mhCellsConfig[i].name+"]");
+                    var label = customContentElem.find(".mh-datagrid-label");
+                    label.html("{{ cellConfig.name }}");
+                    scope.mhCellsConfig[i].customContent = customContentElem.html();
+                }
+
+                dataHeader.attr("mh-compile","cellConfig.customContent == null ? cellConfig.label : cellConfig.customContent");
 
                 var buttonsHeader = elem.find(".mh-datagrid-btns-header");
                 buttonsHeader.attr("ng-if","mhEnableRowButtons !== false");
@@ -37,15 +45,15 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
                 row.attr("ng-repeat", "row in controller.internalCollection");
 
                 var dataCell = elem.find(".mh-datagrid-data-cell");
-                dataCell.attr("ng-repeat", "column in mhColumns");
+                dataCell.attr("ng-repeat", "cellConfig in mhCellsConfig");
 
                 var rowData = elem.find(".mh-datagrid-row-text");
-                rowData.attr("ng-if","column.type != 'image'")
-                rowData.html("{{$eval(column.valueExpression)}}");
+                rowData.attr("ng-if","cellConfig.type != 'image'")
+                rowData.html("{{$eval(cellConfig.valueExpression)}}");
 
                 var rowData = elem.find(".mh-datagrid-row-image");
-                rowData.attr("ng-if","column.type == 'image'")
-                rowData.attr("ng-src", "{{$eval(column.valueExpression)}}")
+                rowData.attr("ng-if","cellConfig.type == 'image'")
+                rowData.attr("ng-src", "{{$eval(cellConfig.valueExpression)}}")
 
                 var checkboxCell = elem.find(".mh-datagrid-checkbox-cell");
                 checkboxCell.attr("ng-if","mhEnableRowSelect !== false");
@@ -93,4 +101,4 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
         controller: 'MHDatagridCtrl',
         controllerAs : 'controller'
     };
-})
+});
