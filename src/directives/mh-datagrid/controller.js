@@ -52,6 +52,7 @@ angular
         
         this.selectAll = function()
         {
+            console.log("select all!");
             if(self.allRowsSelected)
             {
                 self.selectedRows = [];
@@ -72,7 +73,13 @@ angular
 
             if($scope.mhSelectAllChange != null)
             {
-                $scope.mhSelectAllChange();
+                var callback = $scope.mhSelectAllChange();
+                while(typeof(callback) == "function")
+                {
+                    callback = callback(self.selectedRows);
+                }
+                console.log(typeof($scope.mhSelectAllChange()()));
+                //$scope.mhSelectAllChange({selectedRows : {selectedRows : self.selectedRows}});
             }
         }
 
@@ -89,7 +96,12 @@ angular
             }
 
             updateAllRowsSelected();
-        	console.log("selected model is:", row.model);
+
+            if($scope.mhSelectRowChange != null)
+            {
+                console.log($scope.mhSelectRowChange, row);
+                $scope.mhSelectRowChange({row:row});
+            }
         }
 
         this.getSetRowCheckboxModel = function()

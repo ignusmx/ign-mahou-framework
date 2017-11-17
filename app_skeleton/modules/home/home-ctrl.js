@@ -43,9 +43,14 @@
 				enableRowSelect : true
 			};			
 
-			$scope.selectAllEvent = function()
+			$scope.selectAllEvent = function(rows)
 			{
-				//alert("home ctrl select all event!");
+				console.log("all selected:", rows);
+			}
+
+			$scope.selectRowEvent = function(asd)
+			{
+				console.log("a row was selected:", asd);
 			}
 
 			$scope.log = function()

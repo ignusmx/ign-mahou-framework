@@ -5,12 +5,14 @@ angular.module('app').directive('appGrid', function ( $compile )
         scope: 
         { 
             config : '=',
-            selectAllChange : '&',
+            selectAllChange : '&'
         },
         templateUrl : "modules/home/app-grid.html",
         link: function(scope, el, attrs, ctrl, transclude)
         {
-            
+            scope.selectRowChange = function(eee){
+                console.log("eee:", eee);
+            }   
         }
     };
 });

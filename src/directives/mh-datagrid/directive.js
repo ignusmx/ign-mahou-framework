@@ -1,18 +1,20 @@
-angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
+angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
         restrict: 'E',
         scope: 
         { 
             config : '=',
             mhSelectAllChange : '&',
+            mhSelectRowChange : '&',
+            mhSelectedRows : '&'
         },
         transclude : true,
-        link: function(scope, el, attrs, ctrl, transclude)
+        link : function(scope, el, attrs, ctrl, transclude)
         {
-            transclude(function(elem)
+            function compileGridTemplate(elem)
             {
-                var elem = angular.copy(elem);
                 var row = elem.find(".mh-datagrid-row");
+                console.log(row);
                 row.attr("ng-repeat", "row in controller.internalCollection");
 
                 var col = elem.find(".mh-datagrid-col");
@@ -48,13 +50,37 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
                     var rowButtonElement = elem.find(".mh-datagrid-row-btn[name="+scope.config.rowButtons[i].name+"]");
                     rowButtonElement.attr("ng-click", "config.rowButtons["+i+"].action(row.model)");
                 }
-                
 
-                $compile(elem)(scope);
-                el.html(elem);
-            }); 
+                return elem;
+            }
+
+            if(attrs.templateUrl == null)
+            {
+                transclude(function(clone, scope){
+                   console.log("transclude");
+                   var compiled = $compile(compileGridTemplate(clone))(scope);
+                    
+                    el.append(compiled);
+                    //el.find(".eldiv").html("transcluded!");
+                    
+                    
+                });
+            }
+            else
+            {
+                $templateRequest(attrs.templateUrl)
+                .then(function (response) 
+                { 
+                    tpl = response;
+
+                    // compile the html, then link it to the scope
+                    $elem = $compile(compileGridTemplate($compile(tpl)(scope)))(scope);
+                    // append the compiled template inside the element
+                    el.append($elem);                    
+                }); 
+            }
         },
         controller: 'MHDatagridCtrl',
         controllerAs : 'controller'
     };
-});
+})
