@@ -25,23 +25,21 @@
 								{id:"12", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail@mail.com", address:"eee"}
 							];
 			$scope.status = "no se pudo";
-			$scope.config = {
-				columns: 
+			$scope.columns = 
 				[
 					{ name : "id", valueExpression : "row.model.id", type: "text"},
 					{ name : "nombre", valueExpression : "row.model.name", type: "image"},
 					{ name : "correo", valueExpression : "row.model.email", type: "text"},
 					{ name : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
 				]
-				,
-				rowButtons : 
+				
+			$scope.rowButtons = 
 				[
 					{ name : "edit", action : $scope.editClick },
 					{ name : "delete", action : $scope.deleteClick }
-				],
-				collection : collection,
-				enableRowSelect : true
-			};			
+				]
+			$scope.collection = collection;
+			$scope.enableRowSelect = true;		
 
 			$scope.selectAllEvent = function(rows)
 			{
@@ -60,7 +58,7 @@
 
 			$scope.updateCollection = function()
 			{
-				$scope.config.collection.push(
+				$scope.collection.push(
 								{id:"10", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail2@mail.com"},
 								);
 			}

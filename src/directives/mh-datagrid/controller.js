@@ -6,7 +6,7 @@ angular
         var self = this;
 
         this.allRowsSelected = false;
-        this.collection = $scope.config.collection;
+        this.collection = $scope.mhCollection;
         this.checkboxModels = [];
         this.selectedRows = [];
         this.internalCollection = [];
@@ -18,7 +18,7 @@ angular
 
         this.testModel = false;
 
-        $scope.$watchCollection("config.collection", 
+        $scope.$watchCollection("mhCollection", 
             function( newCollection, oldCollection ) 
             {
                 var tempInternalCollection = [];
