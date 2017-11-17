@@ -71,16 +71,7 @@ angular
                 self.internalCollection[i].selected = self.allRowsSelected;
             }
 
-            if($scope.mhSelectAllChange != null)
-            {
-                var callback = $scope.mhSelectAllChange();
-                while(typeof(callback) == "function")
-                {
-                    callback = callback(self.selectedRows);
-                }
-                console.log(typeof($scope.mhSelectAllChange()()));
-                //$scope.mhSelectAllChange({selectedRows : {selectedRows : self.selectedRows}});
-            }
+            $scope.mhSelectAllChange({selectedRows : self.selectedRows});
         }
 
         this.rowSelectChange = function(row)
@@ -96,12 +87,7 @@ angular
             }
 
             updateAllRowsSelected();
-
-            if($scope.mhSelectRowChange != null)
-            {
-                console.log($scope.mhSelectRowChange, row);
-                $scope.mhSelectRowChange({row:row});
-            }
+            $scope.mhSelectRowChange({row:row});
         }
 
         this.getSetRowCheckboxModel = function()

@@ -1,5 +1,5 @@
 <button ng-click="updateCollection()">boton</button>
-<mh-datagrid config="config" mh-select-all-change="selectAllChange" mh-select-row-change="selectRowChange(row)" template-url="modules/home/grid-template.html">
+<mh-datagrid config="config" mh-select-all-change="selectAllEvent(selectedRows)" mh-select-row-change="selectRowEvent(row)" template-url="modules/home/grid-template.html">
 	<div class="container">
 		<table class="table">
 			<thead>
