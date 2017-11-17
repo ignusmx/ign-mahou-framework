@@ -40,7 +40,7 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile ) {
                 selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
 
                 var selectCheckbox = elem.find(".mh-datagrid-select-checkbox");
-                selectCheckbox.attr("ng-change","controller.selectRow(row)");
+                selectCheckbox.attr("ng-change","controller.rowSelectChange(row)");
                 selectCheckbox.attr("ng-model", "row.selected");
 
                 for(var i=0; i < scope.config.rowButtons.length; i++)

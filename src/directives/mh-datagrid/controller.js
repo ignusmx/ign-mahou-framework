@@ -8,7 +8,7 @@ angular
         this.allRowsSelected = false;
         this.collection = $scope.config.collection;
         this.checkboxModels = [];
-        this.selectedItems = [];
+        this.selectedRows = [];
         this.internalCollection = [];
 
         for(var i = 0; i < this.collection.length; i++)
@@ -47,11 +47,23 @@ angular
                 }
 
                 self.internalCollection  = tempInternalCollection;
+                updateAllRowsSelected();
             });
         
         this.selectAll = function()
         {
-            self.selectedItems = angular.copy(self.collection);
+            if(self.allRowsSelected)
+            {
+                self.selectedRows = [];
+                for(var i=0; i< self.internalCollection.length; i++)
+                {
+                    self.selectedRows.push(self.internalCollection[i]);
+                }
+            }
+            else
+            {
+                self.selectedRows = [];
+            }
 
             for(var i = 0; i < self.internalCollection.length; i++)
             {
@@ -64,8 +76,19 @@ angular
             }
         }
 
-        this.selectRow = function(row)
+        this.rowSelectChange = function(row)
         {
+            if(row.selected)
+            {
+                self.selectedRows.push(row);
+            }
+            else
+            {
+                var index = self.selectedRows.indexOf(row);
+                self.selectedRows.splice(index,1);
+            }
+
+            updateAllRowsSelected();
         	console.log("selected model is:", row.model);
         }
 
@@ -78,6 +101,19 @@ angular
         {
             console.log(expression, $scope.$eval(expression));
             return $scope.$eval(expression);
+        }
+
+        //private functions
+        function updateAllRowsSelected()
+        {
+            if(self.selectedRows.length == self.internalCollection.length)
+            {
+                self.allRowsSelected = true;
+            }
+            else
+            {
+                self.allRowsSelected = false;
+            }
         }
     }
 );
