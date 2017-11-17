@@ -56,14 +56,12 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
 
             if(attrs.templateUrl == null)
             {
-                transclude(function(clone, scope){
-                   console.log("transclude");
-                   var compiled = $compile(compileGridTemplate(clone))(scope);
-                    
-                    el.append(compiled);
-                    //el.find(".eldiv").html("transcluded!");
-                    
-                    
+                transclude(function(clone)
+                {
+                    var transcludeTemplateCopy = angular.copy(clone);
+                    var compiledGridTempalte = compileGridTemplate(transcludeTemplateCopy);
+                    var compiledElement = $compile(compiledGridTempalte)(scope);
+                    el.append(compiledElement);
                 });
             }
             else
@@ -71,10 +69,10 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
                 $templateRequest(attrs.templateUrl)
                 .then(function (response) 
                 { 
-                    tpl = response;
-
+                    var template = response;
+                    var compiledElement = compileGridTemplate($compile(template)(scope));
                     // compile the html, then link it to the scope
-                    $elem = $compile(compileGridTemplate($compile(tpl)(scope)))(scope);
+                    $elem = $compile(compiledElement)(scope);
                     // append the compiled template inside the element
                     el.append($elem);                    
                 }); 
