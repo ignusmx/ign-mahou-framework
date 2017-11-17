@@ -30,7 +30,7 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
 
                 for(var i=0; i < scope.mhCellsConfig.length; i++)
                 {
-                    var customContentElem = elem.find(".mh-datagrid-custom-content[name="+scope.mhCellsConfig[i].name+"]");
+                    var customContentElem = dataHeader.find("mh-datagrid-custom-content[name="+scope.mhCellsConfig[i].name+"]");
                     var label = customContentElem.find(".mh-datagrid-label");
                     label.html("{{ cellConfig.name }}");
                     scope.mhCellsConfig[i].customContent = customContentElem.html();
@@ -47,13 +47,30 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
                 var dataCell = elem.find(".mh-datagrid-data-cell");
                 dataCell.attr("ng-repeat", "cellConfig in mhCellsConfig");
 
-                var rowData = elem.find(".mh-datagrid-row-text");
-                rowData.attr("ng-if","cellConfig.type != 'image'")
-                rowData.html("{{$eval(cellConfig.valueExpression)}}");
+                for(var i=0; i < scope.mhCellsConfig.length; i++)
+                {
+                    var customContentElem = dataCell.find("mh-datagrid-custom-content[name="+scope.mhCellsConfig[i].name+"]");
+                    
+                    if(customContentElem.length > 0)
+                    {
+                        var expressionElem = customContentElem.find(".mh-datagrid-value-expression");
+                        var expressionElemType = expressionElem.prop("tagName");
 
-                var rowData = elem.find(".mh-datagrid-row-image");
-                rowData.attr("ng-if","cellConfig.type == 'image'")
-                rowData.attr("ng-src", "{{$eval(cellConfig.valueExpression)}}")
+                        if(expressionElemType.toUpperCase() == "IMG")
+                        {
+                            expressionElem.attr("ng-src", "{{$eval(cellConfig.valueExpression)}}");
+                        }
+                        else
+                        {
+                            expressionElem.html("{{$eval(cellConfig.valueExpression)}}");
+                        }
+
+                        scope.mhCellsConfig[i].customCellContent = customContentElem.html();
+                    }
+                    
+                }
+
+                dataCell.attr("mh-compile","cellConfig.customCellContent == null ? '{{$eval(cellConfig.valueExpression)}}' : cellConfig.customCellContent");
 
                 var checkboxCell = elem.find(".mh-datagrid-checkbox-cell");
                 checkboxCell.attr("ng-if","mhEnableRowSelect !== false");

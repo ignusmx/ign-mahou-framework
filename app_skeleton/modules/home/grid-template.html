@@ -6,9 +6,12 @@
 					<input type="checkbox" class="mh-datagrid-header-checkbox">
 				</th>
 				<th class="mh-datagrid-data-header">
-					<div class="mh-datagrid-custom-content" name="email">
+					<mh-datagrid-custom-content name="email">
 						<div class="mh-datagrid-label" style="color:#FF0000" ng-click="controller.log()"></div>
-					</div>
+					</mh-datagrid-custom-content>
+					<mh-datagrid-custom-content name="id">
+						<div class="mh-datagrid-label" style="color:#FFFF00" ng-click="controller.log()"></div>
+					</mh-datagrid-custom-content>
 				</th>
 				<th class="mh-datagrid-btns-header">acciones</th>
 			</tr>
@@ -19,8 +22,12 @@
 					<input type="checkbox" class="mh-datagrid-row-checkbox">
 				</td>
 				<td class="mh-datagrid-data-cell">
-					<div class="mh-datagrid-row-text"></div>
-					<img class="mh-datagrid-row-image"></img>
+					<mh-datagrid-custom-content name="id">
+						<div class="mh-datagrid-value-expression" style="color:#FFFF00" ng-click="controller.log()"></div>
+					</mh-datagrid-custom-content>
+					<mh-datagrid-custom-content name="name">
+						<img class="mh-datagrid-value-expression" style="color:#FFFF00" ng-click="controller.log()">
+					</mh-datagrid-custom-content>
 				</td>
 				<td class="mh-datagrid-row-btns-cell">
 					<a class="mh-datagrid-row-btn" name="edit">editar</a>
