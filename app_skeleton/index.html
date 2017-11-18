@@ -7,6 +7,7 @@
         <base href="/app_skeleton/">
         <title>Mahou Skeleton App</title>
         <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
     </head>
     <body>
         <div ui-view></div>
@@ -15,11 +16,17 @@
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="node_modules/angular/angular.min.js"></script>
         <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+        <script src="node_modules/angular-aria/angular-aria.js"></script> 
+        <script src="node_modules/angular-animate/angular-animate.js"></script> 
+        <script src="node_modules/angular-material/angular-material.js"></script> 
+    
         <!-- Mahou Framework -->
         <script src="../src/mahou.js"></script>
         <script src="../src/directives/mh-compile.js"></script>
         <script src="../src/directives/mh-datagrid/mh-datagrid-ctrl.js"></script>
         <script src="../src/directives/mh-datagrid/mh-datagrid.js"></script>
+        <script src="../src/directives/mh-form/mh-form-ctrl.js"></script>
+        <script src="../src/directives/mh-form/mh-form.js"></script>
         <!-- build:app -->
         <script src="app.js"></script>
         <script src="modules/home/home-ctrl.js"></script>

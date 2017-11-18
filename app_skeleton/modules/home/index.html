@@ -1,39 +1,28 @@
 <button ng-click="updateCollection()">boton</button>
+
+translude:
+<mh-form ng-model="user" mh-configs="config" mh-template-url="modules/home/form-template.html">
+	<div>
+		<input name="user_name">
+		<input name="mail">
+		<div class="question">????</div>
+		<md-checkbox aria-label="No Ink Effects" ng-model="asd">
+					  {{5+5}}
+					</md-checkbox>
+	</div>
+</mh-form>
 <mh-datagrid 
 mh-cells-config = "cellsConfig"
 mh-row-buttons = "rowButtons",
-mh-enable-row-buttons = "false",
+mh-enable-row-buttons = "true",
 mh-collection = "collection"
 mh-select-all-change="selectAllEvent(selectedRows)" 
 mh-select-row-change="selectRowEvent(row)" 
 mh-template-url="modules/home/grid-template.html">
 </mh-datagrid>
 
-<mh-datagrid 
-mh-enable-row-select = "false"
-mh-cells-config = "cellsConfig"
-mh-row-buttons = "rowButtons"
-mh-collection = "collection"
-mh-select-all-change="selectAllEvent(selectedRows)" 
-mh-select-row-change="selectRowEvent(row)" 
-mh-template-url="modules/home/grid-template.html">
-</mh-datagrid>
+<md-checkbox aria-label="No Ink Effects" ng-model="asd" ng-change="editClick()">
+					  No Ink Effects
+					</md-checkbox>
 
-<mh-datagrid 
-mh-enable-row-select = "true"
-mh-cells-config = "cellsConfig"
-mh-row-buttons = "rowButtons"
-mh-collection = "collection"
-mh-select-all-change="selectAllEvent(selectedRows)" 
-mh-select-row-change="selectRowEvent(row)" 
-mh-template-url="modules/home/grid-template.html">
-</mh-datagrid>
 
-<mh-datagrid 
-mh-cells-config = "cellsConfig"
-mh-row-buttons = "rowButtons"
-mh-collection = "collection"
-mh-select-all-change="selectAllEvent(selectedRows)" 
-mh-select-row-change="selectRowEvent(row)" 
-mh-template-url="modules/home/grid-template.html">
-</mh-datagrid>

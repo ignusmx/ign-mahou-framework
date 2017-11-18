@@ -16,8 +16,6 @@ angular
             this.internalCollection.push({ selected : false, model : this.collection[i]});
         }
 
-        this.testModel = false;
-
         $scope.$watchCollection("mhCollection", 
             function( newCollection, oldCollection ) 
             {
@@ -89,24 +87,11 @@ angular
             $scope.mhSelectRowChange({row:row});
         }
 
-        this.getSetRowCheckboxModel = function()
-        {
-            return self.testModel;
-        }
-
         this.evaluatePropertyExpression = function(model, expression)
         {
             return $scope.$eval(expression);
         }
 
-        this.getElementName = function(element)
-        {
-            console.log(element);
-        }
-
-        this.log = function(){
-            console.log("logeeed!");
-        }
         //private functions
         function updateAllRowsSelected()
         {

@@ -7,7 +7,7 @@
 		function LoginController($scope) 
 		{
 			var self = this;
-
+			
 			$scope.editClick = function(model)
 			{
 				alert("edit clicke!");
@@ -39,7 +39,15 @@
 					{ name: "delete", action : $scope.deleteClick }
 				]
 			$scope.collection = collection;
-			$scope.enableRowSelect = true;		
+			$scope.enableRowSelect = true;
+
+			//FORM CONFIG:
+			$scope.config = [
+				{ name : 'user_name', label : "nombre", valueExpression : "model.name"},
+				{ name : 'mail', label : "correo", valueExpression : "model.mail"}
+			];
+
+			$scope.user = { name : "pepe", mail:"correo@asd.com"};
 
 			$scope.selectAllEvent = function(rows)
 			{
@@ -53,6 +61,7 @@
 
 			$scope.updateCollection = function()
 			{
+			
 				$scope.collection.push(
 								{id:"10", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail2@mail.com"},
 								);
