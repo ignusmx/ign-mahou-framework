@@ -1,4 +1,4 @@
-angular.module('mahou').directive('mhForm', function ( $compile, $templateRequest ) {
+angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
 
     return {
         mhRawInnerTemplate : null,
@@ -16,18 +16,10 @@ angular.module('mahou').directive('mhForm', function ( $compile, $templateReques
         },
         link: function(scope, el, attrs, ctrl)
         {
-            function compileTemplate(templateElem)
-            {
-                templateElem.find("md-checkbox").attr("ng-change", "change()");
-                templateElem.find("md-checkbox").html("{{test}}");
-                return templateElem;
-            }
-
             if(attrs.mhTemplateUrl == null)
             {
                 var templateElem = $(this.mhRawInnerTemplate);
-                var compiledTemplateElem = compileTemplate(templateElem);
-                el.replaceWith($compile(compiledTemplateElem)(scope));
+                ctrl.compileTemplate(scope, templateElem, el);
             }
             else
             {
@@ -36,9 +28,7 @@ angular.module('mahou').directive('mhForm', function ( $compile, $templateReques
                 { 
                     var templateRaw = response;
                     var templateElem = $(templateRaw);
-
-                    var compiledTemplateElem = compileTemplate(templateElem);
-                    el.replaceWith($compile(compiledTemplateElem)(scope));                   
+                    ctrl.compileTemplate(scope, templateElem, el);                   
                 });
             }
         },
