@@ -9,12 +9,12 @@ angular.module('mahou').directive('mhForm', function ( $compile, $templateReques
             mhConfigs : '=',
             mhTemplateUrl : '='
         },
-        template : function(el){
+        template : function(el)
+        {
             this.mhRawInnerTemplate = el.html();
             return "";
         },
-       
-        link: function(scope, el, attrs)
+        link: function(scope, el, attrs, ctrl)
         {
             function compileTemplate(templateElem)
             {

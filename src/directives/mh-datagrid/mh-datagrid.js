@@ -1,5 +1,6 @@
 angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
+        mhRawInnerTemplate : null,
         restrict: 'E',
         scope: 
         { 
@@ -12,21 +13,25 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
             mhSelectAllChange : "&",
             mhSelectRowChange : "&",
         },
-        transclude : true,
-        link : function(scope, el, attrs, ctrl, transclude)
+        template : function(el)
         {
-            function compileGridTemplate(elem)
+            this.mhRawInnerTemplate = el.html();
+            return "";
+        },
+        link : function(scope, el, attrs, ctrl)
+        {
+            function compileTemplate(templateElem)
             {
-                var checkboxHeader = elem.find(".mh-datagrid-checkbox-header");
+                var checkboxHeader = templateElem.find(".mh-datagrid-checkbox-header");
                 checkboxHeader.attr("ng-if","mhEnableRowSelect !== false");
 
-                var selectAllCheckbox = elem.find(".mh-datagrid-header-checkbox");
+                var selectAllCheckbox = templateElem.find(".mh-datagrid-header-checkbox");
                 selectAllCheckbox.attr("ng-change","controller.selectAll()");
                 selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
 
-                var dataHeader = elem.find(".mh-datagrid-data-header");
+                var dataHeader = templateElem.find(".mh-datagrid-data-header");
                 dataHeader.attr("ng-repeat", "cellConfig in mhCellsConfig");
-                var customHeaderContent = elem.find(".mh-datagrid-custom-content");
+                var customHeaderContent = templateElem.find(".mh-datagrid-custom-content");
 
                 for(var i=0; i < scope.mhCellsConfig.length; i++)
                 {
@@ -38,13 +43,13 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
 
                 dataHeader.attr("mh-compile","cellConfig.customContent == null ? cellConfig.label : cellConfig.customContent");
 
-                var buttonsHeader = elem.find(".mh-datagrid-btns-header");
+                var buttonsHeader = templateElem.find(".mh-datagrid-btns-header");
                 buttonsHeader.attr("ng-if","mhEnableRowButtons !== false");
 
-                var row = elem.find(".mh-datagrid-row");
+                var row = templateElem.find(".mh-datagrid-row");
                 row.attr("ng-repeat", "row in controller.internalCollection");
 
-                var dataCell = elem.find(".mh-datagrid-data-cell");
+                var dataCell = templateElem.find(".mh-datagrid-data-cell");
                 dataCell.attr("ng-repeat", "cellConfig in mhCellsConfig");
 
                 for(var i=0; i < scope.mhCellsConfig.length; i++)
@@ -72,47 +77,42 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
 
                 dataCell.attr("mh-compile","cellConfig.customCellContent == null ? '{{$eval(cellConfig.valueExpression)}}' : cellConfig.customCellContent");
 
-                var checkboxCell = elem.find(".mh-datagrid-checkbox-cell");
+                var checkboxCell = templateElem.find(".mh-datagrid-checkbox-cell");
                 checkboxCell.attr("ng-if","mhEnableRowSelect !== false");
 
-                var rowCheckbox = elem.find(".mh-datagrid-row-checkbox");
+                var rowCheckbox = templateElem.find(".mh-datagrid-row-checkbox");
                 rowCheckbox.attr("ng-change","controller.rowSelectChange(row)");
                 rowCheckbox.attr("ng-model", "row.selected");
 
-                var rowButtonsCell = elem.find(".mh-datagrid-row-btns-cell");
+                var rowButtonsCell = templateElem.find(".mh-datagrid-row-btns-cell");
                 rowButtonsCell.attr("ng-if","mhEnableRowButtons !== false");
 
                 for(var i=0; i < scope.mhRowButtons.length; i++)
                 {
-                    var rowButtonElement = elem.find(".mh-datagrid-row-btn[name="+scope.mhRowButtons[i].name+"]");
+                    var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[name="+scope.mhRowButtons[i].name+"]");
                     rowButtonElement.attr("ng-click", "mhRowButtons["+i+"].action(row.model)");
                 }
 
-                return elem;
+                return templateElem;
             }
 
             if(attrs.mhTemplateUrl == null)
             {
-                transclude(function(clone)
-                {
-                    var transcludeTemplateCopy = angular.copy(clone);
-                    var compiledGridTempalte = compileGridTemplate(transcludeTemplateCopy);
-                    var compiledElement = $compile(compiledGridTempalte)(scope);
-                    el.append(compiledElement);
-                });
+                var templateElem = $(this.mhRawInnerTemplate);
+                var compiledTemplateElem = compileTemplate(templateElem);
+                el.replaceWith($compile(compiledTemplateElem)(scope));
             }
             else
             {
                 $templateRequest(attrs.mhTemplateUrl)
                 .then(function (response) 
                 { 
-                    var template = response;
-                    var compiledElement = compileGridTemplate($compile(template)(scope));
-                    // compile the html, then link it to the scope
-                    $elem = $compile(compiledElement)(scope);
-                    // append the compiled template inside the element
-                    el.append($elem);                    
-                }); 
+                    var templateRaw = response;
+                    var templateElem = $(templateRaw);
+
+                    var compiledTemplateElem = compileTemplate(templateElem);
+                    el.replaceWith($compile(compiledTemplateElem)(scope));                   
+                });
             }
         },
         controller: 'MHDatagridCtrl',
