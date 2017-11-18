@@ -1,5 +1,7 @@
 angular.module('mahou').directive('mhForm', function ( $compile, $templateRequest ) {
+
     return {
+        mhRawInnerTemplate : null,
         restrict: 'E',
         scope: 
         { 
@@ -8,10 +10,11 @@ angular.module('mahou').directive('mhForm', function ( $compile, $templateReques
             mhTemplateUrl : '='
         },
         template : function(el){
-            return el.html();
+            this.mhRawInnerTemplate = el.html();
+            return "";
         },
        
-        compile : function(el, attrs)
+        link: function(scope, el, attrs)
         {
             function compileTemplate(templateElem)
             {
@@ -20,24 +23,23 @@ angular.module('mahou').directive('mhForm', function ( $compile, $templateReques
                 return templateElem;
             }
 
-            compileTemplate(el);
+            if(attrs.mhTemplateUrl == null)
+            {
+                var templateElem = $(this.mhRawInnerTemplate);
+                var compiledTemplateElem = compileTemplate(templateElem);
+                el.replaceWith($compile(compiledTemplateElem)(scope));
+            }
+            else
+            {
+                $templateRequest(attrs.mhTemplateUrl)
+                .then(function (response) 
+                { 
+                    var templateRaw = response;
+                    var templateElem = $(templateRaw);
 
-            return {
-                post: function(scope, el, attrs)
-                {
-                    if(attrs.mhTemplateUrl != null)
-                    {
-                        $templateRequest(attrs.mhTemplateUrl)
-                        .then(function (response) 
-                        { 
-                            var templateRaw = response;
-                            var templateElem = $(templateRaw);
-
-                            var compiledTemplateElem = compileTemplate(templateElem);
-                            el.replaceWith($compile(compiledTemplateElem)(scope));                   
-                        });
-                    } 
-                }
+                    var compiledTemplateElem = compileTemplate(templateElem);
+                    el.replaceWith($compile(compiledTemplateElem)(scope));                   
+                });
             }
         },
         controller: 'MHFormCtrl',
