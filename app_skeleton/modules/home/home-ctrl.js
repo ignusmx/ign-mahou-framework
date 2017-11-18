@@ -21,14 +21,15 @@
 			}
 
 			var collection = [
-								{id:"33", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail@mail.com", address:{city:"ciudad", ctry:"pais"}},
-								{id:"12", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail@mail.com", address:"eee"}
+								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "juanperez@mail.com", address:{city:"ciudad", ctry:"pais"}},
+								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"gdl", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
 			$scope.cellsConfig = 
 				[
 					{ name:"id", label : "id", valueExpression : "row.model.id", type: "text"},
-					{ name:"name", label : "nombre", valueExpression : "row.model.name", type: "image"},
+					{ name:"name", label : "nombre", valueExpression : "row.model.name", type: "text"},
+					{ name:"image", label : "imagen", valueExpression : "row.model.image", type: "image"},
 					{ name:"email", label : "correo", valueExpression : "row.model.email", type: "text"},
 					{ name:"address", label : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
 				]
@@ -42,12 +43,12 @@
 			$scope.enableRowSelect = true;
 
 			//FORM CONFIG:
-			$scope.config = [
-				{ name : 'user_name', label : "nombre", valueExpression : "model.name"},
-				{ name : 'mail', label : "correo", valueExpression : "model.mail"}
-			];
+			$scope.user = collection[0];
 
-			$scope.user = { name : "pepe", mail:"correo@asd.com"};
+			$scope.config = [
+				{ name : 'user_name', label : "nombre", model : "name" },
+				{ name : 'mail', label : "correo", model : "email" }
+			];
 
 			$scope.selectAllEvent = function(rows)
 			{

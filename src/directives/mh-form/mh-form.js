@@ -14,7 +14,7 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
             this.mhRawInnerTemplate = el.html();
             return "";
         },
-        link: function(scope, el, attrs, ctrl)
+        link : function(scope, el, attrs, ctrl)
         {
             if(attrs.mhTemplateUrl == null)
             {
@@ -26,8 +26,7 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
                 $templateRequest(attrs.mhTemplateUrl)
                 .then(function (response) 
                 { 
-                    var templateRaw = response;
-                    var templateElem = $(templateRaw);
+                    var templateElem = $(response);
                     ctrl.compileTemplate(scope, templateElem, el);                   
                 });
             }
