@@ -11,6 +11,7 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
         },
         template : function(el)
         {
+            console.log("parent");
             this.mhRawInnerTemplate = el.html();
             return "";
         },
