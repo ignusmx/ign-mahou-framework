@@ -3,7 +3,7 @@ angular.module('mahou').directive('mhFormThemeCustom', function ( $templateReque
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',
-        require : ['^mhForm'],
+        require : ['mhForm'],
         template : function(el)
         {
             this.mhRawInnerTemplate = el.html();

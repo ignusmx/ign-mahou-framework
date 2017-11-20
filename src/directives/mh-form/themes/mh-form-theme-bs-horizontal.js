@@ -2,7 +2,7 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',
-        require : ['^mhForm', 'mhFormThemeBsHorizontal'],
+        require : ['mhForm', 'mhFormThemeBsHorizontal'],
         template : function(el)
         {
             this.mhRawInnerTemplate =  '<form name="testForm">\
