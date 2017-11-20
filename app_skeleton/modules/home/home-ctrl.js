@@ -21,8 +21,8 @@
 			}
 
 			var collection = [
-								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "juanperez@mail.com", address:{city:"ciudad", ctry:"pais"}},
-								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"gdl", ctry:"mx"}}
+								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "juanperez@mail.com", address:{city:"Guanajuato", ctry:"pais"}},
+								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"Guadalajara", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
 			$scope.cellsConfig = 
@@ -46,8 +46,9 @@
 			$scope.user = collection[0];
 
 			$scope.config = [
-				{ name : 'user_name', label : "nombre", model : "name" },
-				{ name : 'mail', label : "correo", model : "email" }
+				{ name : 'user_name', label : "nombre", model : "name", type:"text" },
+				{ name : 'mail', label : "correo", model : "email", type :"email", required : "true" },
+				{ name : 'city', label : "ciudad", model : "address.city", type :"select", default:"Seleccione", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
 			];
 
 			$scope.selectAllEvent = function(rows)

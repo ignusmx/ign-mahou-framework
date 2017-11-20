@@ -16,9 +16,25 @@ translude:
 	</form>
 </mh-form> -->
 
-<mh-form>
-<mhtp-form-bs-horizontal></mhtp-form-bs-horizontal>
+<mh-form mh-form-theme-custom ng-model="user" mh-configs="config">
+	<form name="testForm">
+		<div class="input-container user_name" ng-class="{'has-error':true}">
+			<input name="user_name" required>
+			<input name="mail">
+			<div class="question">????</div>
+			<md-checkbox aria-label="No Ink Effects" ng-model="asd">
+			  {{5+5}}
+			</md-checkbox>
+			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
+		</div>
+	</form>
 </mh-form>
+
+<div class="container">
+	<mh-form mh-form-theme-bs-horizontal ng-model="user" mh-configs="config">
+	</mh-form>
+</div>
+
 
 <mh-datagrid 
 mh-cells-config = "cellsConfig"
