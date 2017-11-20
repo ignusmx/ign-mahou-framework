@@ -5,7 +5,8 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
         scope: 
         { 
             model : '=ngModel',
-            mhConfigs : '='
+            mhFormFields : '=',
+            mhFormButtons : '='
         },
         controller: 'MHFormCtrl',
         controllerAs : 'controller'

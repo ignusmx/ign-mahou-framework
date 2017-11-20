@@ -45,10 +45,16 @@
 			//FORM CONFIG:
 			$scope.user = collection[0];
 
-			$scope.config = [
-				{ name : 'user_name', label : "nombre", model : "name", type:"text" },
-				{ name : 'mail', label : "correo", model : "email", type :"email", required : "true" },
-				{ name : 'city', label : "ciudad", model : "address.city", type :"select", default:"Seleccione", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
+			$scope.formFields = [
+				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:12 },
+				{ name : 'mail', title : "correo", model : "email", type :"email", required : "true" },
+				{ name : 'image', title : "Imagen", model : "image", type :"text"},
+				{ name : 'city', title : "ciudad", model : "address.city", type :"select", default:"Seleccione", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
+			];
+
+			$scope.formButtons = [
+				{name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"},
+				{name : "cancel", title : "Cancelar", action : $scope.deleteClick}
 			];
 
 			$scope.selectAllEvent = function(rows)

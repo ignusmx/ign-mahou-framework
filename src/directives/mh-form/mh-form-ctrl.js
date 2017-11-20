@@ -9,16 +9,14 @@ angular
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
-        	for(var i = 0; i < scope.mhConfigs.length; i++)
+        	for(var i = 0; i < scope.mhFormFields.length; i++)
         	{
-        		var config = scope.mhConfigs[i];
+        		var config = scope.mhFormFields[i];
 
                 var inputContainer = templateElem.find("[data-mh-name="+config.name+"]");
-                inputContainer.find("label").html(config.label);
+                inputContainer.find(".mh-title").html(config.title);
 
                 var input = inputContainer.find(".mh-input");
-
-
         		input.attr("ng-model", "model"+getModelAsHash(config.model));
 
                 if(input.prop("tagName") == "input"
@@ -34,14 +32,25 @@ angular
                     }
                     else
                     {
-                        input.find(".mh-select-default-option").html("{{mhConfigs["+i+"].default}}");
+                        input.find(".mh-select-default-option").html("{{mhFormFields["+i+"].default}}");
                     }
                     
-                    input.find(".mh-select-option").attr("ng-repeat","option in mhConfigs["+i+"].options");
+                    input.find(".mh-select-option").attr("ng-repeat","option in mhFormFields["+i+"].options");
                     input.find(".mh-select-option").attr("ng-value","option");
                     input.find(".mh-select-option").html("{{option}}");
                 }
         	}
+
+            for(var i = 0; i < scope.mhFormButtons.length; i++)
+            {
+                var config = scope.mhFormButtons[i];
+                var button = templateElem.find(".mh-form-button[data-mh-name="+config.name+"]");
+
+                button.attr("ng-click", "mhFormButtons["+i+"].action(model)");
+                button.addClass(config.cssClasses);
+                console.log(config.cssClasses)
+                button.find(".mh-title").html(config.title);
+            }
 
             directiveElem.replaceWith($compile(templateElem)(scope));
         }

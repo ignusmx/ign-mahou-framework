@@ -7,6 +7,7 @@ angular.module('mahou').directive('mhFormThemeCustom', function ( $templateReque
         template : function(el)
         {
             this.mhRawInnerTemplate = el.html();
+            console.log(this.mhRawInnerTemplate)
             return "";
         },
         link : function(scope, el, attrs, ctrls)
