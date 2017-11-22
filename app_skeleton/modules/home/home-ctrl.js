@@ -21,7 +21,7 @@
 			}
 
 			var collection = [
-								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "juanperez@mail.com", address:{city:"Guanajuato", ctry:"pais"}},
+								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:"Guanajuato", ctry:"pais"}},
 								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"Guadalajara", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
@@ -46,15 +46,18 @@
 			$scope.user = collection[0];
 
 			$scope.formFields = [
-				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:12 },
-				{ name : 'mail', title : "correo", model : "email", type :"email", required : "true" },
+				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidClass:"is-invalid" },
+				{ name : 'age', title : "Edad", model : "age", type:"text", cols:4 },
+				{ name : 'mail', title : "correo", model : "email", type :"email", required : true, invalidClass:"is-invalid" },
 				{ name : 'image', title : "Imagen", model : "image", type :"text"},
-				{ name : 'city', title : "ciudad", model : "address.city", type :"select", default:"Seleccione", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
+				{ name : 'city', title : "ciudad", model : "address.city", type :"select", required:true, invalidClass:"is-invalid", default:"seleccione", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
 			];
 
 			$scope.formButtons = [
 				{name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"},
-				{name : "cancel", title : "Cancelar", action : $scope.deleteClick}
+				{name : "cancel", title : "Cancelar", action : $scope.deleteClick},
+				{name : "delete", title : "eliminar", action : $scope.deleteClick, cssClasses : "btn-danger"},
+				{name : "clean", title : "limpiar", action : $scope.deleteClick},
 			];
 
 			$scope.selectAllEvent = function(rows)

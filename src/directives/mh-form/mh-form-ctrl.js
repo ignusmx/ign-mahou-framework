@@ -12,17 +12,30 @@ angular
         	for(var i = 0; i < scope.mhFormFields.length; i++)
         	{
         		var config = scope.mhFormFields[i];
-
+                var formName = templateElem.attr("name");
                 var inputContainer = templateElem.find("[data-mh-name="+config.name+"]");
                 inputContainer.find(".mh-title").html(config.title);
-
+                
                 var input = inputContainer.find(".mh-input");
         		input.attr("ng-model", "model"+getModelAsHash(config.model));
 
-                if(input.prop("tagName") == "input"
-                 && config.type != null && config.type.length > 0)
+                if(config.required)
                 {
-                    inputContainer.attr("type", config.type);
+                    input.attr("required", true);
+                    if(config.invalidClass != null)
+                    {
+                        input.attr("ng-class", 
+                        "{'"+config.invalidClass+"' : controller.fieldIsValid("+formName+"."+config.name+", testForm)}");
+                    }
+                }
+                
+                input.attr("name", config.name);
+
+                if(input.prop("tagName") != null 
+                    && input.prop("tagName").toLowerCase() == "input"
+                    && config.type != null && config.type.length > 0)
+                {
+                    input.attr("type", config.type);
                 }
                 else if(config.type == "select")
                 {
@@ -33,10 +46,11 @@ angular
                     else
                     {
                         input.find(".mh-select-default-option").html("{{mhFormFields["+i+"].default}}");
+                        input.find(".mh-select-default-option").attr("value", "{{null}}")
                     }
                     
                     input.find(".mh-select-option").attr("ng-repeat","option in mhFormFields["+i+"].options");
-                    input.find(".mh-select-option").attr("ng-value","option");
+                    input.find(".mh-select-option").attr("value","{{option}}");
                     input.find(".mh-select-option").html("{{option}}");
                 }
         	}
@@ -48,14 +62,14 @@ angular
 
                 button.attr("ng-click", "mhFormButtons["+i+"].action(model)");
                 button.addClass(config.cssClasses);
-                console.log(config.cssClasses)
                 button.find(".mh-title").html(config.title);
             }
 
+            console.log("compiledTempalte:", templateElem.html())
             directiveElem.replaceWith($compile(templateElem)(scope));
         }
 
-        $scope.showFieldErrorMessage = function(field, form)
+        this.fieldIsValid = function(field, form)
 		{
 			return field.$invalid && (field.$dirty || field.$touched || form.$submitted);
 		}

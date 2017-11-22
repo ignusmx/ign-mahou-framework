@@ -15,11 +15,22 @@ translude:
 		</div>
 	</form>
 </mh-form> -->
-
+<style>
+.is-invalid{
+	border-color: #FF0000;
+}
+</style>
 <mh-form mh-form-theme-custom ng-model="user" mh-form-fields="formFields" mh-form-buttons="formButtons">
 	<form name="testForm">
-		<div class="mh-input-container" ng-class="{'has-error':true}" data-mh-name="user_name">
+		<div class="form-group mh-input-container" data-mh-name="user_name">
 			<input class="mh-input" required>
+			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
+		</div>
+		<div class="form-group mh-input-container" data-mh-name="city">
+			<select class="mh-input" required>
+				<option class="mh-select-default-option"></option>
+				<option class="mh-select-option"></option>
+			</select>
 			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
 		</div>
 		<button class="mh-form-button" data-mh-name="accept"><span class="mh-title"></span></button>
