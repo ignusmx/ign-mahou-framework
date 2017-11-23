@@ -8,10 +8,11 @@
 		{
 			var self = this;
 			
-			$scope.editClick = function(model)
+			$scope.editClick = function(model, form)
 			{
 				alert("edit clicke!");
-				console.log("model to edit is:", model);
+				console.log("model to edit is:", form);
+				form.$setPristine();
 			}
 
 			$scope.deleteClick = function(model)
@@ -21,7 +22,7 @@
 			}
 
 			var collection = [
-								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:null, ctry:"pais"}},
+								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:"Guadalajara", ctry:"pais"}},
 								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"Guadalajara", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
@@ -55,7 +56,7 @@
 
 			$scope.formButtons = [
 				{name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"},
-				{name : "cancel", title : "Cancelar", action : $scope.deleteClick},
+				{name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledEvents : "onModelUnchanged, onFormInvalid"},
 				{name : "delete", title : "eliminar", action : $scope.deleteClick, cssClasses : "btn-danger"},
 				{name : "clean", title : "limpiar", action : $scope.deleteClick},
 			];

@@ -5,6 +5,7 @@ angular
     {
         var self = this;
         self.scope = $scope;
+        self.modelCopy = angular.copy(self.scope.model);
 
         this.compileTemplate = function(templateElem, directiveElem)
         {
@@ -71,8 +72,36 @@ angular
                 var config = scope.mhFormButtons[i];
                 var button = templateElem.find(".mh-form-button[data-mh-name="+config.name+"]");
 
-                button.attr("ng-disabled", "!"+formName+".$valid");
-                button.attr("ng-click", "mhFormButtons["+i+"].action(model)");
+                if(config.disabledEvents != null)
+                {
+                    var disabledExpression = "";
+                    var disabledEvents = config.disabledEvents.split(",");
+
+                    for(var j = 0; j < disabledEvents.length; j++)
+                    {
+                        if(j > 0)
+                        {
+                            disabledExpression +=" || ";
+                        }
+
+                        switch(disabledEvents[j].trim())
+                        {
+                            case "onFormValid" : disabledExpression += formName+".$valid";
+                            break;
+                            case "onFormInvalid" : disabledExpression += "!"+formName+".$valid";
+                            break;
+                            case "onModelChanged" : disabledExpression += "controller.modelChanged()";
+                            break;
+                            case "onModelUnchanged" : disabledExpression += "!controller.modelChanged()";
+                            break;
+                        }
+                    }
+
+                    console.log(disabledExpression);
+                    button.attr("ng-disabled", disabledExpression);    
+                }
+                
+                button.attr("ng-click", "mhFormButtons["+i+"].action(model, "+formName+")");
                 button.addClass(config.cssClasses);
                 button.find(".mh-title").html(config.title);
             }
@@ -86,6 +115,10 @@ angular
 			return field.$invalid && (field.$dirty || field.$touched || form.$submitted);
 		}
 
+        this.modelChanged = function()
+        {
+            return !angular.equals(self.scope.model, self.modelCopy);
+        }
         //private functions
         function getModelAsHash(model)
         {
