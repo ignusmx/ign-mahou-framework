@@ -5,11 +5,12 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
         require : ['mhForm', 'mhFormThemeBsHorizontal'],
         template : function(el)
         {
-            this.mhRawInnerTemplate =  '<form name="testForm">\
+            this.mhRawInnerTemplate =  '<form>\
                                             <div class="mh-form-inputs-container row">\
                                                 <div class="form-group mh-input-container">\
                                                     <label class="mh-title"></label>\
                                                     <input class="form-control mh-input">\
+                                                    <div class="mh-input-error-message invalid-feedback">mensaje de error</div>\
                                                 </div>\
                                                 <div class="form-group mh-select-container">\
                                                     <md-input-container>\
@@ -19,6 +20,9 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                                                         <md-option class="mh-select-option">\
                                                         </md-option>\
                                                       </md-select>\
+                                                      <div class="errors">\
+                                                          <div class="mh-input-error-message" ng-message="required"></div>\
+                                                        </div>\
                                                     </md-input-container>\
                                                 </div>\
                                             </div>\
@@ -64,6 +68,11 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
 
                 for(var i = 0; i < formScope.mhFormFields.length; i++)
                 {
+                    if(formScope.mhFormFields[i].invalidClass == null)
+                    {
+                        formScope.mhFormFields[i].invalidClass = "is-invalid";
+                    }
+                    
                     var config = formScope.mhFormFields[i];
                     var newInputContainer = null;
 

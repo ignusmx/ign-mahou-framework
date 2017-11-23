@@ -9,24 +9,35 @@ angular
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
+
+            var formName = self.scope.mhFormName;
+            console.log(formName);
+            templateElem.attr("name", self.scope.mhFormName);
+            
         	for(var i = 0; i < scope.mhFormFields.length; i++)
         	{
         		var config = scope.mhFormFields[i];
-                var formName = templateElem.attr("name");
                 var inputContainer = templateElem.find("[data-mh-name="+config.name+"]");
                 inputContainer.find(".mh-title").html(config.title);
                 
                 var input = inputContainer.find(".mh-input");
         		input.attr("ng-model", "model"+getModelAsHash(config.model));
 
+                var inputErrorMessage = inputContainer.find(".mh-input-error-message");
                 if(config.required)
                 {
+                    inputErrorMessage.html("{{mhFormFields["+i+"].invalidMessage}}")
+                    inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+config.name+", "+formName+")");
                     input.attr("required", true);
                     if(config.invalidClass != null)
                     {
                         input.attr("ng-class", 
-                        "{'"+config.invalidClass+"' : controller.fieldIsValid("+formName+"."+config.name+", testForm)}");
+                        "{'"+config.invalidClass+"' : controller.fieldIsValid("+formName+"."+config.name+", "+formName+")}");
                     }
+                }
+                else
+                {
+                    inputErrorMessage.remove();
                 }
                 
                 input.attr("name", config.name);
@@ -46,7 +57,7 @@ angular
                     else
                     {
                         input.find(".mh-select-default-option").html("{{mhFormFields["+i+"].default}}");
-                        input.find(".mh-select-default-option").attr("value", "{{null}}")
+                        input.find(".mh-select-default-option").attr("ng-value", "{{null}}")
                     }
                     
                     input.find(".mh-select-option").attr("ng-repeat","option in mhFormFields["+i+"].options");
@@ -60,6 +71,7 @@ angular
                 var config = scope.mhFormButtons[i];
                 var button = templateElem.find(".mh-form-button[data-mh-name="+config.name+"]");
 
+                button.attr("ng-disabled", "!"+formName+".$valid");
                 button.attr("ng-click", "mhFormButtons["+i+"].action(model)");
                 button.addClass(config.cssClasses);
                 button.find(".mh-title").html(config.title);

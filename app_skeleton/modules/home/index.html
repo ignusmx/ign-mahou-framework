@@ -20,8 +20,8 @@ translude:
 	border-color: #FF0000;
 }
 </style>
-<mh-form mh-form-theme-custom ng-model="user" mh-form-fields="formFields" mh-form-buttons="formButtons">
-	<form name="testForm">
+<mh-form mh-form-theme-custom ng-model="user" mh-form-name="'testForm'" mh-form-fields="formFields" mh-form-buttons="formButtons">
+	<form>
 		<div class="form-group mh-input-container" data-mh-name="user_name">
 			<input class="mh-input" required>
 			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
@@ -31,14 +31,14 @@ translude:
 				<option class="mh-select-default-option"></option>
 				<option class="mh-select-option"></option>
 			</select>
-			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
+			<div class="mh-input-error-message">mensaje de error</div>
 		</div>
 		<button class="mh-form-button" data-mh-name="accept"><span class="mh-title"></span></button>
 	</form>
 </mh-form>
 
 <div class="container">
-	<mh-form mh-form-theme-bs-horizontal ng-model="user" mh-form-fields="formFields" mh-form-buttons="formButtons">
+	<mh-form mh-form-theme-bs-horizontal mh-form-name="'testForm'" ng-model="user" mh-form-fields="formFields" mh-form-buttons="formButtons">
 	</mh-form>
 </div>
 
