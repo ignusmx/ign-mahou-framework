@@ -1,5 +1,8 @@
+/**
+ * A constant.
+ * @kind constant
+ */
 angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
-
     return {
         restrict: 'E',
         scope: 
