@@ -1,9 +1,8 @@
 /**
- * @class mhForm
- * @memberof Directives
+ * @class MHFormField
+ * @memberof Models
  * @description
- * use this directive to create a fully functional AngularJS form.<br>
- * Includes fields validation, events callbacks and UI customization using themes.
+ * A model used to setup and render a field on an MHForm.
  *
  * **directive types:** Element only
  * 
@@ -14,18 +13,13 @@
  * @property {number}  scope.mhFormButtons  - How much gold the party starts with.
  * @property {object}  controller - an {@link Controllers.MHFormCtrl MHFormCtrl} used to compile directive.
  */
-
-angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
-    return {
-        restrict: 'E',
-        scope: 
-        { 
-            model : '=ngModel',
-            mhFormName : "=",
-            mhFormFields : '=',
-            mhFormButtons : '='
-        },
-        controller: 'MHFormCtrl',
-        controllerAs : 'controller'
-    };
-})
+function MHFormField()
+{
+	this.name = '';
+	this.title = '';
+	this.model = '';
+	this.type = '';
+	this.cols = 1;
+	this.required = false;
+	this.invalidMessage = '';
+}

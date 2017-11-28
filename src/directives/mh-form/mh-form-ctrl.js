@@ -1,3 +1,18 @@
+/**
+ * @class MHFormCtrl
+ * @memberof Controllers
+ * @description
+ * use this directive to create a fully functional AngularJS form.<br>
+ * Includes fields validation, events callbacks and UI customization using themes.
+ *
+ * **directive types:** Element only
+ * 
+ * @property {object}  scope                - Isolated scope.
+ * @property {object}  scope.model          - The ngModel to be used with the form.
+ * @property {string}  scope.mhFormName     - The name (HTML 'name' attribute) of the form.
+ * @property {array}   scope.mhFormFields   - An array of mhFormFields.
+ * @property {number}  scope.mhFormButtons  - How much gold the party starts with.
+ */
 angular
 .module('mahou')
 .controller('MHFormCtrl', 

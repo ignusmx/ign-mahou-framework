@@ -1,3 +1,8 @@
+/**
+ * A function in MyNamespace (MyNamespace.myFunction).
+ * @class mhDatagrid
+ * @memberof Directives
+ */
 angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
         mhRawInnerTemplate : null,
