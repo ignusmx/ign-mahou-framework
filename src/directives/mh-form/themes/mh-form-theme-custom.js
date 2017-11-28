@@ -12,24 +12,19 @@
  * @property {number}  scope.mhFormButtons  - How much gold the party starts with.
  * @property {object}  controller - an {@link Controllers.MHFormCtrl MHFormCtrl} used to compile directive.
  * @description  
- * ### **Theme customization**
- * mhForm UI can be customized any way you want it using Mahou's mh-form-theme attribute directives.
  *
  * ** *Requires mhForm directive to work. If no mhForm is found, an error will be thrown when compiling directive. **
  *
  * #### **base theme structure**
-
-    <mh-form mh-form-theme-custom ng-model="{modelToBeUsed}" mh-form-name="'{formName}'" mh-form-fields="{arrayOfFormFields}" mh-form-buttons="{arrayOfFormButton}">
-        <form>
-            <div class="mh-input-container" data-mh-name="{nameOfMhFormField}">
-                <input class="mh-input">
-                <div class="mh-form-error-message">{error message}</div>
-            </div>
-            <button class="mh-form-button" data-mh-name="{mhFormButtonName}">
-                <span class="mh-title"></span>
-            </button>
-        </form>
-    </mh-form>
+    <form>
+        <div class="mh-input-container" data-mh-name="{nameOfMhFormField}">
+            <input class="mh-input">
+            <div class="mh-form-error-message">{error message}</div>
+        </div>
+        <button class="mh-form-button" data-mh-name="{mhFormButtonName}">
+            <span class="mh-title"></span>
+        </button>
+    </form>
  */
 angular.module('mahou').directive('mhFormThemeCustom', function ( $templateRequest )
 {
