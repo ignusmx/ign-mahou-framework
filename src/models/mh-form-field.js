@@ -1,17 +1,19 @@
 /**
  * @class MHFormField
  * @memberof Models
- * @description
+ * @classdesc
  * A model used to setup and render a field on an MHForm.
  *
  * **directive types:** Element only
  * 
- * @property {object}  scope                - Isolated scope.
- * @property {object}  scope.model          - The ngModel to be used with the form.
- * @property {string}  scope.mhFormName     - The name (HTML 'name' attribute) of the form.
- * @property {array}   scope.mhFormFields   - An array of mhFormFields.
- * @property {number}  scope.mhFormButtons  - How much gold the party starts with.
- * @property {object}  controller - an {@link Controllers.MHFormCtrl MHFormCtrl} used to compile directive.
+ * @property {string}   name                - name of the field (html name attribute and data-mh-name attribute)
+ * @property {string}   title          		- Title of the field (rendered on element with class mh-form-)
+ * @property {string}   model     			- Name of the inner property of the base model to be used as ngModel for this field
+ * @property {string}   type   				- Type of input (html input type attribute) (text, password, email, number).
+ * @property {number}   cols  				- Number of cols
+ * @property {boolean}  required 			- Sets the field as required
+ * @property {string}   invalidMessage 		- Message to be displayed if the field fails to validate
+ *
  */
 function MHFormField()
 {

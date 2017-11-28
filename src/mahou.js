@@ -9,8 +9,8 @@
 */
 
 /**
- * Templates
- * @namespace Templates
+ * Themes
+ * @namespace Themes
 */
 
 /**
