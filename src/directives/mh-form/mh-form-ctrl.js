@@ -66,7 +66,7 @@ angular
                 }
                 else if(config.type == "select")
                 {
-                    if(config.default == null)
+                    if(config.defaultOption == null)
                     {
                         input.find(".mh-select-default-option").remove();
                     }

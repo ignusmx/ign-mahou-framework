@@ -18,6 +18,11 @@
  * @namespace Models
 */
 
+/**
+ * Enumerators
+ * @namespace Enumerators
+*/
+
 (function(){
 	'use strict';
 	/** @module Mahou
