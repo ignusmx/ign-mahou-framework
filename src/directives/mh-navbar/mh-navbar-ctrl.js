@@ -19,8 +19,9 @@ angular
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
-
-            console.log(scope.mhNavbarButtons);
+            
+            var brandTitle = templateElem.find(".mh-brand > .mh-title");
+            brandTitle.attr("mh-compile","mhNavbarTitle");
             for(var i = 0; i < scope.mhNavbarButtons.length; i++)
             {
                 var config = scope.mhNavbarButtons[i];
@@ -28,7 +29,7 @@ angular
                 //render button
                 var button = templateElem.find(".mh-navbar-button[data-mh-name="+config.name+"]");
                 button.attr("ng-click", "mhNavbarButtons["+i+"].action()");
-                button.find(".mh-title").html(config.title);
+                button.find(".mh-title").attr("mh-compile", "mhNavbarButtons["+i+"].title");
                 
                 //if button has dropdown_buttons, render dropdown_buttons as well
                 if(config.dropdown_buttons != null && config.dropdown_buttons.length > 0)
@@ -38,11 +39,9 @@ angular
                         var dropdownConfig = config.dropdown_buttons[j];
                         var button = templateElem.find(".mh-navbar-button[data-mh-name="+dropdownConfig.name+"]");
                         button.attr("ng-click", "mhNavbarButtons["+i+"].dropdown_buttons["+j+"].action()");
-                        button.find(".mh-title").html(dropdownConfig.title);
+                        button.find(".mh-title").attr("mh-compile","mhNavbarButtons["+i+"].dropdown_buttons["+j+"].title");
                     }
-                }
-                
-                
+                }                
             }
 
             directiveElem.replaceWith($compile(templateElem)(scope));

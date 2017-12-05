@@ -21,25 +21,38 @@
 				console.log("model to delete is:", model);
 			}
 
-			$scope.menuButtons = [
-									{
-										name:"home", 
-										title:"inicio", 
-										action : function(){ console.log("home seleccionado")}, 
-										dropdown_buttons : [
-																{
-																	name : "about_us", 
-																	title: "nosotros", 
-																	action:function(){alert("nosotros seleccionado!")}
-																},
-																{
-																	name : "products", 
-																	title: "Productos", 
-																	action:function(){alert("productos seleccionado!")}
-																}
-															]
-									}
+			var homeDropDowns = [ 
+									new MHButton("about_us", MHBsDecorator.decorateIcon("{{$parent.user.name}}","glyphicon glyphicon-eur", "span"), function(){ alert("nosotros seleccionado")}),
+									new MHButton("about_uss", "nosotros", function(){ alert("nosotros seleccionado")}),
+									new MHButton("about_usss", "nosotres", function(){ alert("nosotres seleccionado")})
 								];
+
+
+			var homeButton = new MHDropdownButton("home", "inicio", function(){ console.log("home seleccionado")}, homeDropDowns);
+
+			$scope.menuButtons = [
+									homeButton
+								];
+
+			$scope.menuRightButtons = [
+										{
+											name:"user", 
+											title:"usuario", 
+											action : function(){ console.log("usuario seleccionado")}, 
+											dropdown_buttons : [
+																	{
+																		name : "logout", 
+																		title: "cerrar sesión", 
+																		action:function(){alert("cerrar sesion seleccionado!")}
+																	},
+																	{
+																		name : "config", 
+																		title: "Configuración", 
+																		action:function(){alert("config seleccionado!")}
+																	}
+																]
+										}
+									];
 
 			var collection = [
 								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:"Guadalajara", ctry:"pais"}},
@@ -65,6 +78,9 @@
 
 			//FORM CONFIG:
 			$scope.user = collection[0];
+
+			$
+			$scope.title = MHBsDecorator.decorateImage("{{$parent.user.name}}");
 
 			$scope.formFields = [
 				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido" },
