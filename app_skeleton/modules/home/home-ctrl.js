@@ -21,6 +21,26 @@
 				console.log("model to delete is:", model);
 			}
 
+			$scope.menuButtons = [
+									{
+										name:"home", 
+										title:"inicio", 
+										action : function(){ console.log("home seleccionado")}, 
+										dropdown_buttons : [
+																{
+																	name : "about_us", 
+																	title: "nosotros", 
+																	action:function(){alert("nosotros seleccionado!")}
+																},
+																{
+																	name : "products", 
+																	title: "Productos", 
+																	action:function(){alert("productos seleccionado!")}
+																}
+															]
+									}
+								];
+
 			var collection = [
 								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:"Guadalajara", ctry:"pais"}},
 								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"Guadalajara", ctry:"mx"}}

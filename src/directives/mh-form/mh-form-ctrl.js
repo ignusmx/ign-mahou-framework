@@ -25,7 +25,7 @@ angular
             var scope = self.scope;
 
             var formName = self.scope.mhFormName;
-            console.log(formName);
+            
             templateElem.attr("name", self.scope.mhFormName);
             
         	for(var i = 0; i < scope.mhFormFields.length; i++)
