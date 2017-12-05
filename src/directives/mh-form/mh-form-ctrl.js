@@ -2,13 +2,11 @@
  * @class MHFormCtrl
  * @memberof Controllers
  * @description
- * use this directive to create a fully functional AngularJS form.<br>
- * Includes fields validation, events callbacks and UI customization using themes.
+ * controller used by mhForm directive to compile and bind events to create a fully functional angularJS form.
  *
- * **directive types:** Element only
  * 
  * @property {object}  scope                - Isolated scope.
- * @property {object}  scope.model          - The ngModel to be used with the form.
+ * @property {object}  scope.modelCopy      - The ngModel to be used with the form.
  * @property {string}  scope.mhFormName     - The name (HTML 'name' attribute) of the form.
  * @property {array}   scope.mhFormFields   - An array of mhFormFields.
  * @property {number}  scope.mhFormButtons  - How much gold the party starts with.
@@ -87,32 +85,31 @@ angular
                 var config = scope.mhFormButtons[i];
                 var button = templateElem.find(".mh-form-button[data-mh-name="+config.name+"]");
 
-                if(config.disabledEvents != null)
+                if(config.disabledStatuses != null)
                 {
                     var disabledExpression = "";
-                    var disabledEvents = config.disabledEvents.split(",");
+                    var disabledStatuses = config.disabledStatuses.split(",");
 
-                    for(var j = 0; j < disabledEvents.length; j++)
+                    for(var j = 0; j < disabledStatuses.length; j++)
                     {
                         if(j > 0)
                         {
                             disabledExpression +=" || ";
                         }
 
-                        switch(disabledEvents[j].trim())
+                        switch(disabledStatuses[j].trim())
                         {
-                            case "onFormValid" : disabledExpression += formName+".$valid";
+                            case MHFormStatus.FORM_VALID : disabledExpression += formName+".$valid";
                             break;
-                            case "onFormInvalid" : disabledExpression += "!"+formName+".$valid";
+                            case MHFormStatus.FORM_INVALID : disabledExpression += "!"+formName+".$valid";
                             break;
-                            case "onModelChanged" : disabledExpression += "controller.modelChanged()";
+                            case MHFormStatus.MODEL_CHANGED : disabledExpression += "controller.modelChanged()";
                             break;
-                            case "onModelUnchanged" : disabledExpression += "!controller.modelChanged()";
+                            case MHFormStatus.MODEL_UNCHANGED : disabledExpression += "!controller.modelChanged()";
                             break;
                         }
                     }
-
-                    console.log(disabledExpression);
+                    
                     button.attr("ng-disabled", disabledExpression);    
                 }
                 
@@ -121,7 +118,6 @@ angular
                 button.find(".mh-title").html(config.title);
             }
 
-            console.log("compiledTempalte:", templateElem.html())
             directiveElem.replaceWith($compile(templateElem)(scope));
         }
 

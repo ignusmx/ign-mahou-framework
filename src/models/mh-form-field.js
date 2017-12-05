@@ -31,7 +31,7 @@ function MHFormField()
 }
 
 /** 
-* Defines the types of an MHFormFields
+* Defines the types of an MHFormField
 * @enum {string}
 * @memberof Enumerators
 */

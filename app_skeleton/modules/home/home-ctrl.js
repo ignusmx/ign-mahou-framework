@@ -56,7 +56,7 @@
 
 			$scope.formButtons = [
 				{name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"},
-				{name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledEvents : "onModelUnchanged, onFormInvalid"},
+				{name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"},
 				{name : "delete", title : "eliminar", action : $scope.deleteClick, cssClasses : "btn-danger"},
 				{name : "clean", title : "limpiar", action : $scope.deleteClick},
 			];

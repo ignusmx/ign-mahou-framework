@@ -47,11 +47,13 @@
  * * It will also try to find an element with class 'mh-form-error-message' inside the container element to render on it the mhFormField.invalidMessage.
  * * Directive iterates through all mhFormButtons and will search for an html element on the template with tag 'button' and class 'mh-form-button' and data-mh-name == mhFormButton.name.
  * * If a button is found, it will search for a span inside with class 'mh-title', if it's found, it will render inside of it the mhFormButton.title value.
+ * * If mhFormButton.disabledStatuses are present, it will add ng-disabled rule with all disabledStatuses conditions.
  *
  * #### **Events binding**
  * This is the process where all events are binded: fields, validations and buttons events.
  * The Event binding process performs the following tasks:
- * * Bind the mhFormButton.
+ * * Bind the mhFormButton.action function to be executed when user performs ngClick on each button.
+ * * add functions to validate mhFormStatuses, required fields validations and all mhForm functionallity.
  */
 
 angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
@@ -87,3 +89,20 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
         controllerAs : 'controller'
     };
 })
+
+/** 
+* Defines the status of an MHForm
+* @enum {string}
+* @memberof Enumerators
+*/
+var MHFormStatus = 
+{
+    /** value: "formValid" (form is valid) */
+    FORM_VALID : "formValid",
+    /** value: "formInvalid" (form is invalid)  */
+    FORM_INVALID : "formInvalid", 
+    /** value: "modelChanged" (model has changed)  */
+    MODEL_CHANGED : "modelChanged",
+    /** value: "modelUnchanged" (model has not changed) */
+    MODEL_UNCHANGED : "modelUnchanged"
+}
