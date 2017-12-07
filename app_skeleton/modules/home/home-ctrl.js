@@ -85,7 +85,7 @@
 			$scope.formFields = [
 				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido" },
 				{ name : 'age', title : "Edad", model : "age", type:"text", cols:4 },
-				{ name : 'mail', title : "correo", model : "email", type :"email", required : true },
+				{ name : 'mail', title : "correo", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" },
 				{ name : 'image', title : "Imagen", model : "image", type :"text"},
 				{ name : 'city', title : "ciudad", model : "address.city", type :"select", required:true, invalidMessage:"test", invalidClass: "is-invalid", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
 			];
