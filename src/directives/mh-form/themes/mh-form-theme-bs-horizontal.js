@@ -66,6 +66,7 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                 var button = buttonsContainer.find("button");
                 button.remove();
 
+                var usedCols=0;
                 for(var i = 0; i < formScope.mhFormFields.length; i++)
                 {
                     if(formScope.mhFormFields[i].invalidClass == null)
@@ -86,6 +87,13 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                     }
                     
                     var cols = config.cols == null ? 4 : config.cols;
+                    usedCols += cols;
+
+                    if(usedCols > 12)
+                    {
+                        newInputContainer.css("clear", "left");
+                        usedCols = 0;
+                    }
                     newInputContainer.addClass("col-md-"+cols);
                     newInputContainer.attr("data-mh-name", config.name);
                     inputsContainer.append(newInputContainer);

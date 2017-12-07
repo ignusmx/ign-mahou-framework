@@ -22,6 +22,31 @@ translude:
 	border-color: #FF0000;
 }
 </style>
+<mh-paginator mh-paginator-theme-bs 
+mh-page-group-size="3" 
+mh-current-page="2" 
+mh-last-page="10"
+mh-on-page-selected="pageSelected()"
+>
+</mh-paginator>
+
+<nav aria-label="Page navigation">
+							<ul class="pagination">
+								<li ng-class="{'disabled' : section.pageGroup === 0}">
+									<a href="#" aria-label="Previous" ng-click="!isLoading  && section.pageGroup !== 0 && search(section.group_init_page)">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+								</li>
+								<li ng-repeat="page in section.pages" ng-class="{'active' : page == section.current_page}">
+									<a href="#" ng-click="!isLoading && page != section.current_page && search(page)">{{page}}</a>
+								</li>
+								<li ng-class="{'disabled' : section.pageGroup === section.lastGroup}">
+									<a href="#" aria-label="Next" ng-click="!isLoading && section.pageGroup !== section.lastGroup && search(section.group_last_page)">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+								</li>
+							</ul>
+						</nav>
 <mh-form mh-form-theme-custom ng-model="user" mh-form-name="'testForm'" mh-form-fields="formFields" mh-form-buttons="formButtons">
 	<form>
 		<div class="form-group mh-input-container" data-mh-name="user_name">
