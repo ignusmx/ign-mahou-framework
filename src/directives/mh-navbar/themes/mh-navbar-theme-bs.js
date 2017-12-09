@@ -77,7 +77,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
 
             var inverse = attrs.mhNavbarInverse == null ? false : true;
             
-            //extend navbar scope to add mhNavbarButtonsRight for this them
+            //extend navbar scope to add mhNavbarButtonsRight for this theme
             var rightButtons = $parse(attrs.mhNavbarButtonsRight)(scope);
 
             var templateElem = 
@@ -103,7 +103,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                     var config = buttons[i];
                     var newButtonContainer = null;
 
-                    if(config.dropdown_buttons != null && config.dropdown_buttons.length > 0)
+                    if(config.dropdownButtons != null && config.dropdownButtons.length > 0)
                     {
                         newButtonContainer = dropdownButtonContainer.clone();
 
@@ -111,11 +111,14 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                         var innerSimpleButtonContainer = innerUl.find("li");
                         innerSimpleButtonContainer.remove();
 
-                        newButtonContainer.find("> a.mh-navbar-button").attr("data-mh-name", config.name);
-                        for(var j = 0; j < config.dropdown_buttons.length; j++)
+                        var navBarButton = newButtonContainer.find("> a.mh-navbar-button");
+                        navBarButton.attr("data-mh-name", config.name);
+
+                        for(var j = 0; j < config.dropdownButtons.length; j++)
                         {
                             var newInnerSimpleButtonContainer = innerSimpleButtonContainer.clone();
-                            newInnerSimpleButtonContainer.find("a.mh-navbar-button").attr("data-mh-name", config.dropdown_buttons[j].name);
+                            var innerButton = newInnerSimpleButtonContainer.find("> a.mh-navbar-button");
+                            innerButton.attr("data-mh-name", config.dropdownButtons[j].name);
                             innerUl.append(newInnerSimpleButtonContainer);
                         }
                     }

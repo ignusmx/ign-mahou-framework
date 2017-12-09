@@ -20,7 +20,9 @@ function MHBsDecorator()
 
 MHBsDecorator.decorateIcon = function(string, cssClass, elementTag)
 {
+
 	return '<'+elementTag+' class="'+cssClass+'"></'+elementTag+'> '+string;
+	return mhTitle;
 }
 
 MHBsDecorator.decorateImage = function(string)

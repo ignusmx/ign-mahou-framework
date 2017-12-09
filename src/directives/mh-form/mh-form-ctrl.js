@@ -43,10 +43,11 @@ angular
                     inputErrorMessage.html("{{mhFormFields["+i+"].invalidMessage}}")
                     inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+config.name+", "+formName+")");
                     input.attr("required", true);
-                    if(config.invalidClass != null)
+
+                    if(self.scope.mhClassInvalid != null)
                     {
                         input.attr("ng-class", 
-                        "{'"+config.invalidClass+"' : controller.fieldIsValid("+formName+"."+config.name+", "+formName+")}");
+                        "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsValid("+formName+"."+config.name+", "+formName+")}");
                     }
                 }
                 else

@@ -21,42 +21,30 @@
 				console.log("model to delete is:", model);
 			}
 
+			//var title = MHBsDecorator.decorateTitleIcon(new MHTitle("{{$parent.user.name}}"),"glyphicon glyphicon-eur", "span");
+			//console.log(title);
+
 			var homeDropDowns = [ 
-									new MHButton("about_us", MHBsDecorator.decorateIcon("{{$parent.user.name}}","glyphicon glyphicon-eur", "span"), function(){ alert("nosotros seleccionado")}),
-									new MHButton("about_uss", "nosotros", function(){ alert("nosotros seleccionado")}),
-									new MHButton("about_usss", "nosotres", function(){ alert("nosotres seleccionado")})
+									new MHButton("calendario", "Calendario", function(){ alert("nosotros seleccionado")}),
+									new MHButton("ganado", "Ganado", function(){ alert("nosotros seleccionado")}),
+									new MHButton("about_usss", "Bitácoras", function(){ alert("nosotres seleccionado")}),
+									new MHButton("about_ussss", "Nuevo sub menu", function(){ alert("nosotres seleccionado")})
 								];
 
 
-			var homeButton = new MHDropdownButton("home", "inicio", function(){ console.log("home seleccionado")}, homeDropDowns);
+			var homeButton = new MHDropdownButton("home", "Ganado", function(){ console.log("home seleccionado")}, homeDropDowns);
 
 			$scope.menuButtons = [
 									homeButton
 								];
 
 			$scope.menuRightButtons = [
-										{
-											name:"user", 
-											title:"usuario", 
-											action : function(){ console.log("usuario seleccionado")}, 
-											dropdown_buttons : [
-																	{
-																		name : "logout", 
-																		title: "cerrar sesión", 
-																		action:function(){alert("cerrar sesion seleccionado!")}
-																	},
-																	{
-																		name : "config", 
-																		title: "Configuración", 
-																		action:function(){alert("config seleccionado!")}
-																	}
-																]
-										}
+										
 									];
 
 			var collection = [
-								{id:"33", name : "Juan perez", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", age:"20", email : "juanperez@mail.com", address:{city:"Guadalajara", ctry:"pais"}},
-								{id:"12", name : "topollilo", image: "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "topollilo@mail.com", address:{city:"Guadalajara", ctry:"mx"}}
+								{id:"33", name : "Vaca 1", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", age:"20", email : "reg34554095", address:{city:"Hembra", ctry:"pais", fierro:"url"}},
+								{id:"12", name : "Vaca 2", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", email : "asd23452345234", address:{city:"Macho", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
 			$scope.cellsConfig = 
@@ -64,7 +52,7 @@
 					{ name:"id", label : "id", valueExpression : "row.model.id", type: "text"},
 					{ name:"name", label : "nombre", valueExpression : "row.model.name", type: "text"},
 					{ name:"image", label : "imagen", valueExpression : "row.model.image", type: "image"},
-					{ name:"email", label : "correo", valueExpression : "row.model.email", type: "text"},
+					{ name:"email", label : "no. registro", valueExpression : "row.model.email", type: "text"},
 					{ name:"address", label : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
 				]
 				
@@ -79,15 +67,15 @@
 			//FORM CONFIG:
 			$scope.user = collection[0];
 
-			$
-			$scope.title = MHBsDecorator.decorateImage("{{$parent.user.name}}");
+			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formFields = [
 				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido" },
 				{ name : 'age', title : "Edad", model : "age", type:"text", cols:4 },
-				{ name : 'mail', title : "correo", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" },
+				{ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" },
 				{ name : 'image', title : "Imagen", model : "image", type :"text"},
-				{ name : 'city', title : "ciudad", model : "address.city", type :"select", required:true, invalidMessage:"test", invalidClass: "is-invalid", options : ["Guadalajara", "Monterrey", "Guanajuato"] }
+				{ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:2, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] },
+				{ name : 'fierro', title : "Fierro", model : "fierro", type :"text", cols:2 }
 			];
 
 			$scope.formButtons = [

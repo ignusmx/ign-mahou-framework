@@ -38,7 +38,9 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
         {
             var formCtrl = ctrls[0];
             var themeCtrl = ctrls[1];
-            console.log(ctrls);
+            
+            formCtrl.scope.mhClassInvalid = 
+            formCtrl.scope.mhClassInvalid == null ? 'is-invalid' : formCtrl.scope.mhClassInvalid;
             
             var templateElem = 
             $(themeCtrl.renderFormTheme(this.mhRawInnerTemplate, formCtrl.scope));
@@ -69,11 +71,6 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                 var usedCols=0;
                 for(var i = 0; i < formScope.mhFormFields.length; i++)
                 {
-                    if(formScope.mhFormFields[i].invalidClass == null)
-                    {
-                        formScope.mhFormFields[i].invalidClass = "is-invalid";
-                    }
-                    
                     var config = formScope.mhFormFields[i];
                     var newInputContainer = null;
 

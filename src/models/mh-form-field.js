@@ -15,19 +15,20 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHFormField()
+function MHFormField(name, title, model, type, options, defaulOption, required, invalidMessage, cssClasses)
 {
-	this.__proto__ = {
-		name : null,
-		title : null,
-		model : null,
-		type : null,
-		options : null,
-		defaultOption : null,
-		required : false,
-		invalidMessage : null,
-		invalidClass : null
-	}
+	//inherit from MHUIElement
+	var parent = new MHUIElement(cssClasses);
+	this.__proto__ = Object.create(parent.__proto__);
+
+	this.__proto__.name = name;
+	this.__proto__.title = title;
+	this.__proto__.model = model;
+	this.__proto__.type = type;
+	this.__proto__.options = options;
+	this.__proto__.defaultOption = defaultOption;
+	this.__proto__.required = required == null ? false : required;
+	this.__proto__.invalidMessage = invalidMessage;
 }
 
 /** 

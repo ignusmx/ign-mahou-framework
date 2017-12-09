@@ -120,7 +120,7 @@ angular.module('mahou').directive('mhNavbarThemeCustom', function ( $templateReq
             var ctrl = ctrls[0];
             if(attrs.mhTemplateUrl == null)
             {
-                var templateElem = $(this.mhRawInnerTemplate);
+                var templateElem = $(this.mhRawInnerTemplate);                
                 ctrl.compileTemplate(templateElem, el);
             }
             else

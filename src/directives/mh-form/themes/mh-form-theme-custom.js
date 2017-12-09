@@ -120,6 +120,7 @@ angular.module('mahou').directive('mhFormThemeCustom', function ( $templateReque
             var ctrl = ctrls[0];
             if(attrs.mhTemplateUrl == null)
             {
+                //TODO: replace button theme if defined by its own
                 var templateElem = $(this.mhRawInnerTemplate);
                 ctrl.compileTemplate(templateElem, el);
             }

@@ -28,18 +28,21 @@ angular
 
                 //render button
                 var button = templateElem.find(".mh-navbar-button[data-mh-name="+config.name+"]");
+                button.addClass(config.cssClasses);
+
                 button.attr("ng-click", "mhNavbarButtons["+i+"].action()");
                 button.find(".mh-title").attr("mh-compile", "mhNavbarButtons["+i+"].title");
                 
-                //if button has dropdown_buttons, render dropdown_buttons as well
-                if(config.dropdown_buttons != null && config.dropdown_buttons.length > 0)
+                //if button has dropdownButtons, render dropdownButtons as well
+                if(config.dropdownButtons != null && config.dropdownButtons.length > 0)
                 {
-                    for(var j = 0; j < config.dropdown_buttons.length; j++)
+                    for(var j = 0; j < config.dropdownButtons.length; j++)
                     {
-                        var dropdownConfig = config.dropdown_buttons[j];
+                        var dropdownConfig = config.dropdownButtons[j];
                         var button = templateElem.find(".mh-navbar-button[data-mh-name="+dropdownConfig.name+"]");
-                        button.attr("ng-click", "mhNavbarButtons["+i+"].dropdown_buttons["+j+"].action()");
-                        button.find(".mh-title").attr("mh-compile","mhNavbarButtons["+i+"].dropdown_buttons["+j+"].title");
+                        button.addClass(dropdownConfig.cssClasses);
+                        button.attr("ng-click", "mhNavbarButtons["+i+"].dropdownButtons["+j+"].action()");
+                        button.find(".mh-title").attr("mh-compile","mhNavbarButtons["+i+"].dropdownButtons["+j+"].title");
                     }
                 }                
             }
