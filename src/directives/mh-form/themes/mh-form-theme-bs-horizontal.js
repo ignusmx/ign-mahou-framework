@@ -84,16 +84,30 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                     }
                     
                     var cols = config.cols == null ? 4 : config.cols;
-                    usedCols += cols;
+                    var offset = config.offset == null ? 0 : config.offset;
+                    usedCols += cols + offset;
+
+                    console.log("used cols:", usedCols);
 
                     if(usedCols > 12)
                     {
-                        newInputContainer.css("clear", "left");
-                        usedCols = 0;
+                        inputsContainer.append('<div class="clearfix"></div>');
+                        usedCols = cols+offset;
                     }
+                    
                     newInputContainer.addClass("col-md-"+cols);
+                    
+                    if(offset > 0)
+                    {
+                        newInputContainer.addClass("col-md-offset-"+offset);
+                    }
+
                     newInputContainer.attr("data-mh-name", config.name);
                     inputsContainer.append(newInputContainer);
+                    if(config.linebreak)
+                    {
+                        inputsContainer.append('<div class="clearfix"></div>');
+                    }
                 }
                 
                 for(var i = 0; i < formScope.mhFormButtons.length; i++)

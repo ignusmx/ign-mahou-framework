@@ -35,6 +35,7 @@ angular
                 inputContainer.find(".mh-title").html(config.title);
                 
                 var input = inputContainer.find(".mh-input");
+                input.addClass(config.cssClasses);
         		input.attr("ng-model", "model"+getModelAsHash(config.model));
 
                 var inputErrorMessage = inputContainer.find(".mh-input-error-message");

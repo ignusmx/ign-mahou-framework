@@ -70,11 +70,11 @@
 			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formFields = [
-				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido" },
-				{ name : 'age', title : "Edad", model : "age", type:"text", cols:4 },
+				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:4, required:true, invalidMessage:"error, nombre es requerido" },
+				{ name : 'age', title : "Edad", model : "age", type:"text", cols:2, offset:4 },
 				{ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" },
 				{ name : 'image', title : "Imagen", model : "image", type :"text"},
-				{ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:2, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] },
+				{ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:3, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] },
 				{ name : 'fierro', title : "Fierro", model : "fierro", type :"text", cols:2 }
 			];
 

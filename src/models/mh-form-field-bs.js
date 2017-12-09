@@ -14,7 +14,7 @@ function MHFormFieldBs(name, title, model, type, options, defaulOption, required
 	var parent = new MHFormField(name, title, model, type, options, defaulOption, required, invalidMessage);
 	this.__proto__ = Object.create(parent.__proto__);
 
-	//TODO: decorate this with a decorator
 	//own properties
 	this.__proto__.cols = 1;
+	this.__proto__.offset = 0;
 }
