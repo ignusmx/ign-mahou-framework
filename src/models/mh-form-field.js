@@ -15,7 +15,7 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHFormField(name, title, model, type, options, defaulOption, required, invalidMessage, cssClasses)
+function MHFormField(name, title, model, type, options, placeholder, defaultOption, required, invalidMessage, cssClasses)
 {
 	//inherit from MHUIElement
 	var parent = new MHUIElement(cssClasses);
@@ -24,6 +24,7 @@ function MHFormField(name, title, model, type, options, defaulOption, required, 
 	this.__proto__.name = name;
 	this.__proto__.title = title;
 	this.__proto__.model = model;
+	this.__proto__.placeholder = placeholder;
 	this.__proto__.type = type;
 	this.__proto__.options = options;
 	this.__proto__.defaultOption = defaultOption;
@@ -48,4 +49,6 @@ var MHFormFieldType =
 	NUMBER : "number",
 	/** value: "select" (mhForm will search for an html of type 'select' and map and repeat inner 'option' based on MHFormField.options ) */
 	SELECT : "select"
+	/** value: "date" (sets 'input' type="date") */
+	DATE : "date"
 }

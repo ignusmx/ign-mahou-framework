@@ -43,7 +43,7 @@ angular
                 {
                     inputErrorMessage.html("{{mhFormFields["+i+"].invalidMessage}}")
                     inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+config.name+", "+formName+")");
-                    input.attr("required", true);
+                    input.attr("ng-required", true);
 
                     if(self.scope.mhClassInvalid != null)
                     {
@@ -63,6 +63,7 @@ angular
                     && config.type != null && config.type.length > 0)
                 {
                     input.attr("type", config.type);
+                    input.attr("placeholder", config.placeholder);
                 }
                 else if(config.type == "select")
                 {

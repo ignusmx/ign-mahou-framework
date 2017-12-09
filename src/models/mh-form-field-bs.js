@@ -8,10 +8,10 @@
  * (will add bootstrap col-md-{cols} class to field container).
  * @augments Models.MHFormField
  */
-function MHFormFieldBs(name, title, model, type, options, defaulOption, required, invalidMessage)
+function MHFormFieldBs(name, title, model, type, options, placeholder, cols, offset, defaultOption, required, invalidMessage, cssClasses)
 {
 	//inherit from MHFormField
-	var parent = new MHFormField(name, title, model, type, options, defaulOption, required, invalidMessage);
+	var parent = new MHFormField(name, title, model, type, options, placeholder, defaultOption, required, invalidMessage, cssClasses);
 	this.__proto__ = Object.create(parent.__proto__);
 
 	//own properties

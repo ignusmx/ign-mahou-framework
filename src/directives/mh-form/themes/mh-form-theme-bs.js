@@ -1,11 +1,11 @@
-angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templateRequest ) {
+angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',
-        require : ['mhForm', 'mhFormThemeBsHorizontal'],
+        require : ['mhForm', 'mhFormThemeBs'],
         template : function(el)
         {
-            this.mhRawInnerTemplate =  '<form>\
+            this.mhRawInnerTemplate =  '<form novalidate>\
                                             <div class="mh-form-inputs-container row">\
                                                 <div class="form-group mh-input-container">\
                                                     <label class="mh-title"></label>\
@@ -23,6 +23,12 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                                                       <div class="errors">\
                                                           <div class="mh-input-error-message" ng-message="required"></div>\
                                                         </div>\
+                                                    </md-input-container>\
+                                                </div>\
+                                                <div class="form-group mh-date-container">\
+                                                    <md-input-container>\
+                                                        <label class="mh-title"></label>\
+                                                        <md-datepicker class="mh-input" md-placeholder="Enter date"></md-datepicker>\
                                                     </md-input-container>\
                                                 </div>\
                                             </div>\
@@ -62,6 +68,9 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                 var selectContainer = inputsContainer.find(".mh-select-container");
                 selectContainer.remove();
 
+                var dateContainer = inputsContainer.find(".mh-date-container");
+                dateContainer.remove();
+
                 var buttonsContainer = form.find(".mh-form-buttons-container");
                 buttonsContainer.remove();
 
@@ -78,11 +87,16 @@ angular.module('mahou').directive('mhFormThemeBsHorizontal', function ( $templat
                     {
                         newInputContainer = selectContainer.clone();
                     }
+                    else if(config.type == "date")
+                    {
+                        newInputContainer = dateContainer.clone();
+                        newInputContainer.find("md-datepicker").attr("md-placeholder", config.placeholder);
+                    }
                     else
                     {
                         newInputContainer = inputContainer.clone();
                     }
-                    
+
                     var cols = config.cols == null ? 4 : config.cols;
                     var offset = config.offset == null ? 0 : config.offset;
                     usedCols += cols + offset;
