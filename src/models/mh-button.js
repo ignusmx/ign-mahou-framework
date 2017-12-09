@@ -13,13 +13,15 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHButton(name, title, action, cssClasses)
+function MHButton(config)
 {
 	//inherit from MHUIElement
-	var parent = new MHUIElement(cssClasses);
-	this.__proto__ = Object.create(parent.__proto__);
+	MHAbstractUIElement.call(this, config);
 
-	this.__proto__.name = name;
-	this.__proto__.title = title;
-	this.__proto__.action = action;
+	this.name = config.name;
+	this.title = config.title;
+	this.action = config.action;
 }
+
+MHButton.prototype = Object.create(MHAbstractUIElement.prototype);
+MHButton.prototype.constructor = MHButton;

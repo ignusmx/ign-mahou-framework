@@ -8,12 +8,14 @@
  * (will add bootstrap col-md-{cols} class to field container).
  * @augments Models.MHFormField
  */
-function MHDropdownButton(name, title, action, dropdownButtons, cssClasses)
+function MHDropdownButton(config)
 {
-	//inherit from MHFormField
-	var parent = new MHButton(name, title, action, cssClasses);
-	this.__proto__ = Object.create(parent.__proto__);
+	//inherit from MHUIElement
+	MHButton.call(this, config);
 
 	//own properties
-	this.__proto__.dropdownButtons = dropdownButtons;
+	this.dropdownButtons = config.dropdownButtons;
 }
+
+MHDropdownButton.prototype = Object.create(MHButton.prototype);
+MHDropdownButton.prototype.constructor = MHDropdownButton;

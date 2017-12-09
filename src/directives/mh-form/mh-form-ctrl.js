@@ -58,14 +58,13 @@ angular
                 
                 input.attr("name", config.name);
 
-                if(input.prop("tagName") != null 
-                    && input.prop("tagName").toLowerCase() == "input"
+                if(config instanceof MHFormFieldInput
                     && config.type != null && config.type.length > 0)
                 {
                     input.attr("type", config.type);
                     input.attr("placeholder", config.placeholder);
                 }
-                else if(config.type == "select")
+                else if(config instanceof MHFormFieldSelect)
                 {
                     if(config.defaultOption == null)
                     {

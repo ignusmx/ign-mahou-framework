@@ -83,11 +83,12 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest )
                     var config = formScope.mhFormFields[i];
                     var newInputContainer = null;
 
-                    if(config.type == "select")
+                    console.log();
+                    if(config instanceof MHFormFieldSelect)
                     {
                         newInputContainer = selectContainer.clone();
                     }
-                    else if(config.type == "date")
+                    else if(config instanceof MHFormFieldInput && config.type == "date")
                     {
                         newInputContainer = dateContainer.clone();
                         newInputContainer.find("md-datepicker").attr("md-placeholder", config.placeholder);

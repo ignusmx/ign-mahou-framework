@@ -25,14 +25,14 @@
 			//console.log(title);
 
 			var homeDropDowns = [ 
-									new MHButton("calendario", "Calendario", function(){ alert("nosotros seleccionado")}),
+									new MHButton({name:"calendario", title:"Calendario", action:function(){ alert("nosotros seleccionado")}}),
 									new MHButton("ganado", "Ganado", function(){ alert("nosotros seleccionado")}),
 									new MHButton("about_usss", "Bitácoras", function(){ alert("nosotres seleccionado")}),
 									new MHButton("about_ussss", "Nuevo sub menu", function(){ alert("nosotres seleccionado")})
 								];
 
 
-			var homeButton = new MHDropdownButton("home", "Ganado", function(){ console.log("home seleccionado")}, homeDropDowns);
+			var homeButton = new MHDropdownButton({name:"home", title:"Ganado", action:function(){ console.log("home seleccionado")}, dropdownButtons:homeDropDowns});
 
 			$scope.menuButtons = [
 									homeButton
@@ -70,11 +70,11 @@
 			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formFields = [
-				{ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" },
+				new MHFormFieldInput({ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				{ name : 'date', title : "Fecha", model : "age", type:"date", cols:3, required:true, placeholder:"eee" },
 				{ name : 'mail', title : "No. registro", model : "email", type :"email", cols:2, required : true, invalidMessage : "escriba por favor un correo valido" },
 				{ name : 'image', title : "Imagen", model : "image", type :"text", cols:2},
-				{ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:2, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] },
+				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:2, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
 				{ name : 'fierro', title : "Fierro", model : "fierro", type :"text", cols:2 }
 			];
 

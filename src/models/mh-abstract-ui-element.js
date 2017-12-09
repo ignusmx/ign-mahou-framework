@@ -13,9 +13,12 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHUIElement(cssClasses)
+function MHAbstractUIElement(config)
 {
-	this.__proto__ = {
-		cssClasses : cssClasses
-	}
+	if (this.constructor === MHAbstractUIElement)
+	{
+      throw new Error("Can't instantiate abstract MHAbstractUIElement");
+    }
+
+	this.cssClasses = config.cssClasses;
 }

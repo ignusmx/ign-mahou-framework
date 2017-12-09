@@ -15,29 +15,24 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHFormField(name, title, model, type, options, placeholder, defaultOption, required, invalidMessage, cssClasses)
+function MHFormFieldInput(config)
 {
-	//inherit from MHUIElement
-	var parent = new MHUIElement(cssClasses);
-	this.__proto__ = Object.create(parent.__proto__);
-
-	this.__proto__.name = name;
-	this.__proto__.title = title;
-	this.__proto__.model = model;
-	this.__proto__.placeholder = placeholder;
-	this.__proto__.type = type;
-	this.__proto__.options = options;
-	this.__proto__.defaultOption = defaultOption;
-	this.__proto__.required = required == null ? false : required;
-	this.__proto__.invalidMessage = invalidMessage;
+	//inherit from MHFormField
+	MHAbstractFormField.call(this, config);
+	this.type = config.type;
 }
+
+MHFormFieldInput.prototype = Object.create(MHAbstractFormField.prototype);
+MHFormFieldInput.prototype.constructor = MHFormFieldInput;
+
+
 
 /** 
 * Defines the types of an MHFormField
 * @enum {string}
 * @memberof Enumerators
 */
-var MHFormFieldType = 
+var MHFormFieldInputType = 
 {
 	/** value: "text" (sets 'input' type="text") */
 	TEXT : "text",
@@ -48,7 +43,5 @@ var MHFormFieldType =
 	/** value: "number" (sets 'input' type="number") */
 	NUMBER : "number",
 	/** value: "select" (mhForm will search for an html of type 'select' and map and repeat inner 'option' based on MHFormField.options ) */
-	SELECT : "select"
-	/** value: "date" (sets 'input' type="date") */
 	DATE : "date"
 }
