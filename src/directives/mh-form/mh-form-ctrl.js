@@ -24,7 +24,7 @@ angular
         for(var i = 0; i < self.scope.mhFormElements.length; i++)
         {
             var element = self.scope.mhFormElements[i];
-            MHValidationHelper.validateClasses(element, [MHAbstractFormField, MHFormButton]);
+            MHValidationHelper.validateType(element, element.name, [MHAbstractFormField, MHFormButton]);
         }
 
         function renderInputField(input, templateElem, formName, elementIndex)
@@ -169,7 +169,7 @@ angular
             {
                 return null;
             }
-            
+
             var modelTree = model.split(".");
             var hashedTree = "";
             for(var i = 0; i < modelTree.length; i++)

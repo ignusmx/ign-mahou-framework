@@ -67,7 +67,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
             for(var i = 0; i < elementContainers.length; i++)
             {
                 var container = elementContainers[i];
-                MHValidationHelper.validateClasses(container, [MHFormBSElementContainer]);
+                MHValidationHelper.validateType(container, "container", [MHFormBSElementContainer]);
             }
 
             formCtrl.scope.mhFormElementContainers = elementContainers;
