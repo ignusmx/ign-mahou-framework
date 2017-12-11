@@ -17,9 +17,7 @@ function MHButton(config)
 {
 	//inherit from MHUIElement
 	MHAbstractUIElement.call(this, config);
-
-	this.title = config.title;
-	this.action = config.action;
+	this.action = MHValidationHelper.safeClassAttribute(config, "action", Function, false);
 }
 
 MHButton.prototype = Object.create(MHAbstractUIElement.prototype);

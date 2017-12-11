@@ -26,9 +26,9 @@
 
 			var homeDropDowns = [ 
 									new MHButton({name:"calendario", title:"Calendario", action:function(){ alert("nosotros seleccionado")}}),
-									new MHButton("ganado", "Ganado", function(){ alert("nosotros seleccionado")}),
-									new MHButton("about_usss", "Bitácoras", function(){ alert("nosotres seleccionado")}),
-									new MHButton("about_ussss", "Nuevo sub menu", function(){ alert("nosotres seleccionado")})
+									new MHButton({name:"ganado", title:"Ganado", action:function(){ alert("nosotros seleccionado")}}),
+									new MHButton({name:"about_usss", title:"Bitácoras", function(){ alert("nosotres seleccionado")}}),
+									new MHButton({name:"about_ussss", title:"Nuevo sub menu", function(){ alert("nosotres seleccionado")}})
 								];
 
 
@@ -75,7 +75,7 @@
 			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formElements = [
-				new MHFormFieldInput({ name : 'user_name', title : "nombre", model : "name", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormFieldInput({ name : 'user_name', title : "nombre", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInput({ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),

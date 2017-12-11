@@ -20,7 +20,8 @@ function MHAbstractUIElement(config)
       throw new Error("Can't instantiate abstract MHAbstractUIElement");
     }
 
-    this.name = config.name;
-	this.cssClasses = config.cssClasses;
-	this.requiredTags = config.requiredTags;
+    this.name = MHValidationHelper.safeClassAttribute(config, "name", String, true);
+	this.title = MHValidationHelper.safeClassAttribute(config, "title", String, false);
+	this.cssClasses = MHValidationHelper.safeClassAttribute(config, "cssClasses", String, false);
+	this.requiredTags = MHValidationHelper.safeClassAttribute(config, "requiredTags", String, false);
 }

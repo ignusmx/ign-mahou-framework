@@ -19,7 +19,7 @@ function MHFormFieldInput(config)
 {
 	//inherit from MHFormField
 	MHAbstractFormField.call(this, config);
-	this.type = config.type;
+	this.type = MHValidationHelper.safeClassAttribute(config, "type", String, true);
 	this.requiredTags = "input";
 }
 

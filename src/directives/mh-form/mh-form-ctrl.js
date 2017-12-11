@@ -165,6 +165,11 @@ angular
         //private functions
         function getModelAsHash(model)
         {
+            if(model == null)
+            {
+                return null;
+            }
+            
             var modelTree = model.split(".");
             var hashedTree = "";
             for(var i = 0; i < modelTree.length; i++)

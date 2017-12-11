@@ -24,11 +24,10 @@ function MHAbstractFormField(config)
 	//inherit from MHUIElement
 	MHAbstractUIElement.call(this, config);
 
-	this.title = config.title;
-	this.model = config.model;
-	this.placeholder = config.placeholder;
-	this.required = config.required == null ? false : config.required;
-	this.invalidMessage = config.invalidMessage;
+	this.model = MHValidationHelper.safeClassAttribute(config, "model", String, false);
+	this.placeholder = MHValidationHelper.safeClassAttribute(config, "placeholder", String, false);
+	this.required = MHValidationHelper.safeClassAttribute(config, "required", Boolean, false, false);
+	this.invalidMessage = MHValidationHelper.safeClassAttribute(config, "invalidMessage", String, false);
 }
 
 MHAbstractFormField.prototype = Object.create(MHAbstractUIElement.prototype);

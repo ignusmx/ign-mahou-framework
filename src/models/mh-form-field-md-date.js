@@ -19,7 +19,6 @@ function MHFormFieldMDDate(config)
 {
 	//inherit from MHUIElement
 	MHAbstractFormField.call(this, config);
-
 	this.requiredTags = "md-datepicker";
 }
 
