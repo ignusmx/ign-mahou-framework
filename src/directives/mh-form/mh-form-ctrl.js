@@ -20,6 +20,107 @@ angular
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
 
+        //validate scope attributes data types
+        for(var i = 0; i < self.scope.mhFormElements.length; i++)
+        {
+            var element = self.scope.mhFormElements[i];
+            MHValidationHelper.validateClasses(element, [MHAbstractFormField, MHFormButton]);
+        }
+
+        function renderInputField(input, templateElem, formName, elementIndex)
+        {
+            var inputContainer = templateElem.find("[data-mh-name="+input.name+"]");
+            inputContainer.find(".mh-title").html(input.title);
+            
+            var inputElem = inputContainer.find(".mh-input");
+
+            MHValidationHelper.validateRequiredTags(input, inputElem);
+            
+            inputElem.addClass(input.cssClasses);
+            inputElem.attr("ng-model", "model"+getModelAsHash(input.model));
+
+            var inputErrorMessage = inputContainer.find(".mh-input-error-message");
+            if(input.required)
+            {
+                inputErrorMessage.html("{{mhFormElements["+elementIndex+"].invalidMessage}}")
+                inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+input.name+", "+formName+")");
+                inputElem.attr("ng-required", true);
+
+                if(self.scope.mhClassInvalid != null)
+                {
+                    inputElem.attr("ng-class", 
+                    "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsValid("+formName+"."+input.name+", "+formName+")}");
+                }
+            }
+            else
+            {
+                inputErrorMessage.remove();
+            }
+            
+            inputElem.attr("name", input.name);
+
+            if(input instanceof MHFormFieldInput
+                && input.type != null && input.type.length > 0)
+            {
+                inputElem.attr("type", input.type);
+                inputElem.attr("placeholder", input.placeholder);
+            }
+            else if(input instanceof MHFormFieldSelect)
+            {
+                if(input.defaultOption == null)
+                {
+                    inputElem.find(".mh-select-default-option").remove();
+                }
+                else
+                {
+                    inputElem.find(".mh-select-default-option").html("{{mhFormElements["+elementIndex+"].default}}");
+                    inputElem.find(".mh-select-default-option").attr("ng-value", "{{null}}")
+                }
+                
+                inputElem.find(".mh-select-option").attr("ng-repeat","option in mhFormElements["+elementIndex+"].options");
+                inputElem.find(".mh-select-option").attr("value","{{option}}");
+                inputElem.find(".mh-select-option").html("{{option}}");
+            }
+        }
+
+        function renderFormButton(button, templateElem, formName, elementIndex)
+        {
+            var buttonContainer = templateElem.find("[data-mh-name="+button.name+"]");
+            var buttonElement = buttonContainer.find(".mh-form-button");
+
+            if(button.disabledStatuses != null)
+            {
+                var disabledExpression = "";
+                var disabledStatuses = button.disabledStatuses.split(",");
+
+                for(var j = 0; j < disabledStatuses.length; j++)
+                {
+                    if(j > 0)
+                    {
+                        disabledExpression +=" || ";
+                    }
+
+                    switch(disabledStatuses[j].trim())
+                    {
+                        case MHFormStatus.FORM_VALID : disabledExpression += formName+".$valid";
+                        break;
+                        case MHFormStatus.FORM_INVALID : disabledExpression += "!"+formName+".$valid";
+                        break;
+                        case MHFormStatus.MODEL_CHANGED : disabledExpression += "controller.modelChanged()";
+                        break;
+                        case MHFormStatus.MODEL_UNCHANGED : disabledExpression += "!controller.modelChanged()";
+                        break;
+                    }
+                }
+                
+                buttonElement.attr("ng-disabled", disabledExpression);    
+            }
+            
+            buttonElement.attr("ng-click", "mhFormElements["+elementIndex+"].action(model, "+formName+")");
+            buttonElement.addClass(button.cssClasses);
+            buttonElement.find(".mh-title").html(button.title);
+        }
+
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
@@ -28,99 +129,28 @@ angular
             
             templateElem.attr("name", self.scope.mhFormName);
             
-        	for(var i = 0; i < scope.mhFormFields.length; i++)
+        	for(var i = 0; i < scope.mhFormElements.length; i++)
         	{
-        		var config = scope.mhFormFields[i];
-                var inputContainer = templateElem.find("[data-mh-name="+config.name+"]");
-                inputContainer.find(".mh-title").html(config.title);
-                
-                var input = inputContainer.find(".mh-input");
-                input.addClass(config.cssClasses);
-        		input.attr("ng-model", "model"+getModelAsHash(config.model));
+        		var formElement = scope.mhFormElements[i];
 
-                var inputErrorMessage = inputContainer.find(".mh-input-error-message");
-                if(config.required)
+                if(formElement instanceof MHAbstractFormField)
                 {
-                    inputErrorMessage.html("{{mhFormFields["+i+"].invalidMessage}}")
-                    inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+config.name+", "+formName+")");
-                    input.attr("ng-required", true);
-
-                    if(self.scope.mhClassInvalid != null)
-                    {
-                        input.attr("ng-class", 
-                        "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsValid("+formName+"."+config.name+", "+formName+")}");
-                    }
+                    renderInputField(formElement, templateElem, formName, i);
                 }
-                else
+                else if(formElement instanceof MHFormButton)
                 {
-                    inputErrorMessage.remove();
-                }
-                
-                input.attr("name", config.name);
-
-                if(config instanceof MHFormFieldInput
-                    && config.type != null && config.type.length > 0)
-                {
-                    input.attr("type", config.type);
-                    input.attr("placeholder", config.placeholder);
-                }
-                else if(config instanceof MHFormFieldSelect)
-                {
-                    if(config.defaultOption == null)
-                    {
-                        input.find(".mh-select-default-option").remove();
-                    }
-                    else
-                    {
-                        input.find(".mh-select-default-option").html("{{mhFormFields["+i+"].default}}");
-                        input.find(".mh-select-default-option").attr("ng-value", "{{null}}")
-                    }
-                    
-                    input.find(".mh-select-option").attr("ng-repeat","option in mhFormFields["+i+"].options");
-                    input.find(".mh-select-option").attr("value","{{option}}");
-                    input.find(".mh-select-option").html("{{option}}");
-                }
+                    renderFormButton(formElement, templateElem, formName, i);
+                }             
         	}
 
-            for(var i = 0; i < scope.mhFormButtons.length; i++)
-            {
-                var config = scope.mhFormButtons[i];
-                var button = templateElem.find(".mh-form-button[data-mh-name="+config.name+"]");
-
-                if(config.disabledStatuses != null)
-                {
-                    var disabledExpression = "";
-                    var disabledStatuses = config.disabledStatuses.split(",");
-
-                    for(var j = 0; j < disabledStatuses.length; j++)
-                    {
-                        if(j > 0)
-                        {
-                            disabledExpression +=" || ";
-                        }
-
-                        switch(disabledStatuses[j].trim())
-                        {
-                            case MHFormStatus.FORM_VALID : disabledExpression += formName+".$valid";
-                            break;
-                            case MHFormStatus.FORM_INVALID : disabledExpression += "!"+formName+".$valid";
-                            break;
-                            case MHFormStatus.MODEL_CHANGED : disabledExpression += "controller.modelChanged()";
-                            break;
-                            case MHFormStatus.MODEL_UNCHANGED : disabledExpression += "!controller.modelChanged()";
-                            break;
-                        }
-                    }
-                    
-                    button.attr("ng-disabled", disabledExpression);    
-                }
-                
-                button.attr("ng-click", "mhFormButtons["+i+"].action(model, "+formName+")");
-                button.addClass(config.cssClasses);
-                button.find(".mh-title").html(config.title);
-            }
-
             directiveElem.replaceWith($compile(templateElem)(scope));
+            if(scope.mhOnFormInit != null)
+             {
+                scope.mhOnFormInit({ disableForm: function(){
+                    //console.log("disable form!", directiveElem);
+                    //templateElem.remove("asd");
+                }});
+             }
         }
 
         this.fieldIsValid = function(field, form)

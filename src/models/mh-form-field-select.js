@@ -22,6 +22,7 @@ function MHFormFieldSelect(config)
 
 	this.options = config.options;
 	this.defaultOption = config.defaultOption;
+	this.requiredTags = "select";
 }
 
 MHFormFieldSelect.prototype = Object.create(MHAbstractFormField.prototype);

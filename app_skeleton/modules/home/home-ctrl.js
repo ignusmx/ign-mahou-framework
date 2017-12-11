@@ -43,8 +43,8 @@
 									];
 
 			var collection = [
-								{id:"33", name : "Vaca 1", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", age:"10/10/2017", email : "reg34554095", address:{city:"Hembra", ctry:"pais", fierro:"url"}},
-								{id:"12", name : "Vaca 2", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", email : "asd23452345234", address:{city:"Macho", ctry:"mx"}}
+								{id:"33", name : "Vaca 1", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", age:new Date(), email : "reg34554095", address:{city:"Macho", ctry:"pais", fierro:"url"}},
+								{id:"12", name : "Vaca 2", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", email : "asd23452345234", address:{city:"Hembra", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
 			$scope.cellsConfig = 
@@ -67,23 +67,37 @@
 			//FORM CONFIG:
 			$scope.user = collection[0];
 
+			$scope.pageSelected = function(page)
+			{
+				console.log("page:",page);
+			}
+
 			$scope.title = "{{$parent.user.name}}";
 
-			$scope.formFields = [
-				new MHFormFieldInput({ name : 'user_name', title : "nombre", model : "name", type:"text", cols:2, required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
-				{ name : 'date', title : "Fecha", model : "age", type:"date", cols:3, required:true, placeholder:"eee" },
-				{ name : 'mail', title : "No. registro", model : "email", type :"email", cols:2, required : true, invalidMessage : "escriba por favor un correo valido" },
-				{ name : 'image', title : "Imagen", model : "image", type :"text", cols:2},
-				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", type :"select", cols:2, required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
-				{ name : 'fierro', title : "Fierro", model : "fierro", type :"text", cols:2 }
+			$scope.formElements = [
+				new MHFormFieldInput({ name : 'user_name', title : "nombre", model : "name", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
+				new MHFormFieldInput({ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" }),
+				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
+				new MHFormButton({name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"}),
+				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"}),
 			];
 
-			$scope.formButtons = [
-				{name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"},
-				{name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"},
-				{name : "delete", title : "eliminar", action : $scope.deleteClick, cssClasses : "btn-danger"},
-				{name : "clean", title : "limpiar", action : $scope.deleteClick},
-			];
+			$scope.onFormInit = function(api)
+			{
+				setTimeout(function(){
+					api.disableForm();
+				}, 1000)
+				console.log();
+			}
+
+			$scope.containers = [	new MHFormBSElementContainer({elements : [$scope.formElements[0],
+																			 $scope.formElements[1]], 
+																			  align:"bottom"}),
+									new MHFormBSElementContainer({elements:[
+																	$scope.formElements[4],
+																	$scope.formElements[5]]})
+								];
 
 			$scope.selectAllEvent = function(rows)
 			{

@@ -15,34 +15,12 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHFormFieldInput(config)
+function MHFormFieldMDSelect(config)
 {
-	//inherit from MHFormField
-	MHAbstractFormField.call(this, config);
-	this.type = config.type;
-	this.requiredTags = "input";
+	//inherit from MHUIElement
+	MHFormFieldSelect.call(this, config);
+	this.requiredTags = "md-select";
 }
 
-MHFormFieldInput.prototype = Object.create(MHAbstractFormField.prototype);
-MHFormFieldInput.prototype.constructor = MHFormFieldInput;
-
-
-
-/** 
-* Defines the types of an MHFormField
-* @enum {string}
-* @memberof Enumerators
-*/
-var MHFormFieldInputType = 
-{
-	/** value: "text" (sets 'input' type="text") */
-	TEXT : "text",
-	/** value: "email" (sets 'input' type="email")  */
-	EMAIL : "email", 
-	/** value: "password" (sets 'input' type="password")  */
-	PASSWORD : "password",
-	/** value: "number" (sets 'input' type="number") */
-	NUMBER : "number",
-	/** value: "select" (mhForm will search for an html of type 'select' and map and repeat inner 'option' based on MHFormField.options ) */
-	DATE : "date"
-}
+MHFormFieldMDSelect.prototype = Object.create(MHFormFieldSelect.prototype);
+MHFormFieldMDSelect.prototype.constructor = MHFormFieldMDSelect;

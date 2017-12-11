@@ -26,7 +26,7 @@ translude:
 mh-page-group-size="3" 
 mh-current-page="2" 
 mh-last-page="10"
-mh-on-page-selected="pageSelected()"
+mh-on-page-selected="pageSelected"
 >
 </mh-paginator>
 
@@ -47,27 +47,12 @@ mh-on-page-selected="pageSelected()"
 								</li>
 							</ul>
 						</nav>
-<mh-form mh-form-theme-custom ng-model="user" mh-form-name="'testForm'" mh-form-fields="formFields" mh-form-buttons="formButtons">
-	<form>
-		<div class="form-group mh-input-container" data-mh-name="user_name">
-			<input class="mh-input" required>
-			<div class="mh-form-error-message" name="user_name">mensaje de error</div>
-		</div>
-		<div class="form-group mh-input-container" data-mh-name="city">
-			<select class="mh-input" required>
-				<option class="mh-select-default-option"></option>
-				<option class="mh-select-option"></option>
-			</select>
-			<div class="mh-input-error-message">mensaje de error</div>
-		</div>
-		<button class="mh-form-button" data-mh-name="accept"><span class="mh-title"></span></button>
-	</form>
-</mh-form>
+
 
 <div><span><span>asd</span>asd</span></div>
 
 <div class="container">
-	<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-fields="formFields" mh-form-buttons="formButtons">
+	<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-elements="formElements" mh-form-element-containers="containers" mh-on-form-init="onFormInit">
 	</mh-form>
 </div>
 

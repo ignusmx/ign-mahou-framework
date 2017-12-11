@@ -63,9 +63,9 @@ angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
         { 
             model : '=ngModel',
             mhFormName : "=",
-            mhFormFields : '=',
-            mhFormButtons : '=',
-            mhClassInvalid : '=?'
+            mhFormElements : '=',
+            mhClassInvalid : '=?',
+            mhOnFormInit : '=?'
         },
         compile : function(elem,attrs)
         {

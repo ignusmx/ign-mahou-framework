@@ -18,7 +18,6 @@ function MHButton(config)
 	//inherit from MHUIElement
 	MHAbstractUIElement.call(this, config);
 
-	this.name = config.name;
 	this.title = config.title;
 	this.action = config.action;
 }

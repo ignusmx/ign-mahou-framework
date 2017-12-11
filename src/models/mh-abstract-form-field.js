@@ -24,7 +24,6 @@ function MHAbstractFormField(config)
 	//inherit from MHUIElement
 	MHAbstractUIElement.call(this, config);
 
-	this.name = config.name;
 	this.title = config.title;
 	this.model = config.model;
 	this.placeholder = config.placeholder;
