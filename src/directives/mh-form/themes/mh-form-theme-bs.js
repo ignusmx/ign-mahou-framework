@@ -112,22 +112,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     for(var j = 0; j < formScope.mhFormElementContainers.length; j++)
                     {
                         var container = formScope.mhFormElementContainers[j];
-
-                        for(var k = 0; k < container.elements.length; k++)
-                        {
-                            console.log("container");
-                            if(container.elements[k] == element)
-                            {
-                                console.log("has container!", element);
-                                hasContainer = true;
-                                break;
-                            }
-                        }
-
-                        if(hasContainer)
-                        {
-                            break;
-                        }
+                        var hasContainer = isElementInContainer(element, container);
                     }
 
                     if(!hasContainer)
@@ -193,6 +178,20 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     if(container.linebreak)
                     {
                         elementsContainer.append('<div class="clearfix"></div>');
+                    }
+                }
+
+                function isElementInContainer(element, container)
+                {
+                    var hasContainer = false;
+                    for(var i = 0; i < container.elements.length; i++)
+                    {
+                        var containerElement = container.elements[i];
+                        if(container.elements[i] == element)
+                        {
+                            hasContainer = true;
+                            break;
+                        }
                     }
                 }
 

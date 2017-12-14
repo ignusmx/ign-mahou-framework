@@ -20,7 +20,11 @@ function MHFormFieldSelect(config)
 	//inherit from MHUIElement
 	MHAbstractFormField.call(this, config);
 
-	this.options = MHValidationHelper.safeClassAttribute(config, "options", String);
+	//validate main DataType
+	this.options = MHValidationHelper.safeClassAttribute(config, "options", Array);
+	//validate array DataTypes
+	MHValidationHelper.validateTypes(this.options, "options", [String, Number]);
+
 	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", String, false);
 	this.requiredTags = "select";
 }

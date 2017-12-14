@@ -92,7 +92,9 @@
 			}
 
 			$scope.containers = [	new MHFormBSElementContainer({elements : [$scope.formElements[0],
-																			 $scope.formElements[1]], 
+																			 $scope.formElements[1],
+																			 new MHFormBSElementContainer({elements:[$scope.formElements[0],
+																			 $scope.formElements[1]]})], 
 																			  align:"bottom"}),
 									new MHFormBSElementContainer({elements:[
 																	$scope.formElements[4],

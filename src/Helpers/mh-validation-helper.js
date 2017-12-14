@@ -30,11 +30,14 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, type, re
 		}
 		else
 		{
-			return defaultValue;
+			if(defaultValue != null)
+			{
+				MHValidationHelper.validateType(defaultValue, attributeName, type);
+			}
+			
+			attribute = defaultValue;
 		}
 	}
-
-    MHValidationHelper.validateType(attribute, attributeName, type);
 
     return attribute;
 }
@@ -46,8 +49,7 @@ MHValidationHelper.validateType = function(property, propertyName, type)
     var baseTypeErrorMessage = '"type" parameter must be a class or an array of classes.';
 
     function isValidProperty(property, type)
-    {
-    	
+    {	
     	if(typeof(property) == "object")
 		{
 			return property instanceof type;
@@ -101,5 +103,13 @@ MHValidationHelper.validateType = function(property, propertyName, type)
 	if(!foundValidProperty)
 	{
 		throw new TypeError( invalidPropertyErrorMessage );
+	}
+}
+
+MHValidationHelper.validateTypes = function(propertiesArray, arrayName, types)
+{
+	for(var i=0; i < propertiesArray.length; i++)
+	{
+		MHValidationHelper.validateType(propertiesArray[i], arrayName +"["+i+"]", types);
 	}
 }
