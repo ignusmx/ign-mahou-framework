@@ -91,14 +91,16 @@
 				console.log();
 			}
 
-			$scope.containers = [	new MHFormBSElementContainer({elements : [$scope.formElements[0],
-																			 $scope.formElements[1],
-																			 new MHFormBSElementContainer({elements:[$scope.formElements[0],
-																			 $scope.formElements[1]]})], 
+			var row0Elements = [new MHFormBSCol({elements : [$scope.formElements[0],
+																			 $scope.formElements[1]], 
 																			  align:"bottom"}),
-									new MHFormBSElementContainer({elements:[
+									new MHFormBSCol({elements:[
 																	$scope.formElements[4],
 																	$scope.formElements[5]]})
+								]
+
+			$scope.formLayout = [	
+									new MHFormBSRow({elements : row0Elements})
 								];
 
 			$scope.selectAllEvent = function(rows)

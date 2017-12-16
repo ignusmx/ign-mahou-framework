@@ -4,7 +4,7 @@ function MHValidationHelper()
 
 MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
 {
-	console.log(mhUIElement, mhUIElement.requiredTags, htmlElement.prop("tagName"))
+	console.log(mhUIElement, mhUIElement.requiredTags, htmlElement.prop("tagName"), htmlElement)
 	var conditionMet = mhUIElement.requiredTags == null 
 	||  (mhUIElement.requiredTags != null && mhUIElement.requiredTags.indexOf(htmlElement.prop("tagName").toLowerCase()) != -1);
 
@@ -18,7 +18,7 @@ MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
 	}
 }
 
-MHValidationHelper.safeClassAttribute = function(config, attributeName, type, required, defaultValue)
+MHValidationHelper.safeClassAttribute = function(config, attributeName, acceptedTypes, rejectedTypes, required, defaultValue)
 {
 	var attribute = config[attributeName];
 
@@ -32,7 +32,7 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, type, re
 		{
 			if(defaultValue != null)
 			{
-				MHValidationHelper.validateType(defaultValue, attributeName, type);
+				MHValidationHelper.validateType(defaultValue, attributeName, acceptedTypes, rejectedTypes);
 			}
 			
 			attribute = defaultValue;
@@ -42,13 +42,9 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, type, re
     return attribute;
 }
 
-MHValidationHelper.validateType = function(property, propertyName, type)
+MHValidationHelper.validateType = function(property, propertyName, acceptedTypes, rejectedTypes)
 {	
-    var foundValidProperty = false;
-    var invalidPropertyErrorMessage = '"'+propertyName +'" must be of type ';
-    var baseTypeErrorMessage = '"type" parameter must be a class or an array of classes.';
-
-    function isValidProperty(property, type)
+    function isOfType(property, type)
     {	
     	if(typeof(property) == "object")
 		{
@@ -60,50 +56,110 @@ MHValidationHelper.validateType = function(property, propertyName, type)
 		}
     }
 
-    //allow multiple type validation
-    if(type instanceof Array)
+    function validateAcceptedTypes()
     {
-    	if(type.length == 0)
-    	{
-    		throw TypeError(baseTypeErrorMessage + ' Types array is empty.');
-    	}
-
-    	for(var i = 0; i < type.length; i++)
-    	{
-    		if(typeof(type[i]) == "object")
+    	var foundValidProperty = false;
+    	var invalidPropertyErrorMessage = '"'+propertyName +'" must be of type ';
+    	var baseTypeErrorMessage = '"acceptedTypes" parameter must be a class or an array of classes.';
+    	//allow multiple type validation
+	    if(acceptedTypes instanceof Array)
+	    {
+	    	if(acceptedTypes.length == 0)
 	    	{
-	    		throw TypeError(baseTypeErrorMessage+' An object was found in the array.');
+	    		throw TypeError(baseTypeErrorMessage + ' Types array is empty.');
 	    	}
 
-    		if(i > 0)
-    		{
-    			invalidPropertyErrorMessage += " or ";
-    		}
+	    	for(var i = 0; i < acceptedTypes.length; i++)
+	    	{
+	    		if(typeof(acceptedTypes[i]) == "object")
+		    	{
+		    		throw TypeError(baseTypeErrorMessage+' An object was found in the array.');
+		    	}
 
-    		invalidPropertyErrorMessage += type[i].prototype.constructor.name;
-    		foundValidProperty = isValidProperty(property, type[i]);
+	    		if(i > 0)
+	    		{
+	    			invalidPropertyErrorMessage += " or ";
+	    		}
 
-    		if(foundValidProperty)
-			{
-				break;
-			}
-    	}
+	    		invalidPropertyErrorMessage += acceptedTypes[i].prototype.constructor.name;
+	    		foundValidProperty = isOfType(property, acceptedTypes[i]);
+
+	    		if(foundValidProperty)
+				{
+					break;
+				}
+	    	}
+	    }
+	    else
+	    {
+	    	if(typeof(acceptedTypes) == "object")
+	    	{
+	    		throw TypeError(baseTypeErrorMessage+' Object given.');
+	    	}
+
+	    	foundValidProperty = isOfType(property, acceptedTypes);
+	    	invalidPropertyErrorMessage += acceptedTypes.prototype.constructor.name;
+	    }
+
+		if(!foundValidProperty)
+		{
+			throw new TypeError( invalidPropertyErrorMessage );
+		}
     }
-    else
+
+    function validateRejectedTypes()
     {
-    	if(typeof(type) == "object")
-    	{
-    		throw TypeError(baseTypeErrorMessage+' Object given.');
-    	}
+    	var foundInvalidProperty = false;
+    	var invalidPropertyErrorMessage = '"'+propertyName +'" cannot be of type ';
+    	var baseTypeErrorMessage = '"rejectedTypes" parameter must be a class or an array of classes.';
+    	//allow multiple type validation
+	    if(rejectedTypes instanceof Array)
+	    {
+	    	for(var i = 0; i < rejectedTypes.length; i++)
+	    	{
+	    		if(typeof(rejectedTypes[i]) == "object")
+		    	{
+		    		throw TypeError(baseTypeErrorMessage+' An object was found in the array.');
+		    	}
 
-    	foundValidProperty = isValidProperty(property, type);
-    	invalidPropertyErrorMessage += type.prototype.constructor.name;
+	    		if(i > 0)
+	    		{
+	    			invalidPropertyErrorMessage += " or ";
+	    		}
+
+	    		invalidPropertyErrorMessage += rejectedTypes[i].prototype.constructor.name;
+	    		foundInvalidProperty = isOfType(property, rejectedTypes[i]);
+
+	    		if(foundInvalidProperty)
+				{
+					break;
+				}
+	    	}
+	    }
+	    else
+	    {
+	    	if(typeof(rejectedTypes) == "object")
+	    	{
+	    		throw TypeError(baseTypeErrorMessage+' Object given.');
+	    	}
+
+	    	foundInvalidProperty = isOfType(property, rejectedTypes);
+	    	invalidPropertyErrorMessage += rejectedTypes.prototype.constructor.name;
+	    }
+
+		if(foundInvalidProperty)
+		{
+			throw new TypeError( invalidPropertyErrorMessage );
+		}
     }
 
-	if(!foundValidProperty)
-	{
-		throw new TypeError( invalidPropertyErrorMessage );
-	}
+    //rejectedTypes are optional, so we test them only if we receive them
+    if(rejectedTypes != null)
+    {
+    	validateRejectedTypes();	
+    }
+    
+    validateAcceptedTypes();
 }
 
 MHValidationHelper.validateTypes = function(propertiesArray, arrayName, types)

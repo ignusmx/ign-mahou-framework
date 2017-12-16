@@ -20,13 +20,6 @@ angular
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
 
-        //validate scope attributes data types
-        for(var i = 0; i < self.scope.mhFormElements.length; i++)
-        {
-            var element = self.scope.mhFormElements[i];
-            MHValidationHelper.validateType(element, element.name, [MHAbstractFormField, MHFormButton]);
-        }
-
         function renderInputField(input, templateElem, formName, elementIndex)
         {
             var inputContainer = templateElem.find("[data-mh-name="+input.name+"]");
@@ -121,17 +114,18 @@ angular
             buttonElement.find(".mh-title").html(button.title);
         }
 
-        this.compileTemplate = function(templateElem, directiveElem)
+        this.compileTemplate = function(templateElem, directiveElem, formElements)
         {
             var scope = self.scope;
-
             var formName = self.scope.mhFormName;
-            
+            scope.mhFormElements = formElements;
+
             templateElem.attr("name", self.scope.mhFormName);
             
         	for(var i = 0; i < scope.mhFormElements.length; i++)
         	{
         		var formElement = scope.mhFormElements[i];
+                MHValidationHelper.validateType(formElement, formElement.name, [MHAbstractFormField, MHFormButton]);
 
                 if(formElement instanceof MHAbstractFormField)
                 {
@@ -140,7 +134,7 @@ angular
                 else if(formElement instanceof MHFormButton)
                 {
                     renderFormButton(formElement, templateElem, formName, i);
-                }             
+                }
         	}
 
             directiveElem.replaceWith($compile(templateElem)(scope));

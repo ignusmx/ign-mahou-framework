@@ -117,11 +117,11 @@ angular.module('mahou').directive('mhPaginatorThemeCustom', function ( $template
         },
         link : function(scope, el, attrs, ctrls)
         {
-            var ctrl = ctrls[0];
+            var formCtrl = ctrls[0];
             if(attrs.mhTemplateUrl == null)
             {
                 var templateElem = $(this.mhRawInnerTemplate);
-                ctrl.compileTemplate(templateElem, el);
+                formCtrl.compileTemplate(templateElem, el, scope.mhFormLayout);
             }
             else
             {
@@ -129,7 +129,7 @@ angular.module('mahou').directive('mhPaginatorThemeCustom', function ( $template
                 .then(function (response) 
                 { 
                     var templateElem = $(response);
-                    ctrl.compileTemplate(templateElem, el);                   
+                    formCtrl.compileTemplate(templateElem, el);                   
                 });
             }
         }

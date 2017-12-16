@@ -25,7 +25,7 @@ function MHFormFieldSelect(config)
 	//validate array DataTypes
 	MHValidationHelper.validateTypes(this.options, "options", [String, Number]);
 
-	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", String, false);
+	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", String, null, false);
 	this.requiredTags = "select";
 }
 

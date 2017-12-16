@@ -18,7 +18,7 @@ function MHFormButton(config)
 	//inherit from MHFormField
 	MHButton.call(this, config);
 
-	this.disabledStatuses = MHValidationHelper.safeClassAttribute(config, "disabledStatuses", String, false);
+	this.disabledStatuses = MHValidationHelper.safeClassAttribute(config, "disabledStatuses", String, null, false);
 }
 
 MHFormButton.prototype = Object.create(MHButton.prototype);

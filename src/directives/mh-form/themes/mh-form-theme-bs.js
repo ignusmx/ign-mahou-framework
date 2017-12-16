@@ -5,9 +5,10 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
         require : ['mhForm', 'mhFormThemeBs'],
         template : function(el)
         {
-            this.mhRawInnerTemplate =  '<form novalidate>\
-                                            <div class="mh-form-elements-container row">\
-                                                <div class="form-group mh-form-md-group">\
+            this.mhRawInnerTemplate =  '<form class="form-horizontal" novalidate>\
+                                            <div class="mh-form-elements-container">\
+                                                <div class="form-group mh-form-row">\
+                                                    <div class="mh-form-col"></div>\
                                                 </div>\
                                                 <div class="mh-input-container">\
                                                     <label class="mh-title"></label>\
@@ -60,24 +61,16 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
             
             formCtrl.scope.mhClassInvalid = 
             formCtrl.scope.mhClassInvalid == null ? 'is-invalid' : formCtrl.scope.mhClassInvalid;
-
-            //extend navbar scope to add layout for this theme
-            var elementContainers = $parse(attrs.mhFormElementContainers)(scope);
-
-            for(var i = 0; i < elementContainers.length; i++)
-            {
-                var container = elementContainers[i];
-                MHValidationHelper.validateType(container, "container", [MHFormBSElementContainer]);
-            }
-
-            formCtrl.scope.mhFormElementContainers = elementContainers;
             
             var templateElem = 
             $(themeCtrl.renderFormTheme(this.mhRawInnerTemplate, formCtrl.scope));
-            formCtrl.compileTemplate(templateElem, el);
+            formCtrl.compileTemplate(templateElem, el, themeCtrl.formElements);
         },
         controller : function($scope, $element, $attrs)
         {
+            var self = this;
+            self.formElements = [];
+
             this.renderFormTheme = function(template, formScope)
             {
                 var renderedTemplate = $("<div></div>");
@@ -86,8 +79,11 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                 var form = renderedTemplate.find("form");
                 var elementsContainer = form.find(".mh-form-elements-container");
 
-                var elementGroup = form.find(".mh-form-md-group");
-                elementGroup.remove();
+                var formRow = form.find(".mh-form-row");
+                formRow.remove();
+
+                var formCol = formRow.find(".mh-form-col");
+                formCol.remove();
                 
                 var inputContainer = elementsContainer.find(".mh-input-container");
                 inputContainer.remove();
@@ -104,95 +100,75 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
 
-                ////CREATE DEFAULT ELEMENT CONTAINERS IF NO CONTAINER IS FOUND
-                for(var i = 0; i < formScope.mhFormElements.length; i++)
+                //RENDER LAYOUT
+                for(var i = 0; i < formScope.mhFormLayout.length; i++)
                 {
-                    var hasContainer = false;
-                    var element = formScope.mhFormElements[i];
-                    for(var j = 0; j < formScope.mhFormElementContainers.length; j++)
-                    {
-                        var container = formScope.mhFormElementContainers[j];
-                        var hasContainer = isElementInContainer(element, container);
-                    }
-
-                    if(!hasContainer)
-                    {
-                        //TODO: aqui me quedé 
-                        //(estandarizar y mover buttons, selects, date e inputs a un mismo container
-                        //en el template)
-                        formScope.mhFormElementContainers.push(new MHFormBSElementContainer({elements:[element], cols:4, offset:0}));
-                    }
+                    var element = formScope.mhFormLayout[i];
+                    recursivelyIndexAndRenderElement(element, elementsContainer);
                 }
 
-                console.log("containers:", formScope.mhFormElementContainers);
-                var usedCols = 0;
-                for(var i = 0; i < formScope.mhFormElementContainers.length; i++)
+                function recursivelyIndexAndRenderElement(element, group)
                 {
-                    var container  = formScope.mhFormElementContainers[i];
-                    var newElementGroup = elementGroup.clone();
-                    var flexAlign = 'flex-start';
-
-                    switch(container.align)
+                    if(element instanceof MHFormBSRow)
                     {
-                        case 'top' : flexAlign = 'flex-start';
-                        break;
-                        case 'middle' : flexAlign = 'center';
-                        break;
-                        case 'bottom' : flexAlign = 'flex-end';
-                        break;
-                    }
+                        var rowContainer = element;
+                        var newFormRow = formRow.clone();
+                        group.append(newFormRow);
 
-                    newElementGroup.css("display", "flex");
-                    newElementGroup.css("align-items", flexAlign);
-
-                    if(container.minHeight != null)
-                    {
-                        newElementGroup.css("min-height", container.minHeight+"px");
-                    }
-
-                    for(var j = 0; j < container.elements.length; j++)
-                    {
-                        var newElementContainer = renderElementContainer(container.elements[j]);
-                        newElementGroup.append(newElementContainer);
-                    }
-
-                    var cols = container.cols;
-                    var offset = container.offset;
-                    usedCols += cols + offset;
-
-                    if(usedCols > 12)
-                    {
-                        elementsContainer.append('<div class="clearfix"></div>');
-                        usedCols = cols+offset;
-                    }
-                    
-                    newElementGroup.addClass("col-md-"+cols);
-                    
-                    if(offset > 0)
-                    {
-                        newElementGroup.addClass("col-md-offset-"+offset);
-                    }
-
-                    
-                    elementsContainer.append(newElementGroup);
-                    if(container.linebreak)
-                    {
-                        elementsContainer.append('<div class="clearfix"></div>');
-                    }
-                }
-
-                function isElementInContainer(element, container)
-                {
-                    var hasContainer = false;
-                    for(var i = 0; i < container.elements.length; i++)
-                    {
-                        var containerElement = container.elements[i];
-                        if(container.elements[i] == element)
+                        for(var i = 0; i < rowContainer.elements.length; i++)
                         {
-                            hasContainer = true;
-                            break;
+                            recursivelyIndexAndRenderElement(rowContainer.elements[i], newFormRow);
                         }
                     }
+                    else if(element instanceof MHFormBSCol)
+                    {
+                        var usedCols = 0;
+                        var container  = element;
+                        var newFormCol = formCol.clone();
+                        var flexAlign = 'flex-start';
+
+                        switch(container.align)
+                        {
+                            case 'top' : flexAlign = 'flex-start';
+                            break;
+                            case 'middle' : flexAlign = 'center';
+                            break;
+                            case 'bottom' : flexAlign = 'flex-end';
+                            break;
+                        }
+
+                        newFormCol.css("display", "flex");
+                        newFormCol.css("align-items", flexAlign);
+
+                        if(container.minHeight != null)
+                        {
+                            newFormCol.css("min-height", container.minHeight+"px");
+                        }
+
+                        var cols = container.colWidth;
+                        var offset = container.offset;
+                        
+                        newFormCol.addClass("col-md-"+cols);
+                        
+                        if(offset > 0)
+                        {
+                            newFormCol.addClass("col-md-offset-"+offset);
+                        }
+                        
+                        group.append(newFormCol);
+
+                        for(var i = 0; i < container.elements.length; i++)
+                        {
+                            recursivelyIndexAndRenderElement(container.elements[i], newFormCol);
+                        }
+                    }
+                    else
+                    {
+                        var newElementContainer = renderElementContainer(element);
+                        group.append(newElementContainer);
+                        //add element to formScope's elements array
+                        self.formElements.push(element);
+                    }   
                 }
 
                 function renderElementContainer(element)
@@ -220,6 +196,8 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     {
                         newElementContainer = inputContainer.clone();
                     }
+
+
 
                     newElementContainer.attr("data-mh-name", element.name);
                     newElementContainer.css("float", "left");
