@@ -4,12 +4,12 @@ angular
     function MHDatagridCtrl($scope, $element, $attrs, $compile) 
     {
         var self = this;
-
-        this.allRowsSelected = false;
-        this.collection = $scope.mhCollection;
-        this.checkboxModels = [];
-        this.selectedRows = [];
-        this.internalCollection = [];
+        self.scope = $scope;
+        self.allRowsSelected = false;
+        self.collection = $scope.mhCollection;
+        self.checkboxModels = [];
+        self.selectedRows = [];
+        self.internalCollection = [];
 
         for(var i = 0; i < this.collection.length; i++)
         {
@@ -92,8 +92,9 @@ angular
             return $scope.$eval(expression);
         }
 
-        this.compileTemplate = function(scope, templateElem, directiveElem)
+        this.compileTemplate = function(templateElem, directiveElem)
         {
+            var scope = self.scope;
             //validate colTypes:
             for(var i = 0; i < scope.mhCols.length; i++)
             {

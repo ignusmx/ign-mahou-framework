@@ -11,33 +11,29 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
         { 
             mhEnableRowSelect : "=",
             mhEnableRowButtons : "=",
-            mhTemplateUrl : "=",
             mhCols : "=",
             mhRowButtons : "=",
             mhCollection : "=",
             mhSelectAllChange : "&",
             mhSelectRowChange : "&",
         },
-        template : function(el)
+        compile : function(elem,attrs)
         {
-            this.mhRawInnerTemplate = el.html();
-            return "";
-        },
-        link : function(scope, el, attrs, ctrl)
-        {
-            if(attrs.mhTemplateUrl == null)
+            //search for a theme directive for proper compiling
+            var themeExists = false;
+            for ( var prop in attrs )
             {
-                var templateElem = $(this.mhRawInnerTemplate);
-                ctrl.compileTemplate(scope, templateElem, el);
+                if(prop.indexOf("mhDatagridTheme") !== -1)
+                {
+                    themeExists = true;
+                    break;
+                }
             }
-            else
+
+            //throw error if no theme found
+            if(!themeExists)
             {
-                $templateRequest(attrs.mhTemplateUrl)
-                .then(function (response) 
-                { 
-                    var templateElem = $(response);
-                    ctrl.compileTemplate(scope, templateElem, el);              
-                });
+                throw new Error("Could not compile mhDatagrid: no mhDatagridTheme directive was found. Please specify one.");
             }
         },
         controller: 'MHDatagridCtrl',
