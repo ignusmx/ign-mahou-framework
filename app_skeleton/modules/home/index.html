@@ -56,6 +56,11 @@ mh-on-page-selected="pageSelected"
 	</mh-form>
 </div>
 
+<div class="container">
+	<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-layout="form2Layout" mh-on-form-init="onFormInit">
+	</mh-form>
+</div>
+
 
 <div class="container">
 	<form class="form-horizontal">
@@ -95,10 +100,8 @@ mh-on-page-selected="pageSelected"
 	</form>
 </div>
 
-
-
 <mh-datagrid 
-mh-cells-config = "cellsConfig"
+mh-cols = "datagridCols"
 mh-row-buttons = "rowButtons",
 mh-enable-row-buttons = "true",
 mh-collection = "collection"

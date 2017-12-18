@@ -13,24 +13,12 @@
  * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
  *
  */
-function MHBsDecorator()
+function MHDatagridCol(config)
 {
-
+	//inherit from MHUIElement
+	MHAbstractUIElement.call(this, config);
+	this.value = MHValidationHelper.safeClassAttribute(config, "value", String, null, false);
 }
 
-MHBsDecorator.decorateIcon = function(string, cssClass, elementTag)
-{
-
-	return '<'+elementTag+' class="'+cssClass+'"></'+elementTag+'> '+string;
-	return mhTitle;
-}
-
-MHBsDecorator.decorateImage = function(string)
-{
-	return '<img src="'+string+'"></img>';
-}
-
-MHBsDecorator.decorateEval = function(string)
-{
-	return "{{$eval('"+string+"')}}";
-}
+MHDatagridCol.prototype = Object.create(MHAbstractUIElement.prototype);
+MHDatagridCol.prototype.constructor = MHDatagridCol;

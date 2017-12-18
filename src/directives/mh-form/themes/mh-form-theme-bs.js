@@ -10,6 +10,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                                                 <div class="form-group mh-form-row">\
                                                     <div class="mh-form-col"></div>\
                                                 </div>\
+                                                <label class="mh-label"><span class="mh-title"></span></label>\
                                                 <div class="mh-input-container">\
                                                     <label class="mh-title"></label>\
                                                     <input class="form-control mh-input">\
@@ -99,6 +100,9 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
 
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
+
+                var label = form.find(".mh-label");
+                label.remove();
 
                 //RENDER LAYOUT
                 for(var i = 0; i < formScope.mhFormLayout.length; i++)
@@ -192,12 +196,18 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     {
                         newElementContainer = buttonContainer.clone();
                     }
+                    else if(element instanceof MHFormBSLabel)
+                    {
+                        newElementContainer = label.clone();
+                    }
                     else
                     {
                         newElementContainer = inputContainer.clone();
+                        if(element.title == null)
+                        {
+                            newElementContainer.find("label").remove();
+                        }
                     }
-
-
 
                     newElementContainer.attr("data-mh-name", element.name);
                     newElementContainer.css("float", "left");

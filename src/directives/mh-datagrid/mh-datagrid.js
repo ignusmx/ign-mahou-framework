@@ -12,7 +12,7 @@ angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRe
             mhEnableRowSelect : "=",
             mhEnableRowButtons : "=",
             mhTemplateUrl : "=",
-            mhCellsConfig : "=",
+            mhCols : "=",
             mhRowButtons : "=",
             mhCollection : "=",
             mhSelectAllChange : "&",

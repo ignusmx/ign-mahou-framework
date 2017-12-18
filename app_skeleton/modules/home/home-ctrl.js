@@ -47,14 +47,15 @@
 								{id:"12", name : "Vaca 2", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", email : "asd23452345234", address:{city:"Hembra", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
-			$scope.cellsConfig = 
+			$scope.datagridCols = 
 				[
-					{ name:"id", label : "id", valueExpression : "row.model.id", type: "text"},
-					{ name:"name", label : "nombre", valueExpression : "row.model.name", type: "text"},
-					{ name:"image", label : "imagen", valueExpression : "row.model.image", type: "image"},
-					{ name:"email", label : "no. registro", valueExpression : "row.model.email", type: "text"},
-					{ name:"address", label : "dirección", valueExpression : "row.model.address.city + ', ' + row.model.address.ctry", type: "text"}
+					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", value : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
+					new MHDatagridCol({ name:"name", title : "nombre", value : "row.model.name" }),
+					new MHDatagridCol({ name:"image", title : "imagen", value : MHBsDecorator.decorateImage(MHBsDecorator.decorateEval('row.model.image'))}),
+					new MHDatagridCol({ name:"email", title : "no. registro", value : "row.model.email" }),
+					new MHDatagridCol({ name:"address", title : "dirección", value : "row.model.address.city + ', ' + row.model.address.ctry" })
 				]
+				
 				
 			$scope.rowButtons = 
 				[
@@ -75,7 +76,8 @@
 			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formElements = [
-				new MHFormFieldInput({ name : 'user_name', title : "nombre", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormBSLabel({ name : "password", title:"password"}),
+				new MHFormFieldInput({ name : 'user_name', model:"name", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInput({ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
@@ -101,6 +103,15 @@
 
 			$scope.formLayout = [	
 									new MHFormBSRow({elements : row0Elements})
+								];
+
+
+			$scope.form2Layout = [	
+									new MHFormBSRow({elements : [
+										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:2, align:"middle", minHeight:70}),
+										new MHFormBSCol({elements:[$scope.formElements[1]], colWidth:5, align:"middle", minHeight:70})
+
+										]})
 								];
 
 			$scope.selectAllEvent = function(rows)

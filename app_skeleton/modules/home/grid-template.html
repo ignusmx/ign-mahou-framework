@@ -3,15 +3,12 @@
 		<thead>
 			<tr>
 				<th class="mh-datagrid-checkbox-header">
-					<input type="checkbox" class="mh-datagrid-header-checkbox">
+					<input type="checkbox" class="mh-input">
 				</th>
 				<th class="mh-datagrid-data-header">
-					<mh-datagrid-custom-content name="email">
-						<div class="mh-datagrid-label" style="color:#FF0000" ng-click="controller.log()"></div>
-					</mh-datagrid-custom-content>
-					<mh-datagrid-custom-content name="id">
-						<div class="mh-datagrid-label" style="color:#FFFF00" ng-click="controller.log()"></div>
-					</mh-datagrid-custom-content>
+					<div style="color:#FF0000">
+						<span class="mh-title"></span>
+					</div>
 				</th>
 				<th class="mh-datagrid-btns-header">acciones</th>
 			</tr>
@@ -22,16 +19,11 @@
 					<input type="checkbox" class="mh-datagrid-row-checkbox">
 				</td>
 				<td class="mh-datagrid-data-cell">
-					<mh-datagrid-custom-content name="id">
-						<div class="mh-datagrid-value-expression" ng-click="controller.log()"></div>
-					</mh-datagrid-custom-content>
-					<mh-datagrid-custom-content name="image">
-						<img class="mh-datagrid-value-expression" ng-click="controller.log()">
-					</mh-datagrid-custom-content>
+					<div class="mh-datagrid-value" ng-click="controller.log()"></div>
 				</td>
 				<td class="mh-datagrid-row-btns-cell">
-					<a class="mh-datagrid-row-btn" name="edit">edit</a>
-					<a class="mh-datagrid-row-btn" name="delete">delete</a>
+					<a class="mh-datagrid-row-btn" data-mh-name="edit">edit</a>
+					<a class="mh-datagrid-row-btn" data-mh-name="delete">delete</a>
 				</td>
 			</tr>
 		</tbody>

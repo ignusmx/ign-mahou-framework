@@ -20,19 +20,15 @@ angular
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
 
-        function renderInputField(input, templateElem, formName, elementIndex)
+        function renderInputField(input, elementTemplate, formName, elementIndex)
         {
-            var inputContainer = templateElem.find("[data-mh-name="+input.name+"]");
-            inputContainer.find(".mh-title").html(input.title);
-            
-            var inputElem = inputContainer.find(".mh-input");
+            var inputElem = elementTemplate.find(".mh-input");
+            inputElem.addClass(input.cssClasses);
 
             MHValidationHelper.validateRequiredTags(input, inputElem);
-            
-            inputElem.addClass(input.cssClasses);
             inputElem.attr("ng-model", "model"+getModelAsHash(input.model));
 
-            var inputErrorMessage = inputContainer.find(".mh-input-error-message");
+            var inputErrorMessage = elementTemplate.find(".mh-input-error-message");
             if(input.required)
             {
                 inputErrorMessage.html("{{mhFormElements["+elementIndex+"].invalidMessage}}")
@@ -76,10 +72,10 @@ angular
             }
         }
 
-        function renderFormButton(button, templateElem, formName, elementIndex)
+        function renderFormButton(button, elementTemplate, formName, elementIndex)
         {
-            var buttonContainer = templateElem.find("[data-mh-name="+button.name+"]");
-            var buttonElement = buttonContainer.find(".mh-form-button");
+            var buttonElement = elementTemplate.find(".mh-form-button");
+            buttonElement.addClass(button.cssClasses);
 
             if(button.disabledStatuses != null)
             {
@@ -110,8 +106,6 @@ angular
             }
             
             buttonElement.attr("ng-click", "mhFormElements["+elementIndex+"].action(model, "+formName+")");
-            buttonElement.addClass(button.cssClasses);
-            buttonElement.find(".mh-title").html(button.title);
         }
 
         this.compileTemplate = function(templateElem, directiveElem, formElements)
@@ -125,15 +119,18 @@ angular
         	for(var i = 0; i < scope.mhFormElements.length; i++)
         	{
         		var formElement = scope.mhFormElements[i];
-                MHValidationHelper.validateType(formElement, formElement.name, [MHAbstractFormField, MHFormButton]);
+                MHValidationHelper.validateType(formElement, formElement.name, [MHFormBSLabel, MHAbstractFormField, MHFormButton]);
+
+                var elementTemplate = templateElem.find("[data-mh-name="+formElement.name+"]");
+                elementTemplate.find(".mh-title").html(formElement.title);
 
                 if(formElement instanceof MHAbstractFormField)
                 {
-                    renderInputField(formElement, templateElem, formName, i);
+                    renderInputField(formElement, elementTemplate, formName, i);
                 }
                 else if(formElement instanceof MHFormButton)
                 {
-                    renderFormButton(formElement, templateElem, formName, i);
+                    renderFormButton(formElement, elementTemplate, formName, i);
                 }
         	}
 
