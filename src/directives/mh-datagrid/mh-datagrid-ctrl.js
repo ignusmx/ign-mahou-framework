@@ -137,6 +137,7 @@ angular
             {
                 var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+scope.mhRowButtons[i].name+"]");
                 rowButtonElement.attr("ng-click", "mhRowButtons["+i+"].action(row.model)");
+                rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].name}}");
             }
 
             directiveElem.replaceWith($compile(templateElem)(scope));

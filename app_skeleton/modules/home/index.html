@@ -100,14 +100,13 @@ mh-on-page-selected="pageSelected"
 	</form>
 </div>
 
-<mh-datagrid mh-datagrid-theme-custom
+<mh-datagrid mh-datagrid-theme-bs
 mh-cols = "datagridCols"
 mh-row-buttons = "rowButtons",
 mh-enable-row-buttons = "true",
 mh-collection = "collection"
 mh-select-all-change="selectAllEvent(selectedRows)" 
-mh-select-row-change="selectRowEvent(row)" 
-mh-template-url="modules/home/grid-template.html">
+mh-select-row-change="selectRowEvent(row)">
 </mh-datagrid>
 
 <md-checkbox aria-label="No Ink Effects" ng-model="asd" ng-change="editClick()">
