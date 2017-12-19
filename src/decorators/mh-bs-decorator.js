@@ -32,5 +32,5 @@ MHBsDecorator.decorateImage = function(string)
 
 MHBsDecorator.decorateEval = function(string)
 {
-	return "{{$eval('"+string+"')}}";
+	return ("{{$eval('"+string.replace(/'/g, "\\'")+"')}}");
 }

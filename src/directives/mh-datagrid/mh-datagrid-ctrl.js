@@ -135,9 +135,11 @@ angular
 
             for(var i=0; i < scope.mhRowButtons.length; i++)
             {
-                var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+scope.mhRowButtons[i].name+"]");
+                var button = scope.mhRowButtons[i];
+                MHValidationHelper.validateType(button, button.name, MHButton);
+                var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+button.name+"]");
                 rowButtonElement.attr("ng-click", "mhRowButtons["+i+"].action(row.model)");
-                rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].name}}");
+                rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].title}}");
             }
 
             directiveElem.replaceWith($compile(templateElem)(scope));

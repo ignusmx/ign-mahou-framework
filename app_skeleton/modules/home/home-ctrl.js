@@ -50,17 +50,17 @@
 			$scope.datagridCols = 
 				[
 					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", value : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
-					new MHDatagridCol({ name:"name", title : "nombre", value : "row.model.name" }),
+					new MHDatagridCol({ name:"name", title : "nombre", value :  MHBsDecorator.decorateEval('row.model.name') }),
 					new MHDatagridCol({ name:"image", title : "imagen", value : MHBsDecorator.decorateImage(MHBsDecorator.decorateEval('row.model.image'))}),
-					new MHDatagridCol({ name:"email", title : "no. registro", value : "row.model.email" }),
-					new MHDatagridCol({ name:"address", title : "dirección", value : "row.model.address.city + ', ' + row.model.address.ctry" })
+					new MHDatagridCol({ name:"email", title : "no. registro", value : MHBsDecorator.decorateEval('row.model.email') }),
+					new MHDatagridCol({ name:"address", title : "dirección", value : MHBsDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") })
 				]
 				
 				
 			$scope.rowButtons = 
 				[
-					{ name: "edit", action : $scope.editClick },
-					{ name: "delete", action : $scope.deleteClick }
+					new MHButton({ name: "edit", title:"Editar", action : $scope.editClick }),
+					new MHButton({ name: "delete", title:"Borrar", action : $scope.deleteClick })
 				]
 			$scope.collection = collection;
 			$scope.enableRowSelect = true;
@@ -77,9 +77,9 @@
 
 			$scope.formElements = [
 				new MHFormBSLabel({ name : "password", title:"password"}),
-				new MHFormFieldInput({ name : 'user_name', model:"name", type:"text", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormFieldInputText({ name : 'user_name', model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
-				new MHFormFieldInput({ name : 'mail', title : "No. registro", model : "email", type :"email", required : true, invalidMessage : "escriba por favor un correo valido" }),
+				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
 				new MHFormButton({name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"}),
 				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"}),
