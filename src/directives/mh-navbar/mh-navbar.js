@@ -55,7 +55,7 @@ angular.module('mahou').directive('mhNavbar', function ( $templateRequest ) {
         restrict: 'E',
         scope: 
         { 
-            mhNavbarButtons : '=',
+            mhNavbarElements : '=',
             mhNavbarTitle : '='
         },
         compile : function(elem,attrs)

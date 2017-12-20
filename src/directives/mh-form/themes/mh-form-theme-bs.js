@@ -129,21 +129,23 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                         var usedCols = 0;
                         var container  = element;
                         var newFormCol = formCol.clone();
-                        var flexAlign = 'flex-start';
 
-                        switch(container.align)
+                        if(element.flex)
                         {
-                            case 'top' : flexAlign = 'flex-start';
-                            break;
-                            case 'middle' : flexAlign = 'center';
-                            break;
-                            case 'bottom' : flexAlign = 'flex-end';
-                            break;
+                            var flexAlign = 'flex-start';
+                            switch(container.align)
+                            {
+                                case 'top' : flexAlign = 'flex-start';
+                                break;
+                                case 'middle' : flexAlign = 'center';
+                                break;
+                                case 'bottom' : flexAlign = 'flex-end';
+                                break;
+                            }
+                            newFormCol.css("display", "flex");
+                            newFormCol.css("align-items", flexAlign);
                         }
-
-                        newFormCol.css("display", "flex");
-                        newFormCol.css("align-items", flexAlign);
-
+                        
                         if(container.minHeight != null)
                         {
                             newFormCol.css("min-height", container.minHeight+"px");
@@ -196,7 +198,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     {
                         newElementContainer = buttonContainer.clone();
                     }
-                    else if(element instanceof MHFormBSLabel)
+                    else if(element instanceof MHFormLabel)
                     {
                         newElementContainer = label.clone();
                     }

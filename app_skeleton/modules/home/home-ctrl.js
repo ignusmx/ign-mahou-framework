@@ -76,7 +76,7 @@
 			$scope.title = "{{$parent.user.name}}";
 
 			$scope.formElements = [
-				new MHFormBSLabel({ name : "password", title:"password"}),
+				new MHFormLabel({ name : "image", title:MHBsDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
 				new MHFormFieldInputText({ name : 'user_name', model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
@@ -101,17 +101,19 @@
 																	$scope.formElements[5]]})
 								]
 
+
+
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]})];
+
 			$scope.formLayout = [	
-									new MHFormBSRow({elements : row0Elements})
-								];
-
-
-			$scope.form2Layout = [	
 									new MHFormBSRow({elements : [
 										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:2, align:"middle", minHeight:70}),
-										new MHFormBSCol({elements:[$scope.formElements[1]], colWidth:5, align:"middle", minHeight:70})
+										new MHFormBSCol({elements:profileRows, colWidth:4, align:"middle", minHeight:70})
 
-										]})
+										]}),
+									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[5], $scope.formElements[6]], colWidth:12})]})
 								];
 
 			$scope.selectAllEvent = function(rows)

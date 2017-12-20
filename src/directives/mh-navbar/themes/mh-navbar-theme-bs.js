@@ -78,13 +78,13 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
             var inverse = attrs.mhNavbarInverse == null ? false : true;
             
             //extend navbar scope to add mhNavbarButtonsRight for this theme
-            var rightButtons = $parse(attrs.mhNavbarButtonsRight)(scope);
+            var rightElements = $parse(attrs.mhNavbarElementsRight)(scope);
 
             var templateElem = 
-            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.scope, rightButtons, navbarPositionClass, inverse));
+            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.scope, rightElements, navbarPositionClass, inverse));
 
             //append the right buttons to navbarButtons array
-            navbarCtrl.scope.mhNavbarButtons = navbarCtrl.scope.mhNavbarButtons.concat(rightButtons);
+            navbarCtrl.scope.mhNavbarElements = navbarCtrl.scope.mhNavbarElements.concat(rightElements);
 
             navbarCtrl.compileTemplate(templateElem, el);
         },
@@ -131,7 +131,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                 }
             }
 
-            this.renderTheme = function(template, navbarScope, rightButtons, navbarPositionClass, inverse)
+            this.renderTheme = function(template, navbarScope, rightElements, navbarPositionClass, inverse)
             {
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
@@ -146,10 +146,10 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                 }
 
                 var ul = navbar.find("ul.nav:not(.navbar-right)");
-                renderLIButtons(ul, navbarScope.mhNavbarButtons);
+                renderLIButtons(ul, navbarScope.mhNavbarElements);
 
                 var rightUl = navbar.find("ul.nav.navbar-right");
-                renderLIButtons(rightUl, rightButtons);
+                renderLIButtons(rightUl, rightElements);
 
                 return renderedTemplate.html();
             }

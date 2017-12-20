@@ -1,4 +1,4 @@
-<mh-navbar mh-navbar-theme-bs mh-navbar-title="title" mh-navbar-buttons="menuButtons" mh-navbar-buttons-right="menuRightButtons" mh-navbar-position="fixed-top" mh-navbar-inverse>
+<mh-navbar mh-navbar-theme-bs mh-navbar-title="title" mh-navbar-elements="menuButtons" mh-navbar-elements-right="menuRightButtons" mh-navbar-position="fixed-top" mh-navbar-inverse>
 </mh-navbar>
 <button ng-click="updateCollection()">boton</button>
 
@@ -56,49 +56,6 @@ mh-on-page-selected="pageSelected"
 	</mh-form>
 </div>
 
-<div class="container">
-	<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-layout="form2Layout" mh-on-form-init="onFormInit">
-	</mh-form>
-</div>
-
-
-<div class="container">
-	<form class="form-horizontal">
-	  <div class="form-group">
-	    <div class="col-md-12">
-	    	<div class="form-group">
-			    <div class="col-md-6">
-			    	<div class="mh-input-container" style="float:left">
-			    		<label for="inputEmail3" class="control-label">Email</label>
-		  				<input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-			    	</div>
-					<button type="submit" class="btn btn-default">Sign in</button>
-			    </div>
-		  	</div>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-	    <div class="col-sm-5">
-	      <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <div class="checkbox">
-	        <label>
-	          <input type="checkbox"> Remember me
-	        </label>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default">Sign in</button>
-	    </div>
-	  </div>
-	</form>
-</div>
 
 <mh-datagrid mh-datagrid-theme-bs
 mh-cols = "datagridCols"

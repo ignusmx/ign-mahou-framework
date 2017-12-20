@@ -22,16 +22,16 @@ angular
             
             var brandTitle = templateElem.find(".mh-brand > .mh-title");
             brandTitle.attr("mh-compile","mhNavbarTitle");
-            for(var i = 0; i < scope.mhNavbarButtons.length; i++)
+            for(var i = 0; i < scope.mhNavbarElements.length; i++)
             {
-                var config = scope.mhNavbarButtons[i];
+                var config = scope.mhNavbarElements[i];
 
                 //render button
                 var button = templateElem.find(".mh-navbar-button[data-mh-name="+config.name+"]");
                 button.addClass(config.cssClasses);
 
-                button.attr("ng-click", "mhNavbarButtons["+i+"].action()");
-                button.find(".mh-title").attr("mh-compile", "mhNavbarButtons["+i+"].title");
+                button.attr("ng-click", "mhNavbarElements["+i+"].action()");
+                button.find(".mh-title").attr("mh-compile", "mhNavbarElements["+i+"].title");
                 
                 //if button has dropdownButtons, render dropdownButtons as well
                 if(config.dropdownButtons != null && config.dropdownButtons.length > 0)
@@ -41,8 +41,8 @@ angular
                         var dropdownConfig = config.dropdownButtons[j];
                         var button = templateElem.find(".mh-navbar-button[data-mh-name="+dropdownConfig.name+"]");
                         button.addClass(dropdownConfig.cssClasses);
-                        button.attr("ng-click", "mhNavbarButtons["+i+"].dropdownButtons["+j+"].action()");
-                        button.find(".mh-title").attr("mh-compile","mhNavbarButtons["+i+"].dropdownButtons["+j+"].title");
+                        button.attr("ng-click", "mhNavbarElements["+i+"].dropdownButtons["+j+"].action()");
+                        button.find(".mh-title").attr("mh-compile","mhNavbarElements["+i+"].dropdownButtons["+j+"].title");
                     }
                 }                
             }

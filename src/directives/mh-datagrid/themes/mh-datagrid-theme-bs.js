@@ -6,34 +6,36 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
         template : function(el)
         {
             this.mhRawInnerTemplate =  '<div class="container">\
-                                            <table class="table">\
-                                                <thead>\
-                                                    <tr>\
-                                                        <th class="mh-datagrid-checkbox-header">\
-                                                            <input type="checkbox" class="mh-input">\
-                                                        </th>\
-                                                        <th class="mh-datagrid-data-header">\
-                                                            <span class="mh-title"></span>\
-                                                        </th>\
-                                                        <th class="mh-datagrid-btns-header">acciones</th>\
-                                                    </tr>\
-                                                </thead>\
-                                                <tbody>\
-                                                    <tr class="mh-datagrid-row">\
-                                                        <td class="mh-datagrid-checkbox-cell">\
-                                                            <input type="checkbox" class="mh-datagrid-row-checkbox">\
-                                                        </td>\
-                                                        <td class="mh-datagrid-data-cell">\
-                                                            <div class="mh-datagrid-value"></div>\
-                                                        </td>\
-                                                        <td class="mh-datagrid-row-btns-cell">\
-                                                            <a class="mh-datagrid-row-btn">\
+                                            <div class="mh-responsive-table-container">\
+                                                <table class="table">\
+                                                    <thead>\
+                                                        <tr>\
+                                                            <th class="mh-datagrid-checkbox-header">\
+                                                                <input type="checkbox" class="mh-input">\
+                                                            </th>\
+                                                            <th class="mh-datagrid-data-header">\
                                                                 <span class="mh-title"></span>\
-                                                            </a>\
-                                                        </td>\
-                                                    </tr>\
-                                                </tbody>\
-                                            </table>\
+                                                            </th>\
+                                                            <th class="mh-datagrid-btns-header">acciones</th>\
+                                                        </tr>\
+                                                    </thead>\
+                                                    <tbody>\
+                                                        <tr class="mh-datagrid-row">\
+                                                            <td class="mh-datagrid-checkbox-cell">\
+                                                                <input type="checkbox" class="mh-datagrid-row-checkbox">\
+                                                            </td>\
+                                                            <td class="mh-datagrid-data-cell">\
+                                                                <div class="mh-datagrid-value"></div>\
+                                                            </td>\
+                                                            <td class="mh-datagrid-row-btns-cell">\
+                                                                <a class="mh-datagrid-row-btn">\
+                                                                    <span class="mh-title"></span>\
+                                                                </a>\
+                                                            </td>\
+                                                        </tr>\
+                                                    </tbody>\
+                                                </table>\
+                                            </div>\
                                         </div>';
             return "";
         },
@@ -41,9 +43,11 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
         {
             var directiveCtrl = ctrls[0];
             var themeCtrl = ctrls[1];
+
+            var isResponsiveTable = attrs.mhResponsive;
             
             var templateElem = 
-            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, directiveCtrl.scope));
+            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, directiveCtrl.scope, isResponsiveTable));
             directiveCtrl.compileTemplate(templateElem, el, themeCtrl.formElements);
         },
         controller : function($scope, $element, $attrs)
@@ -51,10 +55,17 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
             var self = this;
             self.formElements = [];
 
-            this.renderTheme = function(template, scope)
+            this.renderTheme = function(template, scope, isResponsiveTable)
             {
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
+
+                var responsiveTableContainer = renderedTemplate.find(".mh-responsive-table-container");
+                if(isResponsiveTable != "false")
+                {
+                    responsiveTableContainer.addClass("table-responsive");
+                }
+
                 var btnsContainer = renderedTemplate.find(".mh-datagrid-row-btns-cell");
                 var rowBtn = btnsContainer.find(".mh-datagrid-row-btn");
                 rowBtn.remove();

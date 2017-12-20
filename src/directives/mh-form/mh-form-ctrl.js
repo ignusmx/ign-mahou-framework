@@ -119,7 +119,7 @@ angular
         	for(var i = 0; i < scope.mhFormElements.length; i++)
         	{
         		var formElement = scope.mhFormElements[i];
-                MHValidationHelper.validateType(formElement, formElement.name, [MHFormBSLabel, MHAbstractFormField, MHFormButton]);
+                MHValidationHelper.validateType(formElement, formElement.name, [MHFormLabel, MHAbstractFormField, MHFormButton]);
 
                 var elementTemplate = templateElem.find("[data-mh-name="+formElement.name+"]");
                 elementTemplate.find(".mh-title").html(formElement.title);

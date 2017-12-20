@@ -38,6 +38,10 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, accepted
 			attribute = defaultValue;
 		}
 	}
+	else
+	{
+		MHValidationHelper.validateType(attribute, attributeName, acceptedTypes, rejectedTypes);
+	}
 
     return attribute;
 }
