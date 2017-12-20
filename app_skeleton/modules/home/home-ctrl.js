@@ -51,7 +51,7 @@
 				[
 					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", value : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
 					new MHDatagridCol({ name:"name", title : "nombre", value :  MHBsDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", value : MHBsDecorator.decorateImage(MHBsDecorator.decorateEval('row.model.image'))}),
+					new MHDatagridCol({ name:"image", title : "imagen", value : MHBsDecorator.decorateResponsiveImage(MHBsDecorator.decorateEval('row.model.image'))}),
 					new MHDatagridCol({ name:"email", title : "no. registro", value : MHBsDecorator.decorateEval('row.model.email') }),
 					new MHDatagridCol({ name:"address", title : "dirección", value : MHBsDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") })
 				]
@@ -120,6 +120,8 @@
 			{
 				console.log("all selected:", rows);
 			}
+
+
 
 			$scope.selectRowEvent = function(asd)
 			{

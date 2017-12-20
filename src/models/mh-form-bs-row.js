@@ -2,9 +2,8 @@ function MHFormBSRow(config)
 {
 	MHAbstractUIElement.call(this, config);
 
-	console.log("rowElems:",config.elements);
 	//validate main DataType
-	this.elements = MHValidationHelper.safeClassAttribute(config, "elements", Array, null, false, []);
+	this.elements = MHValidationHelper.safeClassAttribute(config, "elements", Array);
 	//validate array DataTypes
 	MHValidationHelper.validateTypes(this.elements, "elements", MHFormBSCol);
 }
