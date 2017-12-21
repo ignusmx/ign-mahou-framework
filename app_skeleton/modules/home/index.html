@@ -25,26 +25,27 @@ translude:
 </style>
 
 <div class="container">
-	<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
-	</mh-form>
+	<mh-bs-panel mh-header-title="'Ganado'">
+		<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
+		</mh-form>
+	</mh-bs-panel>
+	<mh-bs-panel mh-header-title="'Ganado'">
+		<mh-datagrid mh-datagrid-theme-bs
+			mh-cols = "datagridCols"
+			mh-row-buttons = "rowButtons",
+			mh-enable-row-buttons = "true",
+			mh-collection = "collection"
+			mh-select-all-change="selectAllEvent(selectedRows)" 
+			mh-select-row-change="selectRowEvent(row)">
+		</mh-datagrid>
+		<div class="text-center">
+			<mh-paginator mh-paginator-theme-bs 
+			mh-page-group-size="3" 
+			mh-current-page="2" 
+			mh-last-page="10"
+			mh-on-page-selected="pageSelected"
+			>
+			</mh-paginator>
+		</div>
+	</mh-bs-panel>
 </div>
-
-
-<mh-datagrid mh-datagrid-theme-bs
-mh-cols = "datagridCols"
-mh-row-buttons = "rowButtons",
-mh-enable-row-buttons = "true",
-mh-collection = "collection"
-mh-select-all-change="selectAllEvent(selectedRows)" 
-mh-select-row-change="selectRowEvent(row)">
-</mh-datagrid>
-<div class="text-center">
-	<mh-paginator mh-paginator-theme-bs 
-	mh-page-group-size="3" 
-	mh-current-page="2" 
-	mh-last-page="10"
-	mh-on-page-selected="pageSelected"
-	>
-	</mh-paginator>
-</div>
-

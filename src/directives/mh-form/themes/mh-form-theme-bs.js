@@ -215,6 +215,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     newElementContainer.css("float", "left");
                     newElementContainer.css("margin-left", "5px");
                     newElementContainer.css("margin-right", "5px");
+                    newElementContainer.css("width", "100%");
                     return newElementContainer;
                 }
 

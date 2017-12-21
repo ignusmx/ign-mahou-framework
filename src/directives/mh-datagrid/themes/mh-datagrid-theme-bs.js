@@ -5,37 +5,35 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
         require : ['mhDatagrid', 'mhDatagridThemeBs'],
         template : function(el)
         {
-            this.mhRawInnerTemplate =  '<div class="container">\
-                                            <div class="mh-responsive-table-container">\
-                                                <table class="table">\
-                                                    <thead>\
-                                                        <tr>\
-                                                            <th class="mh-datagrid-checkbox-header">\
-                                                                <input type="checkbox" class="mh-input">\
-                                                            </th>\
-                                                            <th class="mh-datagrid-data-header">\
+            this.mhRawInnerTemplate =  '<div class="mh-responsive-table-container">\
+                                            <table class="table">\
+                                                <thead>\
+                                                    <tr>\
+                                                        <th class="mh-datagrid-checkbox-header">\
+                                                            <input type="checkbox" class="mh-input">\
+                                                        </th>\
+                                                        <th class="mh-datagrid-data-header">\
+                                                            <span class="mh-title"></span>\
+                                                        </th>\
+                                                        <th class="mh-datagrid-btns-header">acciones</th>\
+                                                    </tr>\
+                                                </thead>\
+                                                <tbody>\
+                                                    <tr class="mh-datagrid-row">\
+                                                        <td class="mh-datagrid-checkbox-cell">\
+                                                            <input type="checkbox" class="mh-datagrid-row-checkbox">\
+                                                        </td>\
+                                                        <td class="mh-datagrid-data-cell">\
+                                                            <div class="mh-datagrid-value"></div>\
+                                                        </td>\
+                                                        <td class="mh-datagrid-row-btns-cell">\
+                                                            <a class="mh-datagrid-row-btn">\
                                                                 <span class="mh-title"></span>\
-                                                            </th>\
-                                                            <th class="mh-datagrid-btns-header">acciones</th>\
-                                                        </tr>\
-                                                    </thead>\
-                                                    <tbody>\
-                                                        <tr class="mh-datagrid-row">\
-                                                            <td class="mh-datagrid-checkbox-cell">\
-                                                                <input type="checkbox" class="mh-datagrid-row-checkbox">\
-                                                            </td>\
-                                                            <td class="mh-datagrid-data-cell">\
-                                                                <div class="mh-datagrid-value"></div>\
-                                                            </td>\
-                                                            <td class="mh-datagrid-row-btns-cell">\
-                                                                <a class="mh-datagrid-row-btn">\
-                                                                    <span class="mh-title"></span>\
-                                                                </a>\
-                                                            </td>\
-                                                        </tr>\
-                                                    </tbody>\
-                                                </table>\
-                                            </div>\
+                                                            </a>\
+                                                        </td>\
+                                                    </tr>\
+                                                </tbody>\
+                                            </table>\
                                         </div>';
             return "";
         },

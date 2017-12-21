@@ -103,7 +103,7 @@
 
 
 
-			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]}),
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1], $scope.formElements[1]], colWidth:12, flex:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12})]})];
 
@@ -113,7 +113,7 @@
 										new MHFormBSCol({elements:profileRows, colWidth:4, align:"middle", minHeight:70})
 
 										]}),
-									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[5], $scope.formElements[6]], colWidth:12})]})
+									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[5], $scope.formElements[6]], colWidth:12, flex:true})]})
 								];
 
 			$scope.selectAllEvent = function(rows)
