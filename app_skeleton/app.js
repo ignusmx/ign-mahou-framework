@@ -13,6 +13,11 @@
 				templateUrl: "modules/home/index.html",
 				controller: "HomeCtrl as homeCtrl"
 			})
+			$stateProvider
+			.state('eee',{
+				url: "/eee",
+				templateUrl: "modules/home/form-template.html"
+			})
 
 			$locationProvider.hashPrefix('!');
 			$locationProvider.html5Mode(true);

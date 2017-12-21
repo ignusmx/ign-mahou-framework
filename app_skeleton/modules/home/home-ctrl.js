@@ -4,7 +4,7 @@
 	angular
 	.module('app')
 	.controller('HomeCtrl', 
-		function LoginController($scope) 
+		function LoginController($scope, $mdSidenav) 
 		{
 			var self = this;
 			
@@ -25,7 +25,7 @@
 			//console.log(title);
 
 			var homeDropDowns = [ 
-									new MHButton({name:"calendario", title:"Calendario", action:function(){ alert("nosotros seleccionado")}}),
+									new MHButton({name:"calendario", title:"Calendario", action:"eee"}),
 									new MHButton({name:"ganado", title:"Ganado", action:function(){ alert("nosotros seleccionado")}}),
 									new MHButton({name:"about_usss", title:"Bitácoras", function(){ alert("nosotres seleccionado")}}),
 									new MHButton({name:"about_ussss", title:"Nuevo sub menu", function(){ alert("nosotres seleccionado")}})
@@ -59,7 +59,7 @@
 				
 			$scope.rowButtons = 
 				[
-					new MHButton({ name: "edit", title:"Editar", action : $scope.editClick }),
+					new MHButton({ name: "edit", title:"Editar", action : "eee" }),
 					new MHButton({ name: "delete", title:"Borrar", action : $scope.deleteClick })
 				]
 			$scope.collection = collection;
@@ -75,13 +75,18 @@
 
 			$scope.title = "{{$parent.user.name}}";
 
+			$scope.toggleLeft = function()
+			{
+				$mdSidenav("left").toggle();
+			}
+
 			$scope.formElements = [
 				new MHFormLabel({ name : "image", title:MHBsDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
 				new MHFormFieldInputText({ name : 'user_name', model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 				new MHFormFieldSelect({ name : 'city', title : "Sexo", model : "address.city", required:true, invalidMessage:"test", options : ["Hembra", "Macho"] }),
-				new MHFormButton({name : "accept", title : "Guardar", action : $scope.editClick, cssClasses : "btn-primary"}),
+				new MHFormButton({name : "accept", title : "Guardar", action : "eee", cssClasses : "btn-primary"}),
 				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"}),
 			];
 

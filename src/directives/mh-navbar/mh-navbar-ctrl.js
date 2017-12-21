@@ -11,7 +11,7 @@
 angular
 .module('mahou')
 .controller('MHNavbarCtrl', 
-    function MHNavbarCtrl($scope, $element, $attrs, $compile)
+    function MHNavbarCtrl($scope, $element, $attrs, $compile, $state)
     {
         var self = this;
         self.scope = $scope;
@@ -41,13 +41,25 @@ angular
                         var dropdownConfig = config.dropdownButtons[j];
                         var button = templateElem.find(".mh-navbar-button[data-mh-name="+dropdownConfig.name+"]");
                         button.addClass(dropdownConfig.cssClasses);
-                        button.attr("ng-click", "mhNavbarElements["+i+"].dropdownButtons["+j+"].action()");
+                        button.attr("ng-click", "controller.executeStateOrAction(mhNavbarElements["+i+"].dropdownButtons["+j+"].action)");
                         button.find(".mh-title").attr("mh-compile","mhNavbarElements["+i+"].dropdownButtons["+j+"].title");
                     }
                 }                
             }
 
             directiveElem.replaceWith($compile(templateElem)(scope));
+        }
+
+        this.executeStateOrAction = function(action)
+        {
+            if(typeof(action) == "string")
+            {
+                $state.go(action);
+            }
+            else if(typeof(action) == "function")
+            {
+                action();
+            }
         }
     }
 );

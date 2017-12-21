@@ -14,7 +14,7 @@
 angular
 .module('mahou')
 .controller('MHFormCtrl', 
-    function MHFormCtrl($scope, $element, $attrs, $compile)
+    function MHFormCtrl($scope, $element, $attrs, $compile, $state)
     {
         var self = this;
         self.scope = $scope;
@@ -105,7 +105,19 @@ angular
                 buttonElement.attr("ng-disabled", disabledExpression);    
             }
             
-            buttonElement.attr("ng-click", "mhFormElements["+elementIndex+"].action(model, "+formName+")");
+            buttonElement.attr("ng-click", "controller.executeStateOrAction(mhFormElements["+elementIndex+"].action, model, "+formName+")");
+        }
+
+        this.executeStateOrAction = function(action, model, formName)
+        {
+            if(typeof(action) == "string")
+            {
+                $state.go(action);
+            }
+            else if(typeof(action) == "function")
+            {
+                action(model, formName);
+            }
         }
 
         this.compileTemplate = function(templateElem, directiveElem, formElements)

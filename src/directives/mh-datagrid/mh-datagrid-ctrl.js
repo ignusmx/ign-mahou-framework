@@ -1,7 +1,7 @@
 angular
 .module('mahou')
 .controller('MHDatagridCtrl', 
-    function MHDatagridCtrl($scope, $element, $attrs, $compile) 
+    function MHDatagridCtrl($scope, $element, $attrs, $compile, $state) 
     {
         var self = this;
         self.scope = $scope;
@@ -138,11 +138,23 @@ angular
                 var button = scope.mhRowButtons[i];
                 MHValidationHelper.validateType(button, button.name, MHButton);
                 var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+button.name+"]");
-                rowButtonElement.attr("ng-click", "mhRowButtons["+i+"].action(row.model)");
+                rowButtonElement.attr("ng-click", "controller.executeStateOrAction(mhRowButtons["+i+"].action, row.model)");
                 rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].title}}");
             }
 
             directiveElem.replaceWith($compile(templateElem)(scope));
+        }
+
+        this.executeStateOrAction = function(action, model)
+        {
+            if(typeof(action) == "string")
+            {
+                $state.go(action);
+            }
+            else if(typeof(action) == "function")
+            {
+                action(model);
+            }
         }
 
         //private functions
