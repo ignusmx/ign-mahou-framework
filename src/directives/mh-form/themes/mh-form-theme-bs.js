@@ -46,6 +46,18 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                                                         <md-datepicker class="mh-input" md-placeholder="Enter date"></md-datepicker>\
                                                     </md-input-container>\
                                                 </div>\
+                                                <div class="mh-md-autocomplete-container">\
+                                                    <md-autocomplete class="mh-input form-control" style="min-width: inherit;">\
+                                                    <md-item-template>\
+                                                      <span></span>\
+                                                    </md-item-template>\
+                                                    <md-not-found>\
+                                                      No states matching "{{ctrl.searchText}}" were found.\
+                                                      <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>\
+                                                    </md-not-found>\
+                                                  </md-autocomplete>\
+                                                  <div class="mh-input-error-message invalid-feedback">mensaje de error</div>\
+                                                </div>\
                                                 <div class="mh-button-container">\
                                                     <button class="btn btn-default mh-form-button">\
                                                         <span class="mh-title"></span>\
@@ -98,6 +110,9 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                 var mdDateContainer = elementsContainer.find(".mh-date-container");
                 mdDateContainer.remove();
 
+                var mdAutocompleteContainer = elementsContainer.find(".mh-md-autocomplete-container");
+                mdAutocompleteContainer.remove();
+
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
 
@@ -111,7 +126,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     recursivelyIndexAndRenderElement(element, elementsContainer);
                 }
 
-                function recursivelyIndexAndRenderElement(element, group)
+                function recursivelyIndexAndRenderElement(element, group, parent)
                 {
                     if(element instanceof MHFormBSRow)
                     {
@@ -121,7 +136,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
 
                         for(var i = 0; i < rowContainer.elements.length; i++)
                         {
-                            recursivelyIndexAndRenderElement(rowContainer.elements[i], newFormRow);
+                            recursivelyIndexAndRenderElement(rowContainer.elements[i], newFormRow, rowContainer);
                         }
                     }
                     else if(element instanceof MHFormBSCol)
@@ -133,7 +148,8 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                         if(element.flex)
                         {
                             var flexAlign = 'flex-start';
-                            switch(container.align)
+                            var flexJustify = 'flex-start';
+                            switch(container.vAlign)
                             {
                                 case 'top' : flexAlign = 'flex-start';
                                 break;
@@ -142,8 +158,20 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                                 case 'bottom' : flexAlign = 'flex-end';
                                 break;
                             }
+
+                            switch(container.hAlign)
+                            {
+                                case 'left' : flexJustify = 'flex-start';
+                                break;
+                                case 'center' : flexJustify = 'center';
+                                break;
+                                case 'right' : flexJustify = 'flex-end';
+                                break;
+                            }
+
                             newFormCol.css("display", "flex");
                             newFormCol.css("align-items", flexAlign);
+                            newFormCol.css("justify-content", flexJustify);
                         }
                         
                         if(container.minHeight != null)
@@ -165,19 +193,19 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
 
                         for(var i = 0; i < container.elements.length; i++)
                         {
-                            recursivelyIndexAndRenderElement(container.elements[i], newFormCol);
+                            recursivelyIndexAndRenderElement(container.elements[i], newFormCol, container);
                         }
                     }
                     else
                     {
-                        var newElementContainer = renderElementContainer(element);
+                        var newElementContainer = renderElementContainer(element, parent);
                         group.append(newElementContainer);
                         //add element to formScope's elements array
                         self.formElements.push(element);
                     }   
                 }
 
-                function renderElementContainer(element)
+                function renderElementContainer(element, parent)
                 {
                     var newElementContainer = null;
 
@@ -193,6 +221,10 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     {
                         newElementContainer = mdDateContainer.clone();
                         newElementContainer.find("md-datepicker").attr("md-placeholder", element.placeholder);
+                    }
+                    else if(element instanceof MHFormFieldMDAutocomplete)
+                    {
+                        newElementContainer = mdAutocompleteContainer.clone();
                     }
                     else if(element instanceof MHFormButton)
                     {
@@ -213,9 +245,14 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
 
                     newElementContainer.attr("data-mh-name", element.name);
                     newElementContainer.css("float", "left");
-                    newElementContainer.css("margin-left", "5px");
-                    newElementContainer.css("margin-right", "5px");
-                    newElementContainer.css("width", "100%");
+                    newElementContainer.css("padding-left", "5px");
+                    newElementContainer.css("padding-right", "5px");
+
+                    if(parent.fill)
+                    {
+                        newElementContainer.css("width", "100%");
+                    }
+                    
                     return newElementContainer;
                 }
 

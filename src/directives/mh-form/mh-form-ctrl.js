@@ -26,19 +26,23 @@ angular
             inputElem.addClass(input.cssClasses);
 
             MHValidationHelper.validateRequiredTags(input, inputElem);
-            inputElem.attr("ng-model", "model"+getModelAsHash(input.model));
+
+            if(!(input instanceof MHFormFieldMDAutocomplete))
+            {            
+                inputElem.attr("ng-model", "model"+getModelAsHash(input.model));
+            }
 
             var inputErrorMessage = elementTemplate.find(".mh-input-error-message");
             if(input.required)
             {
                 inputErrorMessage.html("{{mhFormElements["+elementIndex+"].invalidMessage}}")
-                inputErrorMessage.attr("ng-show", "controller.fieldIsValid("+formName+"."+input.name+", "+formName+")");
-                inputElem.attr("ng-required", true);
+                inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")");
+                inputElem.attr("required", true);
 
                 if(self.scope.mhClassInvalid != null)
                 {
                     inputElem.attr("ng-class", 
-                    "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsValid("+formName+"."+input.name+", "+formName+")}");
+                    "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")}");
                 }
             }
             else
@@ -53,6 +57,18 @@ angular
             {
                 inputElem.attr("type", input.type);
                 inputElem.attr("placeholder", input.placeholder);
+            }
+            else if(input instanceof MHFormFieldMDAutocomplete)
+            {
+                inputElem.attr("md-selected-item", "model"+getModelAsHash(input.model));
+                inputElem.attr("md-search-text", input.name+"SearchText");
+                inputElem.attr("md-items", "item in mhFormElements["+elementIndex+"].querySearch("+input.name+"SearchText)");
+                inputElem.attr("md-item-text", input.itemText);
+                inputElem.attr("md-min-length", input.minLength);
+                inputElem.attr("placeholder", input.placeholder);
+                inputElem.attr("md-require-match", input.required);
+                inputElem.attr("md-input-name", input.name);
+                inputElem.find("md-item-template > span").html("{{"+input.itemText+"}}");
             }
             else if(input instanceof MHFormFieldSelect)
             {
@@ -156,8 +172,14 @@ angular
              }
         }
 
-        this.fieldIsValid = function(field, form)
+        this.fieldIsInvalid = function(field, form)
 		{
+            if(field == null)
+            {
+                return false;
+            }
+
+            console.log(field.$invalid && (field.$dirty || field.$touched || form.$submitted))
 			return field.$invalid && (field.$dirty || field.$touched || form.$submitted);
 		}
 

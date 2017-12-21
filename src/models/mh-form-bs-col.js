@@ -9,9 +9,11 @@ function MHFormBSCol(config)
 
 	this.colWidth = MHValidationHelper.safeClassAttribute(config, "colWidth", Number, null, false, 12);
 	this.minHeight = MHValidationHelper.safeClassAttribute(config, "minHeight", Number, null, false);
-	this.align = MHValidationHelper.safeClassAttribute(config, "align", String, null, false, "top");
+	this.vAlign = MHValidationHelper.safeClassAttribute(config, "vAlign", String, null, false, "top");
+	this.hAlign = MHValidationHelper.safeClassAttribute(config, "hAlign", String, null, false, "left");
 	this.offset = MHValidationHelper.safeClassAttribute(config, "offset", Number, null, false, 0);
 	this.flex = MHValidationHelper.safeClassAttribute(config, "flex", Boolean, null, false);
+	this.fill = MHValidationHelper.safeClassAttribute(config, "fill", Boolean, null, false);
 }
 
 MHFormBSCol.prototype = Object.create(MHAbstractUIElement.prototype);

@@ -1,0 +1,17 @@
+md-autocomplete.form-control
+{
+	padding:0px;
+}
+
+.md-whiteframe-1dp, .md-whiteframe-z1 
+{
+    box-shadow: none;
+}
+
+md-autocomplete md-autocomplete-wrap {
+    height: inherit;
+}
+
+md-autocomplete input:not(.md-input) {
+    height: inherit;
+}
