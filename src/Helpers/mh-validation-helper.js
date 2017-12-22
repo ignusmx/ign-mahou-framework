@@ -4,9 +4,28 @@ function MHValidationHelper()
 
 MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
 {
-	console.log(mhUIElement, mhUIElement.requiredTags, htmlElement.prop("tagName"), htmlElement)
-	var conditionMet = mhUIElement.requiredTags == null 
-	||  (mhUIElement.requiredTags != null && mhUIElement.requiredTags.indexOf(htmlElement.prop("tagName").toLowerCase()) != -1);
+	var conditionMet = false;
+	var elementTag = htmlElement.prop("tagName").toLowerCase();
+
+	if(mhUIElement.requiredTags == null)
+	{
+		conditionMet = true;
+	}
+	else if(typeof(mhUIElement.requiredTags) == "string")
+	{
+		conditionMet =  elementTag == mhUIElement.requiredTags.trim();
+	}
+	else if(typeof(mhUIElement.requiredTags) == "array")
+	{
+		for(var i = 0; i < mhUIElement.requiredTags.length; i++)
+		{
+			if(mhUIElement.requiredTags[i] == mhUIElement.requiredTags.trim())
+			{
+				conditionMet = true;
+				break;
+			}
+		}
+	} 
 
 	if(!conditionMet)
 	{

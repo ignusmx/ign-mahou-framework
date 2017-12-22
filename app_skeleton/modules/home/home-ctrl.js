@@ -23,10 +23,11 @@
 
 			//var title = MHBsDecorator.decorateTitleIcon(new MHTitle("{{$parent.user.name}}"),"glyphicon glyphicon-eur", "span");
 			//console.log(title);
+			$scope.action = function(){alert("title")}
 
 			var homeDropDowns = [ 
 									new MHButton({name:"calendario", title:"Calendario", action:"eee"}),
-									new MHButton({name:"ganado", title:"Ganado", action:function(){ alert("nosotros seleccionado")}}),
+									new MHButton({name:"ganado", title:"Ganado", action:function(){ console.log("btns:",$scope.menuButtons)}}),
 									new MHButton({name:"about_usss", title:"Bitácoras", function(){ alert("nosotres seleccionado")}}),
 									new MHButton({name:"about_ussss", title:"Nuevo sub menu", function(){ alert("nosotres seleccionado")}})
 								];
@@ -39,7 +40,7 @@
 								];
 
 			$scope.menuRightButtons = [
-										
+										homeButton
 									];
 
 			var collection = [
@@ -100,7 +101,7 @@
 			}
 
 			var row0Elements = [new MHFormBSCol({elements : [$scope.formElements[0],
-																			 $scope.formElements[1]], 
+																			 $scope.formElements[0]], 
 																			  vAlign:"bottom"}),
 									new MHFormBSCol({elements:[
 																	$scope.formElements[4],
@@ -109,8 +110,8 @@
 
 
 
-			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, flex:true, fill:true})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2]], colWidth:12, fill:true})]}),
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1], $scope.formElements[1]], colWidth:12, flex:true, fill:true})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	

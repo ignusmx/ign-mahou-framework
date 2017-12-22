@@ -15,12 +15,17 @@ angular
     {
         var self = this;
         self.scope = $scope;
+        if(self.scope.mhNavbarElements == null)
+        {
+            self.scope.mhNavbarElements = [];
+        }
 
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
-            
-            var brandTitle = templateElem.find(".mh-brand > .mh-title");
+            var brand = templateElem.find(".mh-brand");
+            brand.attr("ng-click", "mhNavbarTitleAction()");
+            var brandTitle = brand.find(".mh-title");
             brandTitle.attr("mh-compile","mhNavbarTitle");
             for(var i = 0; i < scope.mhNavbarElements.length; i++)
             {
@@ -29,6 +34,7 @@ angular
                 //render button
                 var button = templateElem.find(".mh-navbar-button[data-mh-name="+config.name+"]");
                 button.addClass(config.cssClasses);
+                MHValidationHelper.validateRequiredTags(config, button);
 
                 button.attr("ng-click", "mhNavbarElements["+i+"].action()");
                 button.find(".mh-title").attr("mh-compile", "mhNavbarElements["+i+"].title");

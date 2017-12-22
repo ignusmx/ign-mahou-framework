@@ -77,15 +77,18 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
 
             var inverse = attrs.mhNavbarInverse == null ? false : true;
             
-            //extend navbar scope to add mhNavbarButtonsRight for this theme
-            var rightElements = $parse(attrs.mhNavbarElementsRight)(scope);
+            var rightElements = [];
+            if(attrs.mhNavbarElementsRight != null)
+            {
+                //extend navbar scope to add mhNavbarButtonsRight for this theme
+                rightElements = $parse(attrs.mhNavbarElementsRight)(scope);
+            }
 
             var templateElem = 
             $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.scope, rightElements, navbarPositionClass, inverse));
 
             //append the right buttons to navbarButtons array
             navbarCtrl.scope.mhNavbarElements = navbarCtrl.scope.mhNavbarElements.concat(rightElements);
-
             navbarCtrl.compileTemplate(templateElem, el);
         },
         controller : function($scope, $element, $attrs)
