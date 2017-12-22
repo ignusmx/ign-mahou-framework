@@ -83,7 +83,7 @@
 			$scope.formElements = [
 				new MHFormLabel({ name : "image", title:MHBsDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
 				new MHFormFieldMDAutocomplete({ name : 'user_name', title:"asdasd", model:"address.city", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
-				new MHFormFieldInputText({ name : 'eee', model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormFieldInputText({ name : 'eee', title:"asdasd", model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 
@@ -109,13 +109,13 @@
 
 
 
-			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, flex:true, vAlign:"top", fill:true})]}),
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, flex:true, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2]], colWidth:12, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	
 									new MHFormBSRow({elements : [
-										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:2, vAlign:"middle", minHeight:70, flex:true, fill:true}),
+										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:2, vAlign:"middle", minHeight:70}),
 										new MHFormBSCol({elements:profileRows, colWidth:4, vAlign:"middle", minHeight:70})
 
 										]}),
