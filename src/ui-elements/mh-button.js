@@ -4,12 +4,13 @@
  * @classdesc
  * A simple button to be rendered on an Mahou directive.
  * 
- * @property {function, string}		action 		- Function to be executed or ui-router state to transition when user clicks the button.
+ * @property {function|string}	action 	- Function to be executed or ui-router state to transition when user clicks the button.
+ * @augments UIElements.MHAbstractUIElement
  *
  */
 function MHButton(config)
 {
-	//inherit from MHUIElement
+	//inherit from MHAbstractUIElement
 	MHAbstractUIElement.call(this, config);
 	this.action = MHValidationHelper.safeClassAttribute(config, "action", [Function, String], null, false);
 }

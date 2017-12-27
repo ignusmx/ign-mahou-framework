@@ -4,10 +4,10 @@
  * @classdesc
  * This is the base abstract class used to create rendereable UI elements within the Mahou Framework.
  * 
- * @property {string}   	   name             - name of the UI element.
- * @property {string}   	   title          	- title of the element.
- * @property {string}   	   cssClasses		- additional css classes to be applied to the element (separeted by single space or comma)
- * @property {string, array}   requiredTags		- some elements require to be rendered under specific HTML tags. Use this to specify those tags. (can be a string of a single tag or an array of tags. e.g: "span" or ["span", "div", "p"])
+ * @property {string}   	   		name             	- name of the UI element.
+ * @property {string}   	   		title          		- title of the element.
+ * @property {string}   	   	   	cssClasses			- additional css classes to be applied to the element (separeted by single space or comma)
+ * @property {string|string[]}   	requiredTags		- some elements require to be rendered under specific HTML tags. Use this to specify those tags. (can be a string of a single tag or an array of tags. e.g: "span" or ["span", "div", "p"])
  *
  */
 function MHAbstractUIElement(config)

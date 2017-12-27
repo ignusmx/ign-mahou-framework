@@ -1,23 +1,17 @@
 /**
- * @class MHFormField
- * @memberof Models
+ * @class MHFormFieldMDAutocomplete
+ * @memberof UIElements
  * @classdesc
- * A model used to setup and render a field on an MHForm.
+ * Renders a Material Design's Autocomplete input on an MHForm. Requires an md-autocomplete tag.
  * 
- * @property {string}   name                - name of the field (html name attribute and data-mh-name attribute)
- * @property {string}   title          		- Title of the field (rendered on element with class mh-title)
- * @property {string}   model     			- Name of the inner property of the base model to be used as ngModel for this field
- * @property {string}   type   				- Type of input (html input type attribute) ({@link Enumerators.MHFormFieldType MHFormFieldType}).
- * @property {array}    options  			- array of strings to be used as options if input type is MHFormFieldType.SELECT
- * @property {string}   defaultOption		- a string defining the default option to be shown if no option has been selected
- * @property {boolean}  required 			- Sets the field as required
- * @property {string}   invalidMessage 		- Message to be displayed if the field fails to validate
- * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
- *
+ * @property {string}   querySearch  - function returning an array or a promise of results to be queried from.
+ * @property {string}   itemText  	 - property of the current item to be shown in the autocomplete list.
+ * @property {string}   minLength  	 - the min lenght user must type before performing the querySearch function.
+ * @augments UIElements.MHAbstractFormField
  */
 function MHFormFieldMDAutocomplete(config)
 {
-	//inherit from MHUIElement
+	//inherit from MHAbstractFormField
 	MHAbstractFormField.call(this, config);
 	this.querySearch = MHValidationHelper.safeClassAttribute(config, "querySearch", Function, null, true);
 	this.itemText = MHValidationHelper.safeClassAttribute(config, "itemText", String, null, true);

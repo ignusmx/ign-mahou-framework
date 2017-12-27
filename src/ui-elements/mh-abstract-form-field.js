@@ -8,6 +8,7 @@
  * @property {string}   placeholder			- a string defining the placeholder for the field.
  * @property {boolean}  required 			- Defines if the field is required or not.
  * @property {string}   invalidMessage 		- Message to be displayed if the field fails to validate.
+ * @augments UIElements.MHAbstractUIElement
  *
  */
 function MHAbstractFormField(config)
@@ -16,7 +17,7 @@ function MHAbstractFormField(config)
 	{
       throw new Error("Can't instantiate abstract MHAbstractFormField");
     }
-	//inherit from MHUIElement
+	//inherit from MHAbstractUIElement
 	MHAbstractUIElement.call(this, config);
 
 	this.model = MHValidationHelper.safeClassAttribute(config, "model", String, null, false);

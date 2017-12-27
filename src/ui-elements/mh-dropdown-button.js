@@ -1,12 +1,11 @@
 /**
- * @class MHFormFieldBs
- * @memberof Models
+ * @class MHDropdownButton
+ * @memberof UIElements
  * @classdesc
- * A model used to setup and render a bootstrap field on an MHForm with a bootstrap mh-form-theme-bs-*.
+ * A dropdown button with children rendered over a mhNavbar directive.
  * 
- * @property {number}   cols  			- Width of the field container in columns 
- * (will add bootstrap col-md-{cols} class to field container).
- * @augments Models.MHFormField
+ * @property {MHButton[]}   dropdownButtons		- list of {@link UIElements.MHButton MHButton} to be rendered inside dropdown button.
+ * @augments UIElements.MHButton
  */
 function MHDropdownButton(config)
 {
@@ -14,7 +13,9 @@ function MHDropdownButton(config)
 	MHButton.call(this, config);
 
 	//own properties
-	this.dropdownButtons = config.dropdownButtons;
+	this.dropdownButtons  = MHValidationHelper.safeClassAttribute(config, "dropdownButtons", Array, null, false);
+	//validate array DataTypes
+	MHValidationHelper.validateTypes(this.dropdownButtons, "dropdownButtons", MHButton);
 }
 
 MHDropdownButton.prototype = Object.create(MHButton.prototype);

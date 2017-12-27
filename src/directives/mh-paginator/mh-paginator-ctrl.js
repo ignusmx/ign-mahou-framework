@@ -1,13 +1,3 @@
-/**
- * @class MHNavbarCtrl
- * @memberof Controllers
- * @description
- * controller used by mhNavbar directive to compile and bind events to create a fully functional angularJS navbar.
- *
- * 
- * @property {object}  scope                   - Isolated scope.
- * @property {array}  scope.mhNavbarButtons    - An array of mhNavbarButton
- */
 angular
 .module('mahou')
 .controller('MHPaginatorCtrl', 

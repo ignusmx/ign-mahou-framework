@@ -1,7 +1,19 @@
+/**
+ * @class MHValidationHelper
+ * @memberof Helpers
+ * @classdesc
+ * Helper used for data validation
+ *
+ */
 function MHValidationHelper()
 {
 }
 
+/** @memberof Helpers.MHValidationHelper
+ * @param mhUIElement {MHAbstractUIElement} a Mahou UI Element
+ * @param htmlElement {Object} a jQuery html element
+ * @description validates that htmlElement is of a valid tag required by the mhUIElement
+ */
 MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
 {
 	var conditionMet = false;
@@ -37,6 +49,15 @@ MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
 	}
 }
 
+/** @memberof Helpers.MHValidationHelper
+ * @param config 		{Object} 		the config object of the mhUIElement which contians the attribute to be validated 
+ * @param attributeName {string} 		the name of the attribute to be validated
+ * @param acceptedTypes {class|class[]} class or array of classes accepted by this parameter (must be native javascript classes)
+ * @param acceptedTypes {class|class[]} class or array of classes not accepted by this parameter (must be native javascript classes)
+ * @param required 		{boolean} 		sets this parameter as required
+ * @param defaultValue  {Object} 		the default value if the parameter is required
+ * @description validates attribute of an htmlElement
+ */
 MHValidationHelper.safeClassAttribute = function(config, attributeName, acceptedTypes, rejectedTypes, required, defaultValue)
 {
 	var attribute = config[attributeName];
@@ -65,6 +86,13 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, accepted
     return attribute;
 }
 
+/** @memberof Helpers.MHValidationHelper
+ * @param property 		{Object} 		the property to be validated
+ * @param propertyName  {string} 		the name of the property to be displayed on the error stack trace
+ * @param acceptedTypes {class|class[]} class or array of classes accepted by this property (must be native javascript classes)
+ * @param acceptedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
+ * @description validates if a property (object) is of a valid type and not of a rejected type.
+ */
 MHValidationHelper.validateType = function(property, propertyName, acceptedTypes, rejectedTypes)
 {	
     function isOfType(property, type)
@@ -185,10 +213,17 @@ MHValidationHelper.validateType = function(property, propertyName, acceptedTypes
     validateAcceptedTypes();
 }
 
-MHValidationHelper.validateTypes = function(propertiesArray, arrayName, types)
+/** @memberof Helpers.MHValidationHelper
+ * @param propertiesArray 		{object[]} array of properties to be validated 
+ * @param arrayName  {string} 		the name of the array to be displayed on the error stack trace
+ * @param acceptedTypes {class|class[]} class or array of classes accepted by this property (must be native javascript classes)
+ * @param acceptedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
+ * @description validates if properties in an array (objects) is of a valid type and not of a rejected type.
+ */
+MHValidationHelper.validateTypes = function(propertiesArray, arrayName, acceptedTypes, rejectedTypes)
 {
 	for(var i=0; i < propertiesArray.length; i++)
 	{
-		MHValidationHelper.validateType(propertiesArray[i], arrayName +"["+i+"]", types);
+		MHValidationHelper.validateType(propertiesArray[i], arrayName +"["+i+"]", acceptedTypes, rejectedTypes);
 	}
 }

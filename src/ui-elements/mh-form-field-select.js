@@ -1,23 +1,17 @@
 /**
- * @class MHFormField
- * @memberof Models
+ * @class MHFormFieldSelect
+ * @memberof UIElements
  * @classdesc
- * A model used to setup and render a field on an MHForm.
+ * Renders a Select field on an MHForm.
  * 
- * @property {string}   name                - name of the field (html name attribute and data-mh-name attribute)
- * @property {string}   title          		- Title of the field (rendered on element with class mh-title)
- * @property {string}   model     			- Name of the inner property of the base model to be used as ngModel for this field
- * @property {string}   type   				- Type of input (html input type attribute) ({@link Enumerators.MHFormFieldType MHFormFieldType}).
- * @property {array}    options  			- array of strings to be used as options if input type is MHFormFieldType.SELECT
- * @property {string}   defaultOption		- a string defining the default option to be shown if no option has been selected
- * @property {boolean}  required 			- Sets the field as required
- * @property {string}   invalidMessage 		- Message to be displayed if the field fails to validate
- * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
+ * @property {string[]|number[]} options		- Array of values, can be strings or numbers
+ * @property {string|number} 	 defaultOption	- a string or number with the default selected value
+ * @augments UIElements.MHAbstractFormField
  *
  */
 function MHFormFieldSelect(config)
 {
-	//inherit from MHUIElement
+	//inherit from MHAbstractFormField
 	MHAbstractFormField.call(this, config);
 
 	//validate main DataType
@@ -25,7 +19,7 @@ function MHFormFieldSelect(config)
 	//validate array DataTypes
 	MHValidationHelper.validateTypes(this.options, "options", [String, Number]);
 
-	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", String, null, false);
+	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", [String, Number], null, false);
 	this.requiredTags = "select";
 }
 

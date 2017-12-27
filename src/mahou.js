@@ -14,13 +14,18 @@
 */
 
 /**
- * Models
- * @namespace Models
+ * UIElements
+ * @namespace UIElements
 */
 
 /**
  * Enumerators
  * @namespace Enumerators
+*/
+
+/**
+ * Helpers
+ * @namespace Helpers
 */
 
 (function(){
