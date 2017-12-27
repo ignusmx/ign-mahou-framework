@@ -1,5 +1,5 @@
 /**
- * @class MHFormButton
+ * @class MHDatagridCol
  * @memberof Models
  * @classdesc
  * A model used to setup and render a button on an MHForm.

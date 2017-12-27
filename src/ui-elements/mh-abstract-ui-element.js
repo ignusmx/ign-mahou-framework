@@ -1,16 +1,13 @@
 /**
- * @class MHFormButton
- * @memberof Models
+ * @class MHAbstractUIElement
+ * @memberof UIElements
  * @classdesc
- * A model used to setup and render a button on an MHForm.
+ * This is the base abstract class used to create rendereable UI elements within the Mahou Framework.
  * 
- * @property {string}   name                - name of the button (data-mh-name attribute)
- * @property {string}   title          		- Title of the button (rendered on element with class mh-title)
- * @property {function} action  			- function to be used as callback when ngClick has occurred on the button
- * @property {string}   cssClasses			- additional classes to be applied to the button (separeted by single space)
- * @property {string}  	disabledStatuses 	- string with a list of {@link Enumerators.MHFormStatus MHFormStatus} for which the button should remain disabled. (separated with commas).
- * @property {string}   invalidMessage 		- Message to be displayed if the field fails to validate
- * @property {string}   invalidClass  		- class to be applied to the field input when validation fails
+ * @property {string}   	   name             - name of the UI element.
+ * @property {string}   	   title          	- title of the element.
+ * @property {string}   	   cssClasses		- additional css classes to be applied to the element (separeted by single space or comma)
+ * @property {string, array}   requiredTags		- some elements require to be rendered under specific HTML tags. Use this to specify those tags. (can be a string of a single tag or an array of tags. e.g: "span" or ["span", "div", "p"])
  *
  */
 function MHAbstractUIElement(config)
