@@ -56,9 +56,12 @@ var modules_js = [
 					'src/directives/mh-paginator/themes/mh-paginator-theme-bs.js'
                 ];
 
-    var jsDest = dist+'/js';
+    var modules_css = ['src/css/**/*.css'];
 
-gulp.task('compress', function() {
+    var jsDest = dist;
+    var cssDest = dist;
+
+gulp.task('compressJS', function() {
 
     var jsFiles = modules_js;
 
@@ -70,5 +73,14 @@ gulp.task('compress', function() {
     .pipe(gulp.dest(jsDest));
 });
 
+gulp.task('compressCSS', function() {
 
-gulp.task('dist', ['compress']);
+    var cssFiles = modules_css;
+
+    return gulp.src(cssFiles)
+    .pipe(concat('mahou.min.css'))
+    .pipe(gulp.dest(cssDest));
+});
+
+
+gulp.task('dist', ['compressJS', 'compressCSS']);
