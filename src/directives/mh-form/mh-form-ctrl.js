@@ -3,7 +3,7 @@
  * @memberof Controllers
  * @description
  * controller used by mhForm directive to compile and bind events to create a fully functional angularJS form.
- *
+ * #### ** Directive: ** {@link Directives.mhForm mhForm}
  * 
  * @property {object}  scope                                 - Isolated scope.
  * @property {object}  scope.modelCopy                       - The ngModel to be used with the form.

@@ -5,7 +5,7 @@
  * use this directive to customize UI theme for mhForm.<br>
  *
  * **directive types:** Attribute only
- * @property {string}  mhTemplateUrl - Url of the file containing the html of the template to be used (use this intead of template).
+ * @property {string}  mhTemplateUrl - Url of the file containing the html of the template to be used (use this instead of template).
  * @description  
  * #### ** Controller: ** {@link Controllers.MHFormCtrl MHFormCtrl} (inherited from mhForm)
  * ** *Requires mhForm directive to work. If no mhForm is found, an error will be thrown when compiling directive. **
