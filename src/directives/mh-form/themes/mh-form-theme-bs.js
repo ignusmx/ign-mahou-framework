@@ -1,3 +1,10 @@
+/**
+ * @class mhFormThemeBs
+ * @memberof Themes
+ * @classdesc
+ * use this directive to customize UI theme for mhForm.<br>
+ *
+ */
 angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,

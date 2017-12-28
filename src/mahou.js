@@ -24,6 +24,11 @@
 */
 
 /**
+ * Decorators
+ * @namespace Decorators
+*/
+
+/**
  * Helpers
  * @namespace Helpers
 */

@@ -8,16 +8,18 @@
  * **directive types:** Element only
  * @property {object}  ng-model           - The ngModel to be used with the form.
  * @property {string}  mh-form-name       - The name (HTML 'name' attribute) of the form.
- * @property {array}   mh-form-fields     - An array of {@link Models.MHFormField MHFormField} objects.
- * @property {number}  mh-form-buttons    - An array of {@link Models.MHFormButton MHFormButton} objects.
+ * @property {MHAbstractUIElement[]}   mh-form-layout - An array of {@link UIElements.MHAbstractUIElement MHAbstractUIElement} objects.
+ * @property {string}   mh-class-invalid - A string of classes to be used when form is invalid
+  * @property {string}  mh-on-form-init - A function to be executed when form is initialized. Used to expose the form API as parameter
  * @description 
  * #### ** Controller: ** {@link Controllers.MHFormCtrl MHFormCtrl}
  * ### ** HTML declaration **
     <mh-form {mh-form-theme-directive} 
         ng-model="{modelToBeUsed}" 
-        mh-form-name="'{formName}'" 
-        mh-form-fields="{arrayOfFormFields}" 
-        mh-form-buttons="{arrayOfFormButton}">
+        mh-form-name="{formName}" 
+        mh-form-layout="{arrayOfUIElements}" 
+        mh-class-invalid="{nameOfCSSClass}"
+        mh-on-form-init="{classToExposeFormAPI}" >
         <!-- custom UI can be declared here using mhFormThemeCustom -->
     </mh-form>
  * ### **Theme customization**
@@ -27,35 +29,8 @@
  *
  * #### **Available mhForm themes**
  * - **{@link Themes.mhFormThemeCustom mh-form-theme-custom}** (directive for custom UI html)
- * - ** {@link Themes.mhFormThemeBsHorizontal mh-form-theme-bs-horizontal}** (directive with bootstrap horizontal form UI)
- *
- * ### **Directive instantiation flow**
- * There are two steps on the instantiation of this directive:
- * * **Compilation**
- * * **Event binding**
- *
- * #### **Compilation**
- * This is the process where all properties passed through attributes are mapped into the defined html template and a finall UI is rendered.
- * The compilation process performs the following tasks:
- * * Directive iterates through all mhFormFields and will search for an html element on the template with class 'mh-input-container' and data-mh-name == mhFormField.name
- * * If a container element is found for the current field, it will search for inner element with class 'mh-input' to render the field and assign to the 'mh-input' element the ng-model specified in mhFormField.model
- * * note that mhFormField.model should be a string defining an existing property of the ngModel used by the mhForm. 
- * * It will also search for an element with class 'mh-title' to render the mhFormField.title (usually a label element).
- * * If the 'mh-input' element is of type 'input' it will try to assign its attribute 'type' to the mhFormField.type value.
- * * If the 'mh-input' element is not of type 'input' and the mhFormField.type is of type SELECT, it will try to find an inner element with class 'mh-select-option' and will apply ng-repeat for each option in mhFormField.options.
- * * Aditionally, for SELECT type, if mhFormField.defaultOption is present, it will search for an inner element with class 'mh-select-default-option' and try to set its value to mhFormField.defaultOption (useful if you want to show a default empty option if no option has been selected).
- * * It will also try to find an element with class 'mh-form-error-message' inside the container element to render on it the mhFormField.invalidMessage.
- * * Directive iterates through all mhFormButtons and will search for an html element on the template with tag 'button' and class 'mh-form-button' and data-mh-name == mhFormButton.name.
- * * If a button is found, it will search for a span inside with class 'mh-title', if it's found, it will render inside of it the mhFormButton.title value.
- * * If mhFormButton.disabledStatuses are present, it will add ng-disabled rule with all disabledStatuses conditions.
- *
- * #### **Events binding**
- * This is the process where all events are binded: fields, validations and buttons events.
- * The Event binding process performs the following tasks:
- * * Bind the mhFormButton.action function to be executed when user performs ngClick on each button.
- * * add functions to validate mhFormStatuses, required fields validations and all mhForm functionallity.
+ * - ** {@link Themes.mhFormThemeBs mh-form-theme-bs}** (directive with bootstrap horizontal form UI)
  */
-
 angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
     return {
         restrict: 'E',
