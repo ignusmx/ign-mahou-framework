@@ -133,14 +133,18 @@ angular
             var rowButtonsCell = templateElem.find(".mh-datagrid-row-btns-cell");
             rowButtonsCell.attr("ng-if","mhEnableRowButtons !== false");
 
-            for(var i=0; i < scope.mhRowButtons.length; i++)
+            if(scope.mhRowButtons != null)
             {
-                var button = scope.mhRowButtons[i];
-                MHValidationHelper.validateType(button, button.name, MHButton);
-                var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+button.name+"]");
-                rowButtonElement.attr("ng-click", "controller.executeStateOrAction(mhRowButtons["+i+"].action, row.model)");
-                rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].title}}");
+                for(var i=0; i < scope.mhRowButtons.length; i++)
+                {
+                    var button = scope.mhRowButtons[i];
+                    MHValidationHelper.validateType(button, button.name, MHButton);
+                    var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+button.name+"]");
+                    rowButtonElement.attr("ng-click", "controller.executeStateOrAction(mhRowButtons["+i+"].action, row.model)");
+                    rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].title}}");
+                }
             }
+            
 
             directiveElem.replaceWith($compile(templateElem)(scope));
         }

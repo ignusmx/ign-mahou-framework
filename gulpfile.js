@@ -61,7 +61,18 @@ var modules_js = [
     var jsDest = dist;
     var cssDest = dist;
 
+
 gulp.task('compressJS', function() {
+
+    var jsFiles = modules_js;
+
+    return gulp.src(jsFiles)
+    .pipe(concat('mahou.js'))
+    .pipe(ngAnnotate())
+    .pipe(gulp.dest(jsDest))
+});
+
+gulp.task('compressMinJS', function() {
 
     var jsFiles = modules_js;
 

@@ -68,11 +68,14 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
                 var rowBtn = btnsContainer.find(".mh-datagrid-row-btn");
                 rowBtn.remove();
 
-                for(var i=0; i < scope.mhRowButtons.length; i++)
+                if(scope.mhRowButtons != null)
                 {
-                    var newRowBtn = rowBtn.clone();
-                    newRowBtn.attr("data-mh-name", scope.mhRowButtons[i].name);
-                    btnsContainer.append(newRowBtn);
+                    for(var i=0; i < scope.mhRowButtons.length; i++)
+                    {
+                        var newRowBtn = rowBtn.clone();
+                        newRowBtn.attr("data-mh-name", scope.mhRowButtons[i].name);
+                        btnsContainer.append(newRowBtn);
+                    }
                 }
 
                 return renderedTemplate.html();

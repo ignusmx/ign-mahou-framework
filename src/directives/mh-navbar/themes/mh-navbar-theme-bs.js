@@ -1,3 +1,23 @@
+ /**
+ * @class mhNavbarThemeBs
+ * @memberof Themes
+ * @classdesc
+ * A theme for {@link Directives.mhNavbar mhNavbar} directive. Used to define a bootstrap navbar theme.
+ * **directive types:** Attribute only
+ *
+ * @description 
+ * #### ** Directive: ** {@link Directives.mhNavbar mhNavbar}
+ * ### ** HTML declaration **
+    <mh-navbar mh-navbar-theme-bs
+        {navbar-attributes}
+        mh-navbar-elements-right="{arrayOfUIElements}"
+        mh-navbar-position="{navbarPositionString}"
+        mh-navbar-inverse="{boolean}">
+    </mh-navbar>
+ * @property {MHAbstractUIElement[]}  mhNavbarElementsRight     - An array of {@link UIElements.MHButton MHButton} or {@link Models.MHDropdownButton MHDropdownButton} objects.
+ * @property {string}                 mhNavbarPosition          - position of the bootstrap navbar ({@link Enumerators.MHNavbarBSPosition MHNavbarBSPosition}).
+ * @property {boolean}                mhNavbarInverse           - defines if bootstrap should render regular navbar or inverse style.
+ */
 angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,
@@ -64,24 +84,36 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
             var navbarPositionClass ="";
             switch(bsNavbarPosition)
             {
-                case "fixed-top" : 
-                navbarPositionClass = "navbar-fixed-top";
-                break;
-                case "fixed-bottom":
+                case MHNavbarBSPosition.FIXED_BOTTOM :
                 navbarPositionClass = "navbar-fixed-bottom";
                 break;
-                case "static":
+                case MHNavbarBSPosition.STATIC:
                 navbarPositionClass = "navbar-static-top";
+                break;
+                case MHNavbarBSPosition.FIXED_TOP : 
+                default:
+                navbarPositionClass = "navbar-fixed-top";
                 break;
             }
 
             var inverse = attrs.mhNavbarInverse == null ? false : true;
             
-            var rightElements = [];
-            if(attrs.mhNavbarElementsRight != null)
+            var rightElementsParseFunction = $parse(attrs.mhNavbarElementsRight);
+
+            /*if(rightElementsParseFunction.assign == null)
             {
-                //extend navbar scope to add mhNavbarButtonsRight for this theme
-                rightElements = $parse(attrs.mhNavbarElementsRight)(scope);
+                throw "nonasign";
+            }*/
+
+            var rightElements = rightElementsParseFunction(scope);
+
+            if(rightElements != null)
+            {
+                //extend navbar scope to add mhNavbarButtonsRight for this theme 
+                MHValidationHelper.validateType(rightElements, "mhNavbarElementsRight", Array);
+            }else
+            {
+                rightElements = [];
             }
 
             var templateElem = 
@@ -159,3 +191,18 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
         }
     };
 })
+
+/** 
+* Defines the positions of the bootstrap navbar used in theme {@link Themes.mhNavbarThemeBs mhNavbarThemeBs}
+* @enum {string}
+* @memberof Enumerators
+*/
+var MHNavbarBSPosition = 
+{
+    /** value: "fixed-top" */
+    FIXED_TOP : "fixed-top",
+    /** value: "fixed-bottom"  */
+    FIXED_BOTTOM : "fixed-bottom", 
+    /** value: "static"  */
+    STATIC : "static"
+}

@@ -15,7 +15,10 @@ function MHDropdownButton(config)
 	//own properties
 	this.dropdownButtons  = MHValidationHelper.safeClassAttribute(config, "dropdownButtons", Array, null, false);
 	//validate array DataTypes
-	MHValidationHelper.validateTypes(this.dropdownButtons, "dropdownButtons", MHButton);
+	if(this.dropdownButtons != null)
+	{
+		MHValidationHelper.validateTypes(this.dropdownButtons, "dropdownButtons", MHButton, MHDropdownButton);
+	}
 }
 
 MHDropdownButton.prototype = Object.create(MHButton.prototype);
