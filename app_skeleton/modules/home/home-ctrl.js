@@ -34,13 +34,14 @@
 
 
 			var homeButton = new MHDropdownButton({name:"home", title:"Ganado", action:function(){ console.log("home seleccionado")}, dropdownButtons:homeDropDowns});
+			var rightButton = new MHDropdownButton({name:"right", title:"Derecha", action:function(){ console.log("home seleccionado")}, dropdownButtons:homeDropDowns});
 
 			$scope.menuButtons = [
 									homeButton
 								];
 
 			$scope.menuRightButtons = [
-										homeButton
+										rightButton
 									];
 
 			var collection = [

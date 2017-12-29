@@ -18,6 +18,7 @@ angular
     {
         var self = this;
         self.scope = $scope;
+        self.allNavbarElements = self.scope.mhNavbarElements;
         if(self.scope.mhNavbarElements == null)
         {
             self.scope.mhNavbarElements = [];
@@ -46,11 +47,11 @@ angular
             var brandTitle = brand.find(".mh-title");
             brandTitle.attr("mh-compile","mhNavbarTitle");
 
-            for(var i = 0; i < scope.mhNavbarElements.length; i++)
+            for(var i = 0; i < self.allNavbarElements.length; i++)
             {
-                var config = scope.mhNavbarElements[i];
+                var config = self.allNavbarElements[i];
                 //render button
-                MHValidationHelper.validateType(config, "mhNavbarElements["+i+"]", MHButton);
+                MHValidationHelper.validateType(config, "controller.allNavbarElements["+i+"]", MHButton);
                 var button = templateElem.find(".mh-navbar-button[data-mh-name="+config.name+"]");
 
                 //render only if button has been found
@@ -59,8 +60,8 @@ angular
                     button.addClass(config.cssClasses);
                     MHValidationHelper.validateRequiredTags(config, button);
 
-                    button.attr("ng-click", "mhNavbarElements["+i+"].action()");
-                    button.find(".mh-title").attr("mh-compile", "mhNavbarElements["+i+"].title");
+                    button.attr("ng-click", "controller.allNavbarElements["+i+"].action()");
+                    button.find(".mh-title").attr("mh-compile", "controller.allNavbarElements["+i+"].title");
                     
                     //if button has dropdownButtons, render dropdownButtons as well
                     if(config.dropdownButtons != null && config.dropdownButtons.length > 0)
@@ -74,8 +75,8 @@ angular
                             {
                                 button.addClass(dropdownConfig.cssClasses);
                                 MHValidationHelper.validateRequiredTags(dropdownConfig, button);
-                                button.attr("ng-click", "controller.executeStateOrAction(mhNavbarElements["+i+"].dropdownButtons["+j+"].action)");
-                                button.find(".mh-title").attr("mh-compile","mhNavbarElements["+i+"].dropdownButtons["+j+"].title");
+                                button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].dropdownButtons["+j+"].action)");
+                                button.find(".mh-title").attr("mh-compile","controller.allNavbarElements["+i+"].dropdownButtons["+j+"].title");
                             }
                         }
                     } 

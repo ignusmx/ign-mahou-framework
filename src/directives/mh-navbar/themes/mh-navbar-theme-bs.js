@@ -97,15 +97,8 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
             }
 
             var inverse = attrs.mhNavbarInverse == null ? false : true;
-            
-            var rightElementsParseFunction = $parse(attrs.mhNavbarElementsRight);
 
-            /*if(rightElementsParseFunction.assign == null)
-            {
-                throw "nonasign";
-            }*/
-
-            var rightElements = rightElementsParseFunction(scope);
+            var rightElements = $parse(attrs.mhNavbarElementsRight)(scope);
 
             if(rightElements != null)
             {
@@ -120,7 +113,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
             $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.scope, rightElements, navbarPositionClass, inverse));
 
             //append the right buttons to navbarButtons array
-            navbarCtrl.scope.mhNavbarElements = navbarCtrl.scope.mhNavbarElements.concat(rightElements);
+            navbarCtrl.allNavbarElements = navbarCtrl.allNavbarElements.concat(rightElements);
             navbarCtrl.compileTemplate(templateElem, el);
         },
         controller : function($scope, $element, $attrs)
