@@ -26,15 +26,14 @@
  * @property {string}                 mhNavbarTitle           - title of the navbar to be displayed
  * @property {function|string}        mhNavbarTitleAction    - a function to be called or a ui-router state to transition to if user clicks navbar title
  */
-
 angular.module('mahou').directive('mhNavbar', function ( $templateRequest ) {
     return {
         restrict: 'E',
         scope: 
         { 
-            mhNavbarElements : '=?',
+            mhNavbarElements : '=',
             mhNavbarTitle : '=',
-            mhNavbarTitleAction : '=?'
+            mhNavbarTitleAction : '='
         },
         compile : function(elem,attrs)
         {

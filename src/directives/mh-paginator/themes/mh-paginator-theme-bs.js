@@ -1,3 +1,17 @@
+ /**
+ * @class mhPaginatorThemeBs
+ * @memberof Themes
+ * @classdesc
+ * A theme for {@link Directives.mhPaginator mhPaginator} directive. Used to define a bootstrap paginator theme.
+ * **directive types:** Attribute only
+ *
+ * @description 
+ * #### ** Directive: ** {@link Directives.mhPaginator mhPaginator}
+ * ### ** HTML declaration **
+    <mh-paginator mh-paginator-theme-bs
+        {navbar-attributes}>
+    </mh-paginator>
+ */
 angular.module('mahou').directive('mhPaginatorThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,

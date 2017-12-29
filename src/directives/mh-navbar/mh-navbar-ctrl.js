@@ -10,6 +10,7 @@
  * @property {MHButton[] | MHDropDownButton[]}  scope.mhNavbarElements      - An array of {@link UIElements.MHButton MHButton} or {@link UIElements.MHDropDownButton MHDropDownButton}
  * @property {string}                           scope.mhNavbarTitle         - Title to be displayed on the navbar (can be decorated to show an image using {@link Decorators.MHBsDecorator MHBsDecorator})
  * @property {function|string}                  scope.mhNavbarTitleAction   - a function to be called or a ui-router state to transition when user clicks on the title.
+ * @property {MHButton[] | MHDropDownButton[]}  allNavbarElements           - An array of {@link UIElements.MHButton MHButton} or {@link UIElements.MHDropDownButton MHDropDownButton}. If theme extends elements, they should be concatenated here.
  */
 angular
 .module('mahou')
@@ -19,12 +20,12 @@ angular
         var self = this;
         self.scope = $scope;
         self.allNavbarElements = self.scope.mhNavbarElements;
-        if(self.scope.mhNavbarElements == null)
+        if(self.allNavbarElements == null)
         {
-            self.scope.mhNavbarElements = [];
+            self.allNavbarElements = [];
         }
 
-        MHValidationHelper.validateType(self.scope.mhNavbarElements, "mhNavbarElements", Array);
+        MHValidationHelper.validateType(self.allNavbarElements, "mhNavbarElements", Array);
 
         if(self.scope.mhNavbarTitleAction != null)
         {

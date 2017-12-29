@@ -1,3 +1,15 @@
+/**
+ * @class mhCompile
+ * @memberof Directives
+ * @classdesc
+ * use this directive to compile and render a string with an angular expression and html
+ * **directive types:** Attribute
+ *
+ * @description 
+ * ### ** HTML declaration **
+    <span mhCompile="{valueToCompile}"></span>
+ * @property {string}                   mhCompile             - value to be compiled.
+ */
 angular.module('mahou').directive('mhCompile', function ($compile) {
     return function(scope, element, attrs) {
         scope.$watch(

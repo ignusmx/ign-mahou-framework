@@ -110,7 +110,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
             }
 
             var templateElem = 
-            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.scope, rightElements, navbarPositionClass, inverse));
+            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, navbarCtrl.allNavbarElements, rightElements, navbarPositionClass, inverse));
 
             //append the right buttons to navbarButtons array
             navbarCtrl.allNavbarElements = navbarCtrl.allNavbarElements.concat(rightElements);
@@ -159,7 +159,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                 }
             }
 
-            this.renderTheme = function(template, navbarScope, rightElements, navbarPositionClass, inverse)
+            this.renderTheme = function(template, leftElements, rightElements, navbarPositionClass, inverse)
             {
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
@@ -174,7 +174,7 @@ angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest
                 }
 
                 var ul = navbar.find("ul.nav:not(.navbar-right)");
-                renderLIButtons(ul, navbarScope.mhNavbarElements);
+                renderLIButtons(ul, leftElements);
 
                 var rightUl = navbar.find("ul.nav.navbar-right");
                 renderLIButtons(rightUl, rightElements);

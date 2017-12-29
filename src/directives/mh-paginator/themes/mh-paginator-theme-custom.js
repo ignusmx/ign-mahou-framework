@@ -1,3 +1,21 @@
+/**
+ * @class mhPaginatorThemeCustom
+ * @memberof Themes
+ * @classdesc
+ * A theme for {@link Directives.mhPaginator mhPaginator} directive. Used to define a custom UI for the paginator.
+ * **directive types:** Attribute only
+ *
+ * @description 
+ * #### ** Directive: ** {@link Directives.mhPaginator mhPaginator}
+ * ### ** HTML declaration **
+    <mh-paginator mh-paginator-theme-custom
+        {navbar-attributes}
+        mh-tempalte-url="{urlOfExternalHtml}">
+        <!-- TODO: place an example of a custom UI -->
+    </mh-paginator>
+ * @property {html}     mhRawInnerTemplate          - html template defined inside the directive.
+ * @property {string}   mhTemplateUrl               - url of the html template to be loaded. (If specified, mhRawInnerTemplate will be ignored).
+ */
 angular.module('mahou').directive('mhPaginatorThemeCustom', function ( $templateRequest )
 {
     return {

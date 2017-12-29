@@ -1,3 +1,23 @@
+/**
+ * @class MHPaginatorCtrl
+ * @memberof Controllers
+ * @classdesc
+ * controller used by {@link Directives.mhPaginator mhPaginator} directive to compile and bind events to create a fully functional paginator.
+ * @description
+ * #### ** Directive: ** {@link Directives.mhPaginator mhPaginator}
+ *
+ * @property {object}           scope                          - Isolated scope.
+ * @property {number}           scope.mhPageGroupSize          - The number of pages per group.
+ * @property {number}           scope.mhCurrentPage            - Current active page.
+ * @property {number}           scope.mhLastPage               - Last available page.
+ * @property {number}           scope.mhClassActive            - Class to be used for active elements.
+ * @property {number}           scope.mhClassDisabled          - Class to be used for disabled elements.
+ * @property {Function}         scope.mhOnPageSelected         - Function to be called when a page is selected.
+ * @property {number}           groupInitPage                  - Holds the first page of the current group.
+ * @property {number}           groupLastPage                  - Holds the last page of the current group.
+ * @property {number}           pageGroup                      - Holds the number of the current group.
+ * @property {number}           lastGroup                      - Holds the number of the last group.
+ */
 angular
 .module('mahou')
 .controller('MHPaginatorCtrl', 
@@ -10,6 +30,14 @@ angular
         self.pageGroup = 0;
         self.lastGroup = 0;
 
+        /** @function compileTemplate
+         * @memberof Controllers.MHPaginatorCtrl
+         * @instance
+         * @param templateElem {Object} jQuery element with the template provided by the theme directive.
+         * @param directiveElem {Object} default jQuery element created for this directive which will be replaced with theme template.
+         * @returns {void} Nothing
+         * @description compiles the directive theme and setups all elements (this method should be called from the theme directive itself).
+         */
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
@@ -29,6 +57,13 @@ angular
             directiveElem.replaceWith($compile(templateElem)(scope));
         }
 
+        /** @function setCurrentPage
+         * @memberof Controllers.MHPaginatorCtrl
+         * @instance
+         * @param page {number} number of the new page to be set.
+         * @returns {void} Nothing
+         * @description changes the paginator to a new page, recalculates current group and updates UI to reflect the changes.
+         */
         this.setCurrentPage = function(page)
         {
             self.scope.mhCurrentPage = page;
