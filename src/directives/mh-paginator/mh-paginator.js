@@ -12,7 +12,7 @@
         mh-page-group-size="{sizeOfPageGoup}"
         mh-page-current-size="{theCurrentPageNumber}
         mh-last-page="{theLastPageNumber}"
-        mh-on-page-selected="{callbackFunction}">
+        mh-on-page-selected="{callbackFunction(page)}">
     </mh-paginator>
  * ### **Theme customization**
  * mhPaginator UI can be customized any way you want it using Mahou's mh-navbar-theme attribute directives.
@@ -38,9 +38,9 @@ angular.module('mahou').directive('mhPaginator', function ( $templateRequest ) {
             mhPageGroupSize : '=',
             mhCurrentPage : '=',
             mhLastPage : '=',
-            mhClassActive : '=',
-            mhClassDisabled : '=',
-            mhOnPageSelected : '='
+            mhClassActive : '=?',
+            mhClassDisabled : '=?',
+            mhOnPageSelected : '&'
         },
         compile : function(elem,attrs)
         {

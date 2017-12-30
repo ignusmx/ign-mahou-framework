@@ -81,10 +81,11 @@ angular
 
             if(self.scope.mhOnPageSelected != null)
             {
-                self.scope.mhOnPageSelected(self.scope.mhCurrentPage);
+                self.scope.mhOnPageSelected({page : self.scope.mhCurrentPage});
             }
         }
 
+        //PRIVATE
         function groupPages()
         {
             var pages=[];

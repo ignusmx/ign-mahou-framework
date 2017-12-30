@@ -3,6 +3,7 @@
  * @memberof Directives
  * @classdesc
  * use this directive to render a bootstrap panel with some content inside.
+ *
  * **directive types:** Element only
  *
  * @description 
