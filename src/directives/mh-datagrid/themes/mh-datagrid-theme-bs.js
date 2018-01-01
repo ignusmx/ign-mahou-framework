@@ -8,14 +8,13 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
             this.mhRawInnerTemplate =  '<div class="mh-responsive-table-container">\
                                             <table class="table">\
                                                 <thead>\
-                                                    <tr>\
+                                                    <tr class="mh-datagrid-headers-container">\
                                                         <th class="mh-datagrid-checkbox-header">\
                                                             <input type="checkbox" class="mh-input">\
                                                         </th>\
-                                                        <th class="mh-datagrid-data-header">\
+                                                        <th class="mh-datagrid-header">\
                                                             <span class="mh-title"></span>\
                                                         </th>\
-                                                        <th class="mh-datagrid-btns-header">acciones</th>\
                                                     </tr>\
                                                 </thead>\
                                                 <tbody>\
@@ -23,13 +22,13 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
                                                         <td class="mh-datagrid-checkbox-cell">\
                                                             <input type="checkbox" class="mh-datagrid-row-checkbox">\
                                                         </td>\
-                                                        <td class="mh-datagrid-data-cell">\
-                                                            <div class="mh-datagrid-value"></div>\
-                                                        </td>\
-                                                        <td class="mh-datagrid-row-btns-cell">\
-                                                            <a class="mh-datagrid-row-btn">\
-                                                                <span class="mh-title"></span>\
-                                                            </a>\
+                                                        <td class="mh-datagrid-cell">\
+                                                            <div class="mh-cell-content"></div>\
+                                                            <div class="mh-cell-buttons-container">\
+                                                                <a class="mh-button">\
+                                                                    <span class="mh-title"></span>\
+                                                                </a>\
+                                                            </div>\
                                                         </td>\
                                                     </tr>\
                                                 </tbody>\
@@ -62,20 +61,6 @@ angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateReque
                 if(isResponsiveTable != "false")
                 {
                     responsiveTableContainer.addClass("table-responsive");
-                }
-
-                var btnsContainer = renderedTemplate.find(".mh-datagrid-row-btns-cell");
-                var rowBtn = btnsContainer.find(".mh-datagrid-row-btn");
-                rowBtn.remove();
-
-                if(scope.mhRowButtons != null)
-                {
-                    for(var i=0; i < scope.mhRowButtons.length; i++)
-                    {
-                        var newRowBtn = rowBtn.clone();
-                        newRowBtn.attr("data-mh-name", scope.mhRowButtons[i].name);
-                        btnsContainer.append(newRowBtn);
-                    }
                 }
 
                 return renderedTemplate.html();

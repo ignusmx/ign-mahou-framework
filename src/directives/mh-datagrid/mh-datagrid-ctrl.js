@@ -95,11 +95,65 @@ angular
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
+
+            //retrieve elements to be cloned
+            var headersContainer = templateElem.find(".mh-datagrid-headers-container");
+            var header = headersContainer.find(".mh-datagrid-header");
+            header.remove();
+
+            var row = templateElem.find(".mh-datagrid-row");
+            var cell = row.find(".mh-datagrid-cell");
+            cell.remove();
+
+            var cellContent = cell.find(".mh-cell-content");
+            cellContent.remove();
+
+            var cellButtonsContainer = cell.find(".mh-cell-buttons-container")
+            cellButtonsContainer.remove();
+
+            var cellButton = cellButtonsContainer.find(".mh-button");
+            cellButton.remove();
+
+
             //validate colTypes:
             for(var i = 0; i < scope.mhCols.length; i++)
             {
                 var col = scope.mhCols[i];
                 MHValidationHelper.validateType(col, col.name, MHDatagridCol);
+
+                var colHeader = header.clone();
+                colHeader.find(".mh-title").attr("mh-compile","mhCols["+i+"].title");
+                colHeader.attr("ng-show","mhCols["+i+"].visible !== false");
+                headersContainer.append(colHeader);
+
+                var colCell = cell.clone();
+                if(col.content instanceof Array)
+                {
+                    var colCellButtonsContainer = cellButtonsContainer.clone();
+
+                    for(var j = 0; j < col.content.length; j++)
+                    {
+                        var button = col.content[j];
+                        MHValidationHelper.validateType(button, button.name, MHButton);
+                        var colCellButton = cellButton.clone();
+                        colCellButton.addClass(button.cssClasses);
+                        colCellButton.attr("data-mh-name", button.name);
+                        colCellButton.attr("ng-click", "controller.executeStateOrAction(mhCols["+i+"].content["+j+"].action, row.model)");
+                        colCellButton.find(".mh-title").html("{{mhCols["+i+"].content["+j+"].title}}");
+                        colCellButtonsContainer.append(colCellButton);
+                    }
+
+                    colCell.append(colCellButtonsContainer);
+                }
+                else
+                {
+                    var colCellContent = cellContent.clone();
+                    colCellContent.attr("mh-compile", "mhCols["+i+"].content");
+                    colCell.append(colCellContent);
+                }
+
+                colCell.attr("ng-show","mhCols["+i+"].visible !== false");
+                row.append(colCell);
             }
 
             var checkboxHeader = templateElem.find(".mh-datagrid-checkbox-header");
@@ -109,42 +163,15 @@ angular
             selectAllCheckbox.attr("ng-change","controller.selectAll()");
             selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
 
-            var dataHeader = templateElem.find(".mh-datagrid-data-header");
-            dataHeader.attr("ng-repeat", "col in mhCols");
-            dataHeader.find(".mh-title").attr("mh-compile","col.title");
-
-            var buttonsHeader = templateElem.find(".mh-datagrid-btns-header");
-            buttonsHeader.attr("ng-if","mhEnableRowButtons !== false");
-
             var row = templateElem.find(".mh-datagrid-row");
             row.attr("ng-repeat", "row in controller.internalCollection");
-
-            var dataCell = templateElem.find(".mh-datagrid-data-cell");
-            dataCell.attr("ng-repeat", "col in mhCols");
-            dataCell.find(".mh-datagrid-value").attr("mh-compile", "col.value");
 
             var checkboxCell = templateElem.find(".mh-datagrid-checkbox-cell");
             checkboxCell.attr("ng-if","mhEnableRowSelect !== false");
 
             var rowCheckbox = templateElem.find(".mh-datagrid-row-checkbox");
             rowCheckbox.attr("ng-change","controller.rowSelectChange(row)");
-            rowCheckbox.attr("ng-model", "row.selected");
-
-            var rowButtonsCell = templateElem.find(".mh-datagrid-row-btns-cell");
-            rowButtonsCell.attr("ng-if","mhEnableRowButtons !== false");
-
-            if(scope.mhRowButtons != null)
-            {
-                for(var i=0; i < scope.mhRowButtons.length; i++)
-                {
-                    var button = scope.mhRowButtons[i];
-                    MHValidationHelper.validateType(button, button.name, MHButton);
-                    var rowButtonElement = templateElem.find(".mh-datagrid-row-btn[data-mh-name="+button.name+"]");
-                    rowButtonElement.attr("ng-click", "controller.executeStateOrAction(mhRowButtons["+i+"].action, row.model)");
-                    rowButtonElement.find(".mh-title").html("{{mhRowButtons["+i+"].title}}");
-                }
-            }
-            
+            rowCheckbox.attr("ng-model", "row.selected");            
 
             directiveElem.replaceWith($compile(templateElem)(scope));
         }

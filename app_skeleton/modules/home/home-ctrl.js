@@ -21,8 +21,6 @@
 				console.log("model to delete is:", model);
 			}
 
-			//var title = MHBsDecorator.decorateTitleIcon(new MHTitle("{{$parent.user.name}}"),"glyphicon glyphicon-eur", "span");
-			//console.log(title);
 			$scope.action = function(){alert("title")}
 
 			var homeDropDowns = [ 
@@ -49,21 +47,23 @@
 								{id:"12", name : "Vaca 2", image: "https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2", email : "asd23452345234", address:{city:"Hembra", ctry:"mx"}}
 							];
 			$scope.status = "no se pudo";
+
+			$scope.rowButtons = [new MHButton({ name: "edit", title:"a", action : "eee", cssClasses:"btn btn-danger" }),
+					new MHButton({ name: "delete", title:"b", action : $scope.deleteClick })];
+
 			$scope.datagridCols = 
 				[
-					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", value : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
-					new MHDatagridCol({ name:"name", title : "nombre", value :  MHBsDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", value : MHBsDecorator.decorateResponsiveImage(MHBsDecorator.decorateEval('row.model.image'))}),
-					new MHDatagridCol({ name:"email", title : "no. registro", value : MHBsDecorator.decorateEval('row.model.email') }),
-					new MHDatagridCol({ name:"address", title : "dirección", value : MHBsDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") })
+				new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
+					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", content : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
+					new MHDatagridCol({ name:"name", title : "nombre", content :  MHBsDecorator.decorateEval('row.model.name') }),
+					new MHDatagridCol({ name:"image", title : "imagen", content : MHBsDecorator.decorateResponsiveImage(MHBsDecorator.decorateEval('row.model.image'))}),
+					new MHDatagridCol({ name:"email", title : "no. registro", content : MHBsDecorator.decorateEval('row.model.email') }),
+					new MHDatagridCol({ name:"address", title : "dirección", content : MHBsDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") }),
+					
 				]
 				
-				
-			$scope.rowButtons = 
-				[
-					new MHButton({ name: "edit", title:"Editar", action : "eee" }),
-					new MHButton({ name: "delete", title:"Borrar", action : $scope.deleteClick })
-				]
+			
+	
 			$scope.collection = collection;
 			$scope.enableRowSelect = true;
 
