@@ -1,3 +1,24 @@
+/**
+ * @class MHDatagridCtrl
+ * @memberof Controllers
+ * @classdesc
+ * controller used by {@link Directives.mhDatagrid mhDatagrid} directive to compile and bind events to create a fully functional datagrid.
+ * @description
+ * #### ** Directive: ** {@link Directives.mhDatagrid mhDatagrid}
+ *
+ * @property {object}                 scope                                     - Isolated scope.
+ * @property {boolean}                scope.mhEnableRowSelect                   - shows checkboxs and enable row selection. 
+ * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
+ * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid
+ * @property {Function}               scope.mhSelectAllChange                   - callback action to be executed when "select all" checkbox is selected
+ * @property {Function}               scope.mhSelectRowChange                   - callback action to be executed when single row checkbox is selected
+ * @property {boolean}                allRowsSelected                           - true when all rows checkboxes are selected, false otherwise
+ * @property {object[]}               selectedRows                              - keeps the list of the selected rows (updated eachtime a checkbox is selected)
+ * @property {object[]}               internalCollection                        - An internal collection used to keep all rows so we can mark them as selected without modifying the models of the original mhCollection.
+ * @property {object}                 internalCollection[rowIndex]              - A single row inside the internal collection. 
+ * @property {object}                 internalCollection[rowIndex].selected     - True if the row is currently selected, false otherwise.
+ * @property {object}                 internalCollection[rowIndex].model        - A reference to the model of the original mhCollection.
+ */
 angular
 .module('mahou')
 .controller('MHDatagridCtrl', 
@@ -7,7 +28,6 @@ angular
         self.scope = $scope;
         self.allRowsSelected = false;
         self.collection = $scope.mhCollection;
-        self.checkboxModels = [];
         self.selectedRows = [];
         self.internalCollection = [];
 
@@ -48,7 +68,13 @@ angular
                 updateAllRowsSelected();
             });
         
-        this.selectAll = function()
+        /** @function toggleSelectAll
+         * @memberof Controllers.MHDatagridCtrl
+         * @instance
+         * @returns {void} Nothing
+         * @description selects or unselects all rows in the internalCollection and triggers the mhSelectAllChange if exists.
+         */
+        this.toggleSelectAll = function()
         {
             if(self.allRowsSelected)
             {
@@ -71,7 +97,14 @@ angular
             $scope.mhSelectAllChange({selectedRows : self.selectedRows});
         }
 
-        this.rowSelectChange = function(row)
+        /** @function toggleRowSelect
+         * @memberof Controllers.MHDatagridCtrl
+         * @instance
+         * @param row {object} the row selected.
+         * @returns {void} Nothing
+         * @description adds a row to the selectedRows array and triggers the mhSelectRowChange callback if exists.
+         */
+        this.toggleRowSelect = function(row)
         {
             if(row.selected)
             {
@@ -87,11 +120,14 @@ angular
             $scope.mhSelectRowChange({row:row});
         }
 
-        this.evaluatePropertyExpression = function(model, expression)
-        {
-            return $scope.$eval(expression);
-        }
-
+        /** @function compileTemplate
+         * @memberof Controllers.MHDatagridCtrl
+         * @instance
+         * @param templateElem {Object} jQuery element with the template provided by the theme directive.
+         * @param directiveElem {Object} default jQuery element created for this directive which will be replaced with theme template.
+         * @returns {void} Nothing
+         * @description compiles the directive theme and setups all elements (this method should be called from the theme directive itself).
+         */
         this.compileTemplate = function(templateElem, directiveElem)
         {
             var scope = self.scope;
@@ -160,7 +196,7 @@ angular
             checkboxHeader.attr("ng-if","mhEnableRowSelect !== false");
 
             var selectAllCheckbox = templateElem.find(".mh-input");
-            selectAllCheckbox.attr("ng-change","controller.selectAll()");
+            selectAllCheckbox.attr("ng-change","controller.toggleSelectAll()");
             selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
 
             var row = templateElem.find(".mh-datagrid-row");
@@ -170,12 +206,19 @@ angular
             checkboxCell.attr("ng-if","mhEnableRowSelect !== false");
 
             var rowCheckbox = templateElem.find(".mh-datagrid-row-checkbox");
-            rowCheckbox.attr("ng-change","controller.rowSelectChange(row)");
+            rowCheckbox.attr("ng-change","controller.toggleRowSelect(row)");
             rowCheckbox.attr("ng-model", "row.selected");            
 
             directiveElem.replaceWith($compile(templateElem)(scope));
         }
 
+        /** @function executeStateOrAction
+         * @memberof Controllers.MHDatagridCtrl
+         * @instance
+         * @param action {function | string} the action to execute or state to transition
+         * @returns {void} Nothing
+         * @description executes a function or transitions to an ui-router state
+         */
         this.executeStateOrAction = function(action, model)
         {
             if(typeof(action) == "string")

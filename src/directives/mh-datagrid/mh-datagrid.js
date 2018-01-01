@@ -3,7 +3,7 @@
  * @memberof Directives
  * @classdesc
  * use this directive to create a fully functional datagrid to display collections.
- * Supports MHButtons and MHDropdownButtons
+ * Supports MHButtons
  * **directive types:** Element only
  *
  * @description 
@@ -11,9 +11,7 @@
  * ### ** HTML declaration **
     <mh-datagrid {mh-datagrid-theme-directive} 
         mh-enable-row-select="{boolean}"
-        mh-enable-row-buttons="{boolean}"
         mh-cols="{DatagridColsArray}"
-        mh-row-buttons="{MHButtonArray}"
         mh-collection="{dataArray}"
         mh-select-all-change="{selectAllChangeCallback(selectedRows)}"
         mh-select-row-change="{selectRowChangeCallback(row)}">
@@ -28,9 +26,11 @@
  * - **{@link Themes.mhDatagridThemeCustom mh-datagrid-theme-custom}** (directive for custom UI html)
  * - ** {@link Themes.mhDatagridThemeBs mh-datagrid-theme-bs}** (directive with bootstrap table UI)
  *
- * @property {MHAbstractUIElement[]}  mhNavbarElements        - An array of {@link UIElements.MHButton MHButton} or {@link Models.MHDropdownButton MHDropdownButton} objects.
- * @property {string}                 mhNavbarTitle           - title of the navbar to be displayed
- * @property {function|string}        mhNavbarTitleAction    - a function to be called or a ui-router state to transition to if user clicks navbar title
+ * @property {boolean}                mhEnableRowSelect        - shows checkboxs and enable row selection. 
+ * @property {MHDatagridCol[]}        mhCols                   - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
+ * @property {Object[]}               mhCollection             - an array of objects to be displayed on the datagrid
+ * @property {Function}               mhSelectAllChange        - callback action to be executed when "select all" checkbox is selected
+ * @property {Function}               mhSelectRowChange        - callback action to be executed when single row checkbox is selected
  */
 angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
