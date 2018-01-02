@@ -1,16 +1,11 @@
-/**
+ /**
  * @class mhForm
  * @memberof Directives
  * @classdesc
  * use this directive to create a fully functional AngularJS form.<br>
  * Includes fields validation, events callbacks and UI customization using themes.
- *
  * **directive types:** Element only
- * @property {object}  ng-model           - The ngModel to be used with the form.
- * @property {string}  mh-form-name       - The name (HTML 'name' attribute) of the form.
- * @property {MHAbstractUIElement[]}   mh-form-layout - An array of {@link UIElements.MHAbstractUIElement MHAbstractUIElement} objects.
- * @property {string}   mh-class-invalid - A string of classes to be used when form is invalid
-  * @property {string}  mh-on-form-init - A function to be executed when form is initialized. Used to expose the form API as parameter
+ *
  * @description 
  * #### ** Controller: ** {@link Controllers.MHFormCtrl MHFormCtrl}
  * ### ** HTML declaration **
@@ -30,6 +25,12 @@
  * #### **Available mhForm themes**
  * - **{@link Themes.mhFormThemeCustom mh-form-theme-custom}** (directive for custom UI html)
  * - ** {@link Themes.mhFormThemeBs mh-form-theme-bs}** (directive with bootstrap horizontal form UI)
+ *
+ * @property {object}                   ngModel             - The ngModel to be used with the form.
+ * @property {string}                   mhFormName          - The name (HTML 'name' attribute) of the form.
+ * @property {MHAbstractUIElement[]}    mhFormLayout        - An array of {@link UIElements.MHAbstractUIElement MHAbstractUIElement} objects used to display, edit and update the ngModel.
+ * @property {string}                   mhClassInvalid      - A string of classes to be added to fields when form is invalid.
+ * @property {Function}                 mhOnFormInit        - A function to be executed when form is initialized. Used to expose the form API as parameter
  */
 angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
     return {

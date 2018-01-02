@@ -1,16 +1,19 @@
 /**
  * @class MHFormCtrl
  * @memberof Controllers
- * @description
+ * @classdesc
  * controller used by mhForm directive to compile and bind events to create a fully functional angularJS form.
+ * @description
  * #### ** Directive: ** {@link Directives.mhForm mhForm}
- * 
- * @property {object}  scope                                 - Isolated scope.
- * @property {object}  scope.modelCopy                       - The ngModel to be used with the form.
- * @property {string}  scope.mhFormName                      - The name (HTML 'name' attribute) of the form.
- * @property {MHAbstractUIElement[]}   scope.mhFormLayout    - An array of MHAbstractUIElement.
- * @property {string}  scope.mhClassInvalid                  - CSS classes to be applied when form is invalid.
- * @property {string}  scope.mhOnFormInit                    - A function to be executed when form is initialized. Used to expose the form API as parameter.
+ *
+ * @property {object}                   scope                       - Isolated scope.
+ * @property {object}                   scope.ngModel               - The ngModel to be used with the form.
+ * @property {string}                   scope.mhFormName            - The name (HTML 'name' attribute) of the form.
+ * @property {MHAbstractUIElement[]}    scope.mhFormLayout          - An array of {@link UIElements.MHAbstractUIElement MHAbstractUIElement} objects used to display, edit and update the ngModel.
+ * @property {string}                   scope.mhClassInvalid        - A string of classes to be added to fields when form is invalid.
+ * @property {Function}                 scope.mhOnFormInit          - A function to be executed when form is initialized. Used to expose the form API as parameter.
+ * @property {object}                   modelCopy                   - A copy of the model to detect if model has changed or not.
+ * @property {MHAbstractUIElement[]}    formElements                - List of all rendereable form elements.
  */
 angular
 .module('mahou')
@@ -20,6 +23,7 @@ angular
         var self = this;
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
+        self.formElements = null;
 
         /** @function executeStateOrAction
          * @memberof Controllers.MHFormCtrl
@@ -45,23 +49,23 @@ angular
         /** @function compileTemplate
          * @memberof Controllers.MHFormCtrl
          * @instance
-         * @param templateElem {Object} the action to execute or state to transition
-         * @param directiveElem {Object} the form ng-model to be passed as parameter to the action function
-         * @param formElements {string} the name of the form to be passed as parameter to the action function
+         * @param templateElem {Object} jQuery element with the template provided by the theme directive.
+         * @param directiveElem {Object} default jQuery element created for this directive which will be replaced with theme template.
+         * @param formElements {MHAbstractUIElement[]} array with all the elements in the form.
          * @returns {void} Nothing
-         * @description compiles the directive theme and setups all form elements (this method should be called from the theme directive itself)
+         * @description compiles the directive theme and setups all elements (this method should be called from the theme directive itself).
          */
         this.compileTemplate = function(templateElem, directiveElem, formElements)
         {
             var scope = self.scope;
             var formName = self.scope.mhFormName;
-            scope.mhFormElements = formElements;
+            self.formElements = formElements;
 
             templateElem.attr("name", self.scope.mhFormName);
             
-        	for(var i = 0; i < scope.mhFormElements.length; i++)
+        	for(var i = 0; i < self.formElements.length; i++)
         	{
-        		var formElement = scope.mhFormElements[i];
+        		var formElement = self.formElements[i];
                 MHValidationHelper.validateType(formElement, formElement.name, [MHFormLabel, MHAbstractFormField, MHFormButton]);
 
                 var elementTemplate = templateElem.find("[data-mh-name="+formElement.name+"]");
@@ -165,7 +169,7 @@ angular
             var inputErrorMessage = elementTemplate.find(".mh-input-error-message");
             if(input.required)
             {
-                inputErrorMessage.html("{{mhFormElements["+elementIndex+"].invalidMessage}}")
+                inputErrorMessage.html("{{controller.formElements["+elementIndex+"].invalidMessage}}")
                 inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")");
                 inputElem.attr("required", true);
 
@@ -192,7 +196,7 @@ angular
             {
                 inputElem.attr("md-selected-item", "model"+getModelAsHash(input.model));
                 inputElem.attr("md-search-text", input.name+"SearchText");
-                inputElem.attr("md-items", "item in mhFormElements["+elementIndex+"].querySearch("+input.name+"SearchText)");
+                inputElem.attr("md-items", "item in controller.formElements["+elementIndex+"].querySearch("+input.name+"SearchText)");
                 inputElem.attr("md-item-text", input.itemText);
                 inputElem.attr("md-min-length", input.minLength);
                 inputElem.attr("placeholder", input.placeholder);
@@ -208,11 +212,11 @@ angular
                 }
                 else
                 {
-                    inputElem.find(".mh-select-default-option").html("{{mhFormElements["+elementIndex+"].default}}");
+                    inputElem.find(".mh-select-default-option").html("{{controller.formElements["+elementIndex+"].default}}");
                     inputElem.find(".mh-select-default-option").attr("ng-value", "{{null}}")
                 }
                 
-                inputElem.find(".mh-select-option").attr("ng-repeat","option in mhFormElements["+elementIndex+"].options");
+                inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
                 inputElem.find(".mh-select-option").attr("value","{{option}}");
                 inputElem.find(".mh-select-option").html("{{option}}");
             }
@@ -260,7 +264,7 @@ angular
                 buttonElement.attr("ng-disabled", disabledExpression);    
             }
             
-            buttonElement.attr("ng-click", "controller.executeStateOrAction(mhFormElements["+elementIndex+"].action, model, "+formName+")");
+            buttonElement.attr("ng-click", "controller.executeStateOrAction(controller.formElements["+elementIndex+"].action, model, "+formName+")");
         }
     }
 );

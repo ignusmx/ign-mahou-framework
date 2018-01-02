@@ -1,9 +1,18 @@
-/**
+ /**
  * @class mhFormThemeBs
  * @memberof Themes
  * @classdesc
- * use this directive to customize UI theme for mhForm.<br>
+ * A theme for {@link Directives.mhForm mhForm} directive. Used to define a bootstrap form theme.
+ * **directive types:** Attribute only
  *
+ * @description 
+ * #### ** Directive: ** {@link Directives.mhForm mhForm}
+ * ### ** HTML declaration **
+    <mh-form mh-form-theme-bs
+        {mh-form-attributes}
+        mhFormLayout={ArrayOfUIElements}>
+    </mh-form>
+ * @property {MHFormBSRow[]}      mhFormLayout     - array composed of {@link UIElement.MHFormBSRow MHFormBSRow} with columns and elements inside.
  */
 angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, $parse ) {
     return {
@@ -207,7 +216,7 @@ angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, 
                     {
                         var newElementContainer = renderElementContainer(element, parent);
                         group.append(newElementContainer);
-                        //add element to formScope's elements array
+                        //add element to elements array
                         self.formElements.push(element);
                     }   
                 }
