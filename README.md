@@ -8,7 +8,7 @@ npm install -g jsdoc
 
 #### **Build docs with JSDoc**
 ```
-jsdoc src -r -c jsdocs-conf.json -R README.md
+jsdoc src -r -c jsdocs-conf.json -R README.md -d docs
 ```
 
 #### **Build minified js**
