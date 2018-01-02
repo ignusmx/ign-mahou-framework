@@ -67,7 +67,7 @@ gulp.task('compressJS', function() {
     var jsFiles = modules_js;
 
     return gulp.src(jsFiles)
-    .pipe(concat('mahou.js'))
+    .pipe(concat('ign-mahou.js'))
     .pipe(ngAnnotate())
     .pipe(gulp.dest(jsDest))
 });
@@ -77,7 +77,7 @@ gulp.task('compressMinJS', function() {
     var jsFiles = modules_js;
 
     return gulp.src(jsFiles)
-    .pipe(concat('mahou.min.js'))
+    .pipe(concat('ign-mahou.min.js'))
     .pipe(ngAnnotate())
     .pipe(gulp.dest(jsDest))
     .pipe(uglify())
@@ -89,7 +89,7 @@ gulp.task('compressCSS', function() {
     var cssFiles = modules_css;
 
     return gulp.src(cssFiles)
-    .pipe(concat('mahou.min.css'))
+    .pipe(concat('ign-mahou.min.css'))
     .pipe(gulp.dest(cssDest));
 });
 
