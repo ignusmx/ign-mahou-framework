@@ -94,4 +94,4 @@ gulp.task('compressCSS', function() {
 });
 
 
-gulp.task('dist', ['compressJS', 'compressCSS']);
+gulp.task('dist', ['compressJS', 'compressMinJS', 'compressCSS']);
