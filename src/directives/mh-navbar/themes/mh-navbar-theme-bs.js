@@ -18,7 +18,7 @@
  * @property {string}                 mhNavbarPosition          - position of the bootstrap navbar ({@link Enumerators.MHNavbarBSPosition MHNavbarBSPosition}).
  * @property {boolean}                mhNavbarInverse           - defines if bootstrap should render regular navbar or inverse style.
  */
-angular.module('mahou').directive('mhNavbarThemeBs', function ( $templateRequest, $parse ) {
+angular.module('ign.Mahou').directive('mhNavbarThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',

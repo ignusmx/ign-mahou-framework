@@ -10,7 +10,7 @@
     <span mhCompile="{valueToCompile}"></span>
  * @property {string}                   mhCompile             - value to be compiled.
  */
-angular.module('mahou').directive('mhCompile', function ($compile) {
+angular.module('ign.Mahou').directive('mhCompile', function ($compile) {
     return function(scope, element, attrs) {
         scope.$watch(
             function(scope) {

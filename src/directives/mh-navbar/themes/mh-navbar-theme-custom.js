@@ -16,7 +16,7 @@
  * @property {html}     mhRawInnerTemplate          - html template defined inside the directive.
  * @property {string}   mhTemplateUrl               - url of the html template to be loaded. (If specified, mhRawInnerTemplate will be ignored).
  */
-angular.module('mahou').directive('mhNavbarThemeCustom', function ( $templateRequest )
+angular.module('ign.Mahou').directive('mhNavbarThemeCustom', function ( $templateRequest )
 {
     return {
         mhRawInnerTemplate : null,

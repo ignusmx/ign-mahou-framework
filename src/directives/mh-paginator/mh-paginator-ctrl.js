@@ -19,7 +19,7 @@
  * @property {number}           lastGroup                      - Holds the number of the last group.
  */
 angular
-.module('mahou')
+.module('ign.Mahou')
 .controller('MHPaginatorCtrl', 
     function MHPaginatorCtrl($scope, $element, $attrs, $compile)
     {

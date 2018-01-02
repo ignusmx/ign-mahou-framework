@@ -14,7 +14,7 @@
     </mh-datagrid>
  * @property {boolean}      mhResponsive     - if true, theme will add an extra div container with the bootstrap class "table-responsive"
  */
-angular.module('mahou').directive('mhDatagridThemeBs', function ( $templateRequest, $parse ) {
+angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',

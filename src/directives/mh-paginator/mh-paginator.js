@@ -30,7 +30,7 @@
  * @property {number}           mhClassDisabled          - Class to be used for disabled elements.
  * @property {Function}         mhOnPageSelected         - Function to be called when a page is selected.
  */
-angular.module('mahou').directive('mhPaginator', function ( $templateRequest ) {
+angular.module('ign.Mahou').directive('mhPaginator', function ( $templateRequest ) {
     return {
         restrict: 'E',
         scope: 

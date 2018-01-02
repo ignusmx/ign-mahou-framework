@@ -16,7 +16,7 @@
  * @property {MHAbstractUIElement[]}    formElements                - List of all rendereable form elements.
  */
 angular
-.module('mahou')
+.module('ign.Mahou')
 .controller('MHFormCtrl', 
     function MHFormCtrl($scope, $element, $attrs, $compile, $state)
     {

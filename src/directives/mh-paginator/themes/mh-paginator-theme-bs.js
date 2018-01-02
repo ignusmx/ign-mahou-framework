@@ -12,7 +12,7 @@
         {navbar-attributes}>
     </mh-paginator>
  */
-angular.module('mahou').directive('mhPaginatorThemeBs', function ( $templateRequest, $parse ) {
+angular.module('ign.Mahou').directive('mhPaginatorThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',

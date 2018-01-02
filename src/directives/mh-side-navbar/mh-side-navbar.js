@@ -1,4 +1,4 @@
-angular.module('mahou').directive('mhSideNavbar', function ( $compile, $templateRequest ) {
+angular.module('ign.Mahou').directive('mhSideNavbar', function ( $compile, $templateRequest ) {
     return {
         restrict: 'E',
         scope:{ 

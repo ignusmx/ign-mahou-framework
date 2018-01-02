@@ -13,7 +13,7 @@
  * @property {MHButton[] | MHDropDownButton[]}  allNavbarElements           - An array of {@link UIElements.MHButton MHButton} or {@link UIElements.MHDropDownButton MHDropDownButton}. If theme extends elements, they should be concatenated here.
  */
 angular
-.module('mahou')
+.module('ign.Mahou')
 .controller('MHNavbarCtrl', 
     function MHNavbarCtrl($scope, $element, $attrs, $compile, $state)
     {

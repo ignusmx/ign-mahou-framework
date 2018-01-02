@@ -32,7 +32,7 @@
  * @property {string}                   mhClassInvalid      - A string of classes to be added to fields when form is invalid.
  * @property {Function}                 mhOnFormInit        - A function to be executed when form is initialized. Used to expose the form API as parameter
  */
-angular.module('mahou').directive('mhForm', function ( $templateRequest ) {
+angular.module('ign.Mahou').directive('mhForm', function ( $templateRequest ) {
     return {
         restrict: 'E',
         scope: 

@@ -32,7 +32,7 @@
  * @property {Function}               mhSelectAllChange        - callback action to be executed when "select all" checkbox is selected
  * @property {Function}               mhSelectRowChange        - callback action to be executed when single row checkbox is selected
  */
-angular.module('mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
+angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'E',

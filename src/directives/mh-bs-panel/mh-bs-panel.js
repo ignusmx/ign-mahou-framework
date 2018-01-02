@@ -16,7 +16,7 @@
  * @property {string}                   mhHeaderTitle             - Title to be displayed on the panel's header.
  * @property {string}                   mhFooterTitle             - Title to be displayed on the panel's footer.
  */
-angular.module('mahou').directive('mhBsPanel', function ( $compile, $templateRequest ) {
+angular.module('ign.Mahou').directive('mhBsPanel', function ( $compile, $templateRequest ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'E',

@@ -14,7 +14,7 @@
     </mh-form>
  * @property {MHFormBSRow[]}      mhFormLayout     - array composed of {@link UIElement.MHFormBSRow MHFormBSRow} with columns and elements inside.
  */
-angular.module('mahou').directive('mhFormThemeBs', function ( $templateRequest, $parse ) {
+angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateRequest, $parse ) {
     return {
         mhRawInnerTemplate : null,
         restrict: 'A',

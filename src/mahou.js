@@ -37,7 +37,12 @@
 	'use strict';
 	/** @module Mahou
 	@description Main module for including Mahou Framework to your angular app
+	* #### **Usage**
+	* Add the ign.Mahou module to your AnguarJS app
+	* ```
+	* angular.module('app', ['ign.Mahou'])
+	* ```
 	 */
-	angular.module('mahou', []);
+	angular.module('ign.Mahou', []);
 
 })();

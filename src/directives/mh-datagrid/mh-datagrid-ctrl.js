@@ -2,25 +2,25 @@
  * @class MHDatagridCtrl
  * @memberof Controllers
  * @classdesc
- * controller used by {@link Directives.mhDatagrid mhDatagrid} directive to compile and bind events to create a fully functional datagrid.
+ * Controller used by {@link Directives.mhDatagrid mhDatagrid} directive to compile and bind events to create a fully functional datagrid.
  * @description
  * #### ** Directive: ** {@link Directives.mhDatagrid mhDatagrid}
  *
  * @property {object}                 scope                                     - Isolated scope.
  * @property {boolean}                scope.mhEnableRowSelect                   - shows checkboxs and enable row selection. 
- * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
- * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid
- * @property {Function}               scope.mhSelectAllChange                   - callback action to be executed when "select all" checkbox is selected
- * @property {Function}               scope.mhSelectRowChange                   - callback action to be executed when single row checkbox is selected
- * @property {boolean}                allRowsSelected                           - true when all rows checkboxes are selected, false otherwise
- * @property {object[]}               selectedRows                              - keeps the list of the selected rows (updated eachtime a checkbox is selected)
+ * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content.
+ * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid.
+ * @property {Function}               scope.mhSelectAllChange                   - callback action to be executed when "select all" checkbox is selected.
+ * @property {Function}               scope.mhSelectRowChange                   - callback action to be executed when single row checkbox is selected.
+ * @property {boolean}                allRowsSelected                           - true when all rows checkboxes are selected, false otherwise.
+ * @property {object[]}               selectedRows                              - keeps the list of the selected rows (updated eachtime a checkbox is selected).
  * @property {object[]}               internalCollection                        - An internal collection used to keep all rows so we can mark them as selected without modifying the models of the original mhCollection.
- * @property {object}                 internalCollection[rowIndex]              - A single row inside the internal collection. 
- * @property {object}                 internalCollection[rowIndex].selected     - True if the row is currently selected, false otherwise.
- * @property {object}                 internalCollection[rowIndex].model        - A reference to the model of the original mhCollection.
+ * @property {object}                 row                                       - A single row inside the internalCollection. 
+ * @property {boolean}                row.selected                              - True if the row is currently selected, false otherwise.
+ * @property {object}                 row.model                                 - A reference to the model of the original mhCollection.
  */
 angular
-.module('mahou')
+.module('ign.Mahou')
 .controller('MHDatagridCtrl', 
     function MHDatagridCtrl($scope, $element, $attrs, $compile, $state) 
     {
