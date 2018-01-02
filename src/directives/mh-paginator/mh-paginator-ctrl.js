@@ -114,5 +114,18 @@ angular
             self.pageGroup = pageGroup;
             self.lastGroup = pagesGroupsCount-1;
         }
+
+
+        $scope.$watch("mhLastPage", 
+        function( newValue, oldValue ) 
+        {
+            groupPages();
+        });
+
+        $scope.$watch("mhCurrentPage", 
+        function( newValue, oldValue ) 
+        {
+            self.setCurrentPage(newValue);
+        });
     }
 );
