@@ -61,7 +61,7 @@ angular
                     button.addClass(config.cssClasses);
                     MHValidationHelper.validateRequiredTags(config, button);
 
-                    button.attr("ng-click", "controller.allNavbarElements["+i+"].action()");
+                    button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].action)");
                     button.find(".mh-title").attr("mh-compile", "controller.allNavbarElements["+i+"].title");
                     
                     //if button has dropdownButtons, render dropdownButtons as well
