@@ -54,11 +54,11 @@
 			$scope.datagridCols = 
 				[
 				new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
-					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", content : '<span style="color:#0FFF0F">'+MHBsDecorator.decorateEval('row.model.id')+"<span>"}),
-					new MHDatagridCol({ name:"name", title : "nombre", content :  MHBsDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", content : MHBsDecorator.decorateResponsiveImage(MHBsDecorator.decorateEval('row.model.image'))}),
-					new MHDatagridCol({ name:"email", title : "no. registro", content : MHBsDecorator.decorateEval('row.model.email') }),
-					new MHDatagridCol({ name:"address", title : "dirección", content : MHBsDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") }),
+					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", content : '<span style="color:#0FFF0F">'+MHDecorator.decorateEval('row.model.id')+"<span>"}),
+					new MHDatagridCol({ name:"name", title : "nombre", content :  MHDecorator.decorateEval('row.model.name') }),
+					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateResponsiveImage(MHDecorator.decorateEval('row.model.image'))}),
+					new MHDatagridCol({ name:"email", title : "no. registro", content : MHDecorator.decorateEval('row.model.email') }),
+					new MHDatagridCol({ name:"address", title : "dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") }),
 					
 				]
 				
@@ -83,7 +83,7 @@
 			}
 
 			$scope.formElements = [
-				new MHFormLabel({ name : "image", title:MHBsDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
+				new MHFormLabel({ name : "image", title:MHDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
 				new MHFormFieldMDAutocomplete({ name : 'user_name', title:"asdasd", model:"address.city", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
 				new MHFormFieldInputText({ name : 'eee', title:"asdasd", model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),

@@ -175,7 +175,7 @@ angular
                         colCellButton.addClass(button.cssClasses);
                         colCellButton.attr("data-mh-name", button.name);
                         colCellButton.attr("ng-click", "controller.executeStateOrAction(mhCols["+i+"].content["+j+"].action, row.model)");
-                        colCellButton.find(".mh-title").html("{{mhCols["+i+"].content["+j+"].title}}");
+                        colCellButton.find(".mh-title").attr("mh-compile", "mhCols["+i+"].content["+j+"].title");
                         colCellButtonsContainer.append(colCellButton);
                     }
 
