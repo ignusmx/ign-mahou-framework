@@ -13,8 +13,7 @@
         mh-enable-row-select="{boolean}"
         mh-cols="{DatagridColsArray}"
         mh-collection="{dataArray}"
-        mh-select-all-change="{selectAllChangeCallback(selectedRows)}"
-        mh-select-row-change="{selectRowChangeCallback(row)}">
+        mh-rows-selected-change="{rowsSelectedChangeCallback(rows)}">
         <!-- custom UI can be declared here using mhDatagridThemeCustom -->
     </mh-datagrid>
  * ### **Theme customization**
@@ -29,8 +28,7 @@
  * @property {boolean}                mhEnableRowSelect        - shows checkboxs and enable row selection. 
  * @property {MHDatagridCol[]}        mhCols                   - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
  * @property {Object[]}               mhCollection             - an array of objects to be displayed on the datagrid
- * @property {Function}               mhSelectAllChange        - callback action to be executed when "select all" checkbox is selected
- * @property {Function}               mhSelectRowChange        - callback action to be executed when single row checkbox is selected
+ * @property {Function}               mhRowsSelectedChange     - callback action to be executed when one or more row checkbox have been selected
  */
 angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
     return {
@@ -41,8 +39,7 @@ angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templa
             mhEnableRowSelect : "=",
             mhCols : "=",
             mhCollection : "=",
-            mhSelectAllChange : "&",
-            mhSelectRowChange : "&"
+            mhRowsSelectedChange : "&"
         },
         compile : function(elem,attrs)
         {

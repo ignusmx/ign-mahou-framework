@@ -10,8 +10,7 @@
  * @property {boolean}                scope.mhEnableRowSelect                   - shows checkboxs and enable row selection. 
  * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content.
  * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid.
- * @property {Function}               scope.mhSelectAllChange                   - callback action to be executed when "select all" checkbox is selected.
- * @property {Function}               scope.mhSelectRowChange                   - callback action to be executed when single row checkbox is selected.
+ * @property {Function}               scope.mhRowsSelectedChange                - callback action to be executed when one or more row checkbox have been selected.
  * @property {boolean}                allRowsSelected                           - true when all rows checkboxes are selected, false otherwise.
  * @property {object[]}               selectedRows                              - keeps the list of the selected rows (updated eachtime a checkbox is selected).
  * @property {object[]}               internalCollection                        - An internal collection used to keep all rows so we can mark them as selected without modifying the models of the original mhCollection.
@@ -60,11 +59,13 @@ angular
                     }
                     else
                     {
+                        existingRow.selected = false;
                         tempInternalCollection.push(existingRow);
                     }
                 }
 
                 self.internalCollection  = tempInternalCollection;
+                self.selectedRows = [];
                 updateAllRowsSelected();
             });
         
@@ -94,7 +95,7 @@ angular
                 self.internalCollection[i].selected = self.allRowsSelected;
             }
 
-            $scope.mhSelectAllChange({selectedRows : self.selectedRows});
+            $scope.mhRowsSelectedChange({rows : self.selectedRows});
         }
 
         /** @function toggleRowSelect
@@ -117,7 +118,7 @@ angular
             }
 
             updateAllRowsSelected();
-            $scope.mhSelectRowChange({row:row});
+            $scope.mhRowsSelectedChange({rows:self.selectedRows});
         }
 
         /** @function compileTemplate

@@ -17,10 +17,13 @@
  */
 function MHFormBSCol(config)
 {
+	config = config || {};
 	MHAbstractUIElement.call(this, config);
 
 	//validate main DataType
 	this.elements = MHValidationHelper.safeClassAttribute(config, "elements", Array);
+	this.elements = this.elements || [];
+	
 	//validate array DataTypes
 	if(this.elements != null)
 	{

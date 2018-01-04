@@ -101,7 +101,6 @@
 				console.log();
 			}
 
-			console.log((new MHFormBSRow({})).append());
 			var row0Elements = [new MHFormBSCol({elements : [$scope.formElements[0],
 																			 $scope.formElements[0]], 
 																			  vAlign:"bottom"}),
@@ -125,16 +124,9 @@
 									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[5], $scope.formElements[6]], colWidth:12, flex:true, hAlign:"center"})]})
 								];
 
-			$scope.selectAllEvent = function(rows)
+			$scope.gridRowsSelected = function(rows)
 			{
-				console.log("all selected:", rows);
-			}
-
-
-
-			$scope.selectRowEvent = function(asd)
-			{
-				console.log("a row was selected:", asd);
+				console.log("rows selected:", rows);
 			}
 
 			$scope.updateCollection = function()
