@@ -58,7 +58,7 @@ angular
                 //render only if button has been found
                 if(button.length > 0)
                 {
-                    button.addClass(config.cssClasses);
+                    MHDecorator.decorateEltCSS(button, config.cssClasses, config.styles);
                     MHValidationHelper.validateRequiredTags(config, button);
 
                     button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].action)");
@@ -74,7 +74,7 @@ angular
                             //render only if button has been found
                             if(button.length > 0)
                             {
-                                button.addClass(dropdownConfig.cssClasses);
+                                MHDecorator.decorateEltCSS(button, dropdownConfig.cssClasses, dropdownConfig.styles);
                                 MHValidationHelper.validateRequiredTags(dropdownConfig, button);
                                 button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].dropdownButtons["+j+"].action)");
                                 button.find(".mh-title").attr("mh-compile","controller.allNavbarElements["+i+"].dropdownButtons["+j+"].title");

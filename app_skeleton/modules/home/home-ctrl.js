@@ -101,6 +101,7 @@
 				console.log();
 			}
 
+			console.log((new MHFormBSRow({})).append());
 			var row0Elements = [new MHFormBSCol({elements : [$scope.formElements[0],
 																			 $scope.formElements[0]], 
 																			  vAlign:"bottom"}),
@@ -111,7 +112,7 @@
 
 
 
-			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1], $scope.formElements[1]], colWidth:12, fill:false})]}),
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, fill:false})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
 

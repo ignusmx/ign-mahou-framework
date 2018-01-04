@@ -79,6 +79,20 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                     responsiveTableContainer.addClass("table-responsive");
                 }
 
+                for(var i = 0; i < scope.mhCols.length; i++)
+                {
+                    var col = scope.mhCols[i];
+                    MHValidationHelper.validateType(col, col.name, MHDatagridCol);
+
+                    if(col.content instanceof Array)
+                    {
+                        for(var j = 0; j < col.content.length; j++)
+                        {
+                            col.content[j].styles = { cursor : "pointer" };
+                        }
+                    }
+                }
+
                 return renderedTemplate.html();
             }
         }

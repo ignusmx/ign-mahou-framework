@@ -172,7 +172,7 @@ angular
                         var button = col.content[j];
                         MHValidationHelper.validateType(button, button.name, MHButton);
                         var colCellButton = cellButton.clone();
-                        colCellButton.addClass(button.cssClasses);
+                        MHDecorator.decorateEltCSS(colCellButton, button.cssClasses, button.styles);
                         colCellButton.attr("data-mh-name", button.name);
                         colCellButton.attr("ng-click", "controller.executeStateOrAction(mhCols["+i+"].content["+j+"].action, row.model)");
                         colCellButton.find(".mh-title").attr("mh-compile", "mhCols["+i+"].content["+j+"].title");
@@ -198,6 +198,7 @@ angular
             var selectAllCheckbox = templateElem.find(".mh-input");
             selectAllCheckbox.attr("ng-change","controller.toggleSelectAll()");
             selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
+            selectAllCheckbox.attr("ng-show", "controller.internalCollection.length > 0");
 
             var row = templateElem.find(".mh-datagrid-row");
             row.attr("ng-repeat", "row in controller.internalCollection");

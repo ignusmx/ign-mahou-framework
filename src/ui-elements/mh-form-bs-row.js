@@ -15,7 +15,24 @@ function MHFormBSRow(config)
 	//validate main DataType
 	this.elements = MHValidationHelper.safeClassAttribute(config, "elements", Array);
 	//validate array DataTypes
-	MHValidationHelper.validateTypes(this.elements, "elements", MHFormBSCol);
+	if(this.elements != null)
+	{
+		MHValidationHelper.validateTypes(this.elements, "elements", MHFormBSCol);
+	}
+
+	/** @function append
+     * @memberof UIElements.MHFormBSRow
+     * @instance
+     * @param column {MHFormBSCol} a {@link UIElement.MHFormBSCol MHFormBSCol} to be appended to the elements list.
+     * @returns {void} reference to itself for method chaining
+     * @description appends a {@link UIElement.MHFormBSCol MHFormBSCol} to the elements list of the row.
+     */
+	this.append = function(column)
+	{
+		MHValidationHelper.validateType(column, "column", MHFormBSCol);
+		this.elements.push(column);
+		return this;
+	};
 }
 
 MHFormBSRow.prototype = Object.create(MHAbstractUIElement.prototype);

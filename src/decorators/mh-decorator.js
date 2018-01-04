@@ -43,7 +43,6 @@ MHDecorator.decorateResponsiveImage = function(string)
 	var imgHtml = MHDecorator.decorateTag("", "img");
 	var responsiveImgHtml = MHDecorator.decorateCSS(imgHtml, "img-responsive");
 
-	console.log(imgHtml);
 	return MHDecorator.decorateAttributes(responsiveImgHtml, { 'src' : string });
 }
 
@@ -77,6 +76,22 @@ MHDecorator.decorateCSS = function(string, cssClasses, styles)
 	}
 	
 	return container.html();
+}
+
+/** @memberof Decorators.MHDecorator
+ * @param element 	 	{$} jQuery element to be decorated
+ * @param cssClasses 	{string} string with classes to be applied, separated by space
+ * @param styles 		{object} object with list of all styles to be applied (e.g. { "minWidth" : "200px" })
+ * @description decorates the root element of provided string with given classes and styles
+ */
+MHDecorator.decorateEltCSS = function(element, cssClasses, styles)
+{
+	element.addClass(cssClasses);
+	for(var styleName in styles) 
+	{
+	    var styleValue = styles[styleName];
+		element.css(styleName, styleValue);
+	}
 }
 
 /** @memberof Decorators.MHDecorator
@@ -114,4 +129,18 @@ MHDecorator.decorateAttributes = function(string, attributes)
 	}
 	
 	return container.html();
+}
+
+/** @memberof Decorators.MHDecorator
+ * @param element 	 	{$} jQuery object to be decorated
+ * @param attributes 	{object} object with the attributes to be added (e.g. { "data-some-attr" : "attribute value" })
+ * @description applies given attributes to root Element of the given string.
+ */
+MHDecorator.decorateEltAttributes = function(element, attributes)
+{
+	for(var attributeName in attributes) 
+	{
+	    var attributeValue = attributes[attributeName];
+		element.attr(attributeName, attributeValue);
+	}
 }

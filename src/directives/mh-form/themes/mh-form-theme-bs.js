@@ -30,7 +30,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                 <div class="mh-input-container">\
                                                     <label class="mh-title"></label>\
                                                     <input class="form-control mh-input">\
-                                                    <div class="mh-input-error-message invalid-feedback">mensaje de error</div>\
+                                                    <div class="mh-input-error-message help-block">mensaje de error</div>\
                                                 </div>\
                                                 <div class="mh-select-container">\
                                                     <label class="mh-title"></label>\
@@ -72,7 +72,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                       <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>\
                                                     </md-not-found>\
                                                   </md-autocomplete>\
-                                                  <div class="mh-input-error-message invalid-feedback">mensaje de error</div>\
+                                                  <div class="mh-input-error-message help-block">mensaje de error</div>\
                                                 </div>\
                                                 <div class="mh-button-container">\
                                                     <button class="btn btn-default mh-form-button">\
@@ -89,7 +89,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
             var themeCtrl = ctrls[1];
             
             formCtrl.scope.mhClassInvalid = 
-            formCtrl.scope.mhClassInvalid == null ? 'is-invalid' : formCtrl.scope.mhClassInvalid;
+            formCtrl.scope.mhClassInvalid == null ? 'has-error' : formCtrl.scope.mhClassInvalid;
             
             var templateElem = 
             $(themeCtrl.renderFormTheme(this.mhRawInnerTemplate, formCtrl.scope));
@@ -150,10 +150,13 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         var newFormRow = formRow.clone();
                         group.append(newFormRow);
 
-                        for(var i = 0; i < rowContainer.elements.length; i++)
+                        if(rowContainer.elements != null)
                         {
-                            recursivelyIndexAndRenderElement(rowContainer.elements[i], newFormRow, rowContainer);
-                        }
+                            for(var i = 0; i < rowContainer.elements.length; i++)
+                            {
+                                recursivelyIndexAndRenderElement(rowContainer.elements[i], newFormRow, rowContainer);
+                            }
+                        }  
                     }
                     else if(element instanceof MHFormBSCol)
                     {
@@ -207,9 +210,12 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         
                         group.append(newFormCol);
 
-                        for(var i = 0; i < container.elements.length; i++)
+                        if(container.elements != null)
                         {
-                            recursivelyIndexAndRenderElement(container.elements[i], newFormCol, container);
+                            for(var i = 0; i < container.elements.length; i++)
+                            {
+                                recursivelyIndexAndRenderElement(container.elements[i], newFormCol, container);
+                            }
                         }
                     }
                     else

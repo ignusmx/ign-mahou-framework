@@ -157,7 +157,7 @@ angular
         function renderInputField(input, elementTemplate, formName, elementIndex)
         {
             var inputElem = elementTemplate.find(".mh-input");
-            inputElem.addClass(input.cssClasses);
+            MHDecorator.decorateEltCSS(inputElem, input.cssClasses, input.styles);
 
             MHValidationHelper.validateRequiredTags(input, inputElem);
 
@@ -170,12 +170,12 @@ angular
             if(input.required)
             {
                 inputErrorMessage.html("{{controller.formElements["+elementIndex+"].invalidMessage}}")
-                inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")");
+                inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+") && controller.formElements["+elementIndex+"].invalidMessage != null");
                 inputElem.attr("required", true);
 
                 if(self.scope.mhClassInvalid != null)
                 {
-                    inputElem.attr("ng-class", 
+                    elementTemplate.attr("ng-class", 
                     "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")}");
                 }
             }
@@ -234,7 +234,7 @@ angular
         function renderFormButton(button, elementTemplate, formName, elementIndex)
         {
             var buttonElement = elementTemplate.find(".mh-form-button");
-            buttonElement.addClass(button.cssClasses);
+            MHDecorator.decorateEltCSS(buttonElement, button.cssClasses, button.styles);
 
             if(button.disabledStatuses != null)
             {
