@@ -206,6 +206,7 @@ angular
             }
             else if(input instanceof MHFormFieldSelect)
             {
+                inputElem.attr("ng-change", "controller.formElements["+elementIndex+"].onChange(model"+getModelAsHash(input.model)+")");
                 if(input.defaultOption == null)
                 {
                     inputElem.find(".mh-select-default-option").remove();
@@ -213,12 +214,12 @@ angular
                 else
                 {
                     inputElem.find(".mh-select-default-option").attr("ng-repeat","option in [controller.formElements["+elementIndex+"].defaultOption]");
-                    inputElem.find(".mh-select-default-option").attr("ng-value","{{null}}");
+                    inputElem.find(".mh-select-default-option").attr("value","");
                     inputElem.find(".mh-select-default-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
                 }
                 
                 inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
-                inputElem.find(".mh-select-option").attr("value","{{$eval(controller.formElements["+elementIndex+"].value)}}");
+                inputElem.find(".mh-select-option").attr("ng-value","$eval(controller.formElements["+elementIndex+"].value)");
                 inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
             }
             else if(input instanceof MHFormFieldTextArea)

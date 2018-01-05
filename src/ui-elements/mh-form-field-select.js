@@ -25,6 +25,7 @@ function MHFormFieldSelect(config)
 	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", [String, Number, Object], null, false);
 	this.value = MHValidationHelper.safeClassAttribute(config, "value", String, null, false, "option");
 	this.text = MHValidationHelper.safeClassAttribute(config, "text", String, null, false, "option");
+	this.onChange = MHValidationHelper.safeClassAttribute(config, "onChange", Function);
 	this.requiredTags = "select";
 }
 
