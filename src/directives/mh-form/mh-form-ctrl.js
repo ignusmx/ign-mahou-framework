@@ -212,13 +212,19 @@ angular
                 }
                 else
                 {
-                    inputElem.find(".mh-select-default-option").html("{{controller.formElements["+elementIndex+"].default}}");
-                    inputElem.find(".mh-select-default-option").attr("ng-value", "{{null}}")
+                    inputElem.find(".mh-select-default-option").attr("ng-repeat","option in [controller.formElements["+elementIndex+"].defaultOption]");
+                    inputElem.find(".mh-select-default-option").attr("ng-value","{{null}}");
+                    inputElem.find(".mh-select-default-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
                 }
                 
                 inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
-                inputElem.find(".mh-select-option").attr("value","{{option}}");
-                inputElem.find(".mh-select-option").html("{{option}}");
+                inputElem.find(".mh-select-option").attr("value","{{$eval(controller.formElements["+elementIndex+"].value)}}");
+                inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
+            }
+            else if(input instanceof MHFormFieldTextArea)
+            {
+                inputElem.attr("placeholder", input.placeholder);
+                MHDecorator.decorateEltCSS(inputElem, null, { resize: input.resize });
             }
         }
 

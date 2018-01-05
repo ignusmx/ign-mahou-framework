@@ -30,12 +30,18 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                 <div class="mh-input-container">\
                                                     <label class="mh-title"></label>\
                                                     <input class="form-control mh-input">\
-                                                    <div class="mh-input-error-message help-block">mensaje de error</div>\
+                                                    <div class="mh-input-error-message help-block"></div>\
+                                                </div>\
+                                                <div class="mh-textarea-container">\
+                                                    <label class="mh-title"></label>\
+                                                    <textarea class="form-control mh-input">\
+                                                    </textarea>\
+                                                    <div class="mh-input-error-message help-block"></div>\
                                                 </div>\
                                                 <div class="mh-select-container">\
                                                     <label class="mh-title"></label>\
                                                     <select class="form-control mh-input">\
-                                                        <option class="mh-select-default-option"><em></em></option>\
+                                                        <option class="mh-select-default-option"></option>\
                                                         <option class="mh-select-option">\
                                                         </option>\
                                                     </select>\
@@ -44,10 +50,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </div>\
                                                 </div>\
                                                 <div class="mh-md-select-container">\
-                                                    <md-input-container style="margin-bottom:0px">\
+                                                    <md-input-container style="margin-bottom:0px; width:100%">\
                                                         <label class="mh-title"></label>\
                                                         <md-select class="mh-input">\
-                                                            <md-option class="mh-select-default-option"><em></em></md-option>\
+                                                            <md-option class="mh-select-default-option"></md-option>\
                                                             <md-option class="mh-select-option">\
                                                             </md-option>\
                                                         </md-select>\
@@ -57,7 +63,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </md-input-container>\
                                                 </div>\
                                                 <div class="mh-date-container">\
-                                                    <md-input-container style="margin-bottom:0px">\
+                                                    <md-input-container style="margin-bottom:0px; width:100%">\
                                                         <label class="mh-title"></label>\
                                                         <md-datepicker class="mh-input" md-placeholder="Enter date"></md-datepicker>\
                                                     </md-input-container>\
@@ -116,6 +122,9 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                 
                 var inputContainer = elementsContainer.find(".mh-input-container");
                 inputContainer.remove();
+
+                var textareaContainer = elementsContainer.find(".mh-textarea-container");
+                textareaContainer.remove();
 
                 var selectContainer = elementsContainer.find(".mh-select-container");
                 selectContainer.remove();
@@ -255,6 +264,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     else if(element instanceof MHFormLabel)
                     {
                         newElementContainer = label.clone();
+                    }
+                    else if(element instanceof MHFormFieldTextArea)
+                    {
+                        newElementContainer = textareaContainer.clone();
                     }
                     else
                     {

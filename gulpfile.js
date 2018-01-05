@@ -31,6 +31,7 @@ var modules_js = [
 					'src/ui-elements/mh-form-field-input-email.js',
 					'src/ui-elements/mh-form-field-input-number.js',
 					'src/ui-elements/mh-form-field-input-date.js',
+					'src/ui-elements/mh-form-field-textarea.js',
 					'src/ui-elements/mh-form-field-select.js',
 					'src/ui-elements/mh-form-field-md-select.js',
 					'src/ui-elements/mh-form-field-md-date.js',
