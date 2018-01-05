@@ -88,6 +88,9 @@ angular
         //PRIVATE
         function groupPages()
         {
+            self.scope.mhLastPage = self.scope.mhLastPage || 1;
+            self.scope.mhCurrentPage = self.scope.mhCurrentPage < 1 || self.scope.mhCurrentPage == null ? 1 : self.scope.mhCurrentPage;
+
             var pages=[];
             var pagesPerGroup = self.scope.mhPageGroupSize < 1 ? 1 : self.scope.mhPageGroupSize;
             var pagesGroupsCount = self.scope.mhLastPage > 0 ? Math.ceil(self.scope.mhLastPage / pagesPerGroup) : 1;
@@ -100,10 +103,10 @@ angular
             if(groupEnd > self.scope.mhLastPage)
             {
                 groupEnd = self.scope.mhLastPage;
-            };
-
+            }
+            
             var i;
-            for(i=groupInit; i<groupEnd; i++)
+            for(i=0; i<groupEnd; i++)
             {
                 pages.push(i+1);
             };
