@@ -41,7 +41,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                 <div class="mh-select-container">\
                                                     <label class="mh-title"></label>\
                                                     <select class="form-control mh-input">\
-                                                        <option class="mh-select-default-option"></option>\
+                                                        <option class="mh-select-empty-option"></option>\
                                                         <option class="mh-select-option">\
                                                         </option>\
                                                     </select>\
@@ -53,7 +53,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     <md-input-container style="margin-bottom:0px; width:100%">\
                                                         <label class="mh-title"></label>\
                                                         <md-select class="mh-input">\
-                                                            <md-option class="mh-select-default-option"></md-option>\
+                                                            <md-option class="mh-select-empty-option"></md-option>\
                                                             <md-option class="mh-select-option">\
                                                             </md-option>\
                                                         </md-select>\

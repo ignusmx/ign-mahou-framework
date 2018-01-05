@@ -207,15 +207,14 @@ angular
             else if(input instanceof MHFormFieldSelect)
             {
                 inputElem.attr("ng-change", "controller.formElements["+elementIndex+"].onChange(model"+getModelAsHash(input.model)+")");
-                if(input.defaultOption == null)
+                if(input.emptyOption == null)
                 {
-                    inputElem.find(".mh-select-default-option").remove();
+                    inputElem.find(".mh-select-empty-option").remove();
                 }
                 else
                 {
-                    inputElem.find(".mh-select-default-option").attr("ng-repeat","option in [controller.formElements["+elementIndex+"].defaultOption]");
-                    inputElem.find(".mh-select-default-option").attr("value","");
-                    inputElem.find(".mh-select-default-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
+                    inputElem.find(".mh-select-empty-option").attr("ng-value","null");
+                    inputElem.find(".mh-select-empty-option").html("{{controller.formElements["+elementIndex+"].emptyOption}}");
                 }
                 
                 inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");

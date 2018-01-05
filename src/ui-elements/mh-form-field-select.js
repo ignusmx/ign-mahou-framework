@@ -5,7 +5,7 @@
  * Renders a Select field on an MHForm.
  * 
  * @property {string[]|number[]|Object[]} 	options			- Array of values, can be strings, numbers or objects.
- * @property {string|number|Object} 	 	defaultOption	- a string, number or object with the default selected value.
+ * @property {string}				 	 	emptyOption		- if set, string to be shown as an option with empty value.
  * @property {string} 	 				 	value			- the property of the option to be used as value (e.g: "option.property"). Default is "option" itself.
  * @property {string} 	 				 	text			- the property of the option to be used as text (e.g: "option.property"). Default is "option" itself.
  * @augments UIElements.MHAbstractFormField
@@ -22,7 +22,7 @@ function MHFormFieldSelect(config)
 	//validate array DataTypes
 	MHValidationHelper.validateTypes(this.options, "options", [String, Number, Object]);
 
-	this.defaultOption = MHValidationHelper.safeClassAttribute(config, "defaultOption", [String, Number, Object], null, false);
+	this.emptyOption = MHValidationHelper.safeClassAttribute(config, "emptyOption", String, null, false);
 	this.value = MHValidationHelper.safeClassAttribute(config, "value", String, null, false, "option");
 	this.text = MHValidationHelper.safeClassAttribute(config, "text", String, null, false, "option");
 	this.onChange = MHValidationHelper.safeClassAttribute(config, "onChange", Function);
