@@ -80,6 +80,12 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                   </md-autocomplete>\
                                                   <div class="mh-input-error-message help-block">mensaje de error</div>\
                                                 </div>\
+                                                <div class="mh-dropfiles-container">\
+                                                    <ngf-drop ngf-select class="mh-bs-dropfile mh-input">\
+                                                        <span class="mh-title"></span>\
+                                                    </ngf-drop>\
+                                                    <div ngf-no-file-drop class="mh-input-error-message"></div>\
+                                                </div>\
                                                 <div class="mh-button-container">\
                                                     <button class="btn btn-default mh-form-button">\
                                                         <span class="mh-title"></span>\
@@ -138,6 +144,9 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                 var mdAutocompleteContainer = elementsContainer.find(".mh-md-autocomplete-container");
                 mdAutocompleteContainer.remove();
 
+                var ngfDropContainer = elementsContainer.find(".mh-dropfiles-container");
+                ngfDropContainer.remove();
+
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
 
@@ -157,6 +166,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     {
                         var rowContainer = element;
                         var newFormRow = formRow.clone();
+                        MHDecorator.decorateEltCSS(newFormRow, element.cssClasses, element.styles);
                         group.append(newFormRow);
 
                         if(rowContainer.elements != null)
@@ -172,6 +182,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         var usedCols = 0;
                         var container  = element;
                         var newFormCol = formCol.clone();
+                        MHDecorator.decorateEltCSS(newFormCol, element.cssClasses, element.styles);
 
                         if(element.flex)
                         {
@@ -202,11 +213,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                             newFormCol.css("justify-content", flexJustify);
                         }
                         
-                        if(container.minHeight != null)
-                        {
-                            newFormCol.css("min-height", container.minHeight+"px");
-                        }
-
                         var cols = container.colWidth;
                         var offset = container.offset;
                         
@@ -269,6 +275,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     {
                         newElementContainer = textareaContainer.clone();
                     }
+                    else if(element instanceof MHFormFieldDropfile)
+                    {
+                        newElementContainer = ngfDropContainer.clone();
+                    }
                     else
                     {
                         newElementContainer = inputContainer.clone();
@@ -286,6 +296,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     if(parent.fill)
                     {
                         newElementContainer.css("width", "100%");
+                        newElementContainer.css("height", "100%");
                     }
                     
                     return newElementContainer;

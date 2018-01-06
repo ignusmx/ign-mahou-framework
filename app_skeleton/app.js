@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	angular.module('app', ['ui.router', 'ngMaterial', 'ign.Mahou'])
+	angular.module('app', ['ui.router', 'ngMaterial', 'ngFileUpload', 'ign.Mahou'])
 	.config(
 		function($stateProvider, $urlRouterProvider, $locationProvider)
 		{

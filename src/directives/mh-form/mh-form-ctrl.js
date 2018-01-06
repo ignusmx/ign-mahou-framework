@@ -226,6 +226,13 @@ angular
                 inputElem.attr("placeholder", input.placeholder);
                 MHDecorator.decorateEltCSS(inputElem, null, { resize: input.resize });
             }
+            else if(input instanceof MHFormFieldDropfile)
+            {
+                inputElem.attr("ngf-drag-over-class", input.dragOverClass);
+                inputElem.attr("ngf-multiple", input.multiple);
+                inputElem.attr("ngf-allow-dir", input.allowDir);
+                inputElem.attr("ngf-pattern", input.pattern);
+            }
         }
 
         /** 

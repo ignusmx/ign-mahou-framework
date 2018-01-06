@@ -31,7 +31,6 @@ function MHFormBSCol(config)
 	}
 
 	this.colWidth = MHValidationHelper.safeClassAttribute(config, "colWidth", Number, null, false, 12);
-	this.minHeight = MHValidationHelper.safeClassAttribute(config, "minHeight", Number, null, false);
 	this.vAlign = MHValidationHelper.safeClassAttribute(config, "vAlign", String, null, false, "top");
 	this.hAlign = MHValidationHelper.safeClassAttribute(config, "hAlign", String, null, false, "left");
 	this.offset = MHValidationHelper.safeClassAttribute(config, "offset", Number, null, false, 0);

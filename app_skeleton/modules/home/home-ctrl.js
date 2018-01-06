@@ -85,11 +85,13 @@
 			$scope.formElements = [
 				new MHFormLabel({ name : "image", title:MHDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
 				new MHFormFieldMDAutocomplete({ name : 'user_name', title:"asdasd", model:"address.city", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
-				new MHFormFieldInputText({ name : 'eee', title:"asdasd", model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers" }),
+				new MHFormFieldDropfile({ name : 'eee', title:"asdasd", model:"name", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 
-				new MHFormButton({name : "accept", title : "Guardar", action : "eee", cssClasses : "btn-primary"}),
+				new MHFormButton({name : "accept", title : "Guardar", action : function(){
+					console.log($scope.user.name)
+				}, cssClasses : "btn-primary"}),
 				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"}),
 			];
 
@@ -112,7 +114,7 @@
 
 
 			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, fill:false})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2]], colWidth:12, fill:true, styles:{height:"200px"}})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	

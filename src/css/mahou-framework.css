@@ -15,3 +15,16 @@ md-autocomplete md-autocomplete-wrap {
 md-autocomplete input:not(.md-input) {
     height: inherit;
 }
+
+.mh-bs-dropfile{
+	background: #F8F8F8;
+    border: 5px dashed #DDD;
+    padding: 10px;
+    width:100%; 
+    height:100%; 
+    display:inline-block;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
