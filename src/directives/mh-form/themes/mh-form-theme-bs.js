@@ -86,6 +86,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </ngf-drop>\
                                                     <div ngf-no-file-drop class="mh-input-error-message"></div>\
                                                 </div>\
+                                                <div class="mh-files-preview-container">\
+                                                    <img class="mh-input" style="width:200px" ngf-size="{width: 200, height: 200, quality: 0.9}">\
+                                                </div>\
+                                                </div>\
                                                 <div class="mh-button-container">\
                                                     <button class="btn btn-default mh-form-button">\
                                                         <span class="mh-title"></span>\
@@ -146,6 +150,9 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
 
                 var ngfDropContainer = elementsContainer.find(".mh-dropfiles-container");
                 ngfDropContainer.remove();
+
+                var filesPreviewContainer = elementsContainer.find(".mh-files-preview-container");
+                filesPreviewContainer.remove();
 
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
@@ -278,6 +285,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     else if(element instanceof MHFormFieldDropfile)
                     {
                         newElementContainer = ngfDropContainer.clone();
+                    }
+                    else if(element instanceof MHFormFilesPreview)
+                    {
+                        newElementContainer = filesPreviewContainer.clone();
                     }
                     else
                     {

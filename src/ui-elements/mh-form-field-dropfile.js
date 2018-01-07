@@ -16,12 +16,6 @@ function MHFormFieldDropfile(config)
 	//inherit from MHAbstractFormField
 	MHAbstractFormField.call(this, config);
 
-	config.options = config.options || [];
-	//validate main DataType
-	this.options = MHValidationHelper.safeClassAttribute(config, "options", Array);
-	//validate array DataTypes
-	MHValidationHelper.validateTypes(this.options, "options", [String, Number, Object]);
-
 	this.dragOverClass = MHValidationHelper.safeClassAttribute(config, "dragOverClass", String);
 	this.multiple = MHValidationHelper.safeClassAttribute(config, "multiple", Boolean);
 	this.allowDir = MHValidationHelper.safeClassAttribute(config, "allowDir", Boolean);

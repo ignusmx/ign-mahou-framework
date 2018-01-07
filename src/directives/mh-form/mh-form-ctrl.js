@@ -73,7 +73,7 @@ angular
 
                 if(formElement instanceof MHAbstractFormField)
                 {
-                    renderInputField(formElement, elementTemplate, formName, i);
+                    renderField(formElement, elementTemplate, formName, i);
                 }
                 else if(formElement instanceof MHFormButton)
                 {
@@ -147,36 +147,36 @@ angular
 
         /** 
          * @memberof Controllers.MHFormCtrl
-         * @param input {MHAbstractFormField} the input to be rendered
-         * @param elementTemplate {Object} a jQuery html element to be used as template for rendering the input
+         * @param field {MHAbstractFormField} the field to be rendered
+         * @param elementTemplate {Object} a jQuery html element to be used as template for rendering the field
          * @param formName {string} the name of the form, used for adding field validations
-         * @param elementIndex {number} the input position inside the elements array
+         * @param elementIndex {number} the field position inside the elements array
          * @description renders an {@link UIElements.MHAbstractFormField MHAbstractFormField}
          * @access private
          */
-        function renderInputField(input, elementTemplate, formName, elementIndex)
+        function renderField(field, elementTemplate, formName, elementIndex)
         {
             var inputElem = elementTemplate.find(".mh-input");
-            MHDecorator.decorateEltCSS(inputElem, input.cssClasses, input.styles);
+            MHDecorator.decorateEltCSS(inputElem, field.cssClasses, field.styles);
 
-            MHValidationHelper.validateRequiredTags(input, inputElem);
+            MHValidationHelper.validateRequiredTags(field, inputElem);
 
-            if(!(input instanceof MHFormFieldMDAutocomplete))
+            if(!(field instanceof MHFormFieldMDAutocomplete))
             {            
-                inputElem.attr("ng-model", "model"+getModelAsHash(input.model));
+                inputElem.attr("ng-model", "model"+getModelAsHash(field.model));
             }
 
             var inputErrorMessage = elementTemplate.find(".mh-input-error-message");
-            if(input.required)
+            if(field.required)
             {
                 inputErrorMessage.html("{{controller.formElements["+elementIndex+"].invalidMessage}}")
-                inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+") && controller.formElements["+elementIndex+"].invalidMessage != null");
+                inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+field.name+", "+formName+") && controller.formElements["+elementIndex+"].invalidMessage != null");
                 inputElem.attr("required", true);
 
                 if(self.scope.mhClassInvalid != null)
                 {
                     elementTemplate.attr("ng-class", 
-                    "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsInvalid("+formName+"."+input.name+", "+formName+")}");
+                    "{'"+self.scope.mhClassInvalid+"' : controller.fieldIsInvalid("+formName+"."+field.name+", "+formName+")}");
                 }
             }
             else
@@ -184,30 +184,30 @@ angular
                 inputErrorMessage.remove();
             }
             
-            inputElem.attr("name", input.name);
+            inputElem.attr("name", field.name);
 
-            if(input instanceof MHFormFieldInput
-                && input.type != null && input.type.length > 0)
+            if(field instanceof MHFormFieldInput
+                && field.type != null && field.type.length > 0)
             {
-                inputElem.attr("type", input.type);
-                inputElem.attr("placeholder", input.placeholder);
+                inputElem.attr("type", field.type);
+                inputElem.attr("placeholder", field.placeholder);
             }
-            else if(input instanceof MHFormFieldMDAutocomplete)
+            else if(field instanceof MHFormFieldMDAutocomplete)
             {
-                inputElem.attr("md-selected-item", "model"+getModelAsHash(input.model));
-                inputElem.attr("md-search-text", input.name+"SearchText");
-                inputElem.attr("md-items", "item in controller.formElements["+elementIndex+"].querySearch("+input.name+"SearchText)");
-                inputElem.attr("md-item-text", input.itemText);
-                inputElem.attr("md-min-length", input.minLength);
-                inputElem.attr("placeholder", input.placeholder);
-                inputElem.attr("md-require-match", input.required);
-                inputElem.attr("md-input-name", input.name);
-                inputElem.find("md-item-template > span").html("{{"+input.itemText+"}}");
+                inputElem.attr("md-selected-item", "model"+getModelAsHash(field.model));
+                inputElem.attr("md-search-text", field.name+"SearchText");
+                inputElem.attr("md-items", "item in controller.formElements["+elementIndex+"].querySearch("+field.name+"SearchText)");
+                inputElem.attr("md-item-text", field.itemText);
+                inputElem.attr("md-min-length", field.minLength);
+                inputElem.attr("placeholder", field.placeholder);
+                inputElem.attr("md-require-match", field.required);
+                inputElem.attr("md-input-name", field.name);
+                inputElem.find("md-item-template > span").html("{{"+field.itemText+"}}");
             }
-            else if(input instanceof MHFormFieldSelect)
+            else if(field instanceof MHFormFieldSelect)
             {
-                inputElem.attr("ng-change", "controller.formElements["+elementIndex+"].onChange(model"+getModelAsHash(input.model)+")");
-                if(input.emptyOption == null)
+                inputElem.attr("ng-change", "controller.formElements["+elementIndex+"].onChange(model"+getModelAsHash(field.model)+")");
+                if(field.emptyOption == null)
                 {
                     inputElem.find(".mh-select-empty-option").remove();
                 }
@@ -221,17 +221,22 @@ angular
                 inputElem.find(".mh-select-option").attr("ng-value","$eval(controller.formElements["+elementIndex+"].value)");
                 inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
             }
-            else if(input instanceof MHFormFieldTextArea)
+            else if(field instanceof MHFormFieldTextArea)
             {
-                inputElem.attr("placeholder", input.placeholder);
-                MHDecorator.decorateEltCSS(inputElem, null, { resize: input.resize });
+                inputElem.attr("placeholder", field.placeholder);
+                MHDecorator.decorateEltCSS(inputElem, null, { resize: field.resize });
             }
-            else if(input instanceof MHFormFieldDropfile)
+            else if(field instanceof MHFormFieldDropfile)
             {
-                inputElem.attr("ngf-drag-over-class", input.dragOverClass);
-                inputElem.attr("ngf-multiple", input.multiple);
-                inputElem.attr("ngf-allow-dir", input.allowDir);
-                inputElem.attr("ngf-pattern", input.pattern);
+                inputElem.attr("ngf-drag-over-class", field.dragOverClass);
+                inputElem.attr("ngf-multiple", field.multiple);
+                inputElem.attr("ngf-allow-dir", field.allowDir);
+                inputElem.attr("ngf-pattern", field.pattern);
+            }
+            else if(field instanceof MHFormFilesPreview)
+            {
+                inputElem.attr("ng-repeat", "file in model"+getModelAsHash(field.model));
+                inputElem.attr("ngf-thumbnail", "file");
             }
         }
 
