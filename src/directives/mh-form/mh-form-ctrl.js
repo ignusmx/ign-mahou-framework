@@ -161,7 +161,7 @@ angular
 
             MHValidationHelper.validateRequiredTags(field, inputElem);
 
-            if(!(field instanceof MHFormFieldMDAutocomplete))
+            if(!(field instanceof MHFormFieldMDAutocomplete) && !(field instanceof MHFormFilesPreview))
             {            
                 inputElem.attr("ng-model", "model"+getModelAsHash(field.model));
             }
@@ -228,6 +228,10 @@ angular
             }
             else if(field instanceof MHFormFieldDropfile)
             {
+                if(field.dragOverClass == null)
+                {
+                    field.dragOverClass = "'mh-bs-dropfile-dragover'";
+                }
                 inputElem.attr("ngf-drag-over-class", field.dragOverClass);
                 inputElem.attr("ngf-multiple", field.multiple);
                 inputElem.attr("ngf-allow-dir", field.allowDir);
@@ -236,7 +240,48 @@ angular
             else if(field instanceof MHFormFilesPreview)
             {
                 inputElem.attr("ng-repeat", "file in model"+getModelAsHash(field.model));
-                inputElem.attr("ngf-thumbnail", "file");
+
+                var imgPreview = inputElem.find(".mh-image-preview");
+                var title = inputElem.find(".mh-title");
+                title.html("{{file.name}}");
+
+                if(field.previewType != MHFormFilesPreviewType.TITLE)
+                {
+                    imgPreview.attr("ngf-thumbnail", "file");
+                    imgPreview.attr("ngf-size", JSON.stringify(field.thumbnailSize));
+                    title.addClass("text-center");
+
+                    if(field.previewType == MHFormFilesPreviewType.THUMBNAIL)
+                    {
+                        title.remove();
+                    }
+                }
+                else
+                {
+                    title.addClass("text-left");
+                    imgPreview.remove();
+                }
+
+                inputElem.attr("ng-style", 
+                    "{\
+                        'width' : \
+                        controller.formElements["+elementIndex+"].previewType != '"+MHFormFilesPreviewType.TITLE+"' ? \
+                        controller.formElements["+elementIndex+"].thumbnailSize.width : 'auto', \
+                        'height' : 'auto', \
+                    }");
+
+
+
+                if(field.direction == MHFormFilesPreviewDirection.VERTICAL)
+                {
+                    elementTemplate.css("flex-direction", "column");
+                }
+                else
+                {
+                    elementTemplate.css("flex-direction", "row");
+                }
+
+                
             }
         }
 

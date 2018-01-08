@@ -87,7 +87,10 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     <div ngf-no-file-drop class="mh-input-error-message"></div>\
                                                 </div>\
                                                 <div class="mh-files-preview-container">\
-                                                    <img class="mh-input" style="width:200px" ngf-size="{width: 200, height: 200, quality: 0.9}">\
+                                                    <div class="mh-input" style="padding:5px;">\
+                                                        <img class="mh-image-preview" style="width:100%; height:100%">\
+                                                        <div class="mh-title" style="word-wrap: break-word"></div>\
+                                                    </div>\
                                                 </div>\
                                                 </div>\
                                                 <div class="mh-button-container">\

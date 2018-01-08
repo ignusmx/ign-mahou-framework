@@ -82,7 +82,7 @@
 				$mdSidenav("left").toggle();
 			}
 
-			$scope.imagesPreview = new MHFormFilesPreview({name:"imagesPreview", title:"Imágenes", model:"images"});
+			$scope.imagesPreview = new MHFormFilesPreview({name:"imagesPreview", title:"Imágenes", model:"images", direction:MHFormFilesPreviewDirection.VERTICAL, previewType:'detail'});
 
 			$scope.formElements = [
 				new MHFormLabel({ name : "image", title:MHDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
@@ -116,7 +116,7 @@
 
 
 			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, fill:false})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.imagesPreview], colWidth:12, fill:true, styles:{height:"200px"}})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.imagesPreview], colWidth:12, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	

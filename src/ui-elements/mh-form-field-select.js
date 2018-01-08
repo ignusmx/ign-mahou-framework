@@ -8,6 +8,7 @@
  * @property {string}				 	 	emptyOption		- if set, string to be shown as an option with empty value.
  * @property {string} 	 				 	value			- the property of the option to be used as value (e.g: "option.property"). Default is "option" itself.
  * @property {string} 	 				 	text			- the property of the option to be used as text (e.g: "option.property"). Default is "option" itself.
+ * @property {Function}				 	 	onChange		- function to be called when select option changes.
  * @augments UIElements.MHAbstractFormField
  *
  */
