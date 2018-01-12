@@ -26,27 +26,35 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                                                 <thead>\
                                                     <tr class="mh-datagrid-headers-container">\
                                                         <th class="mh-datagrid-header">\
-                                                            <span class="mh-title"></span>\
-                                                            <input type="checkbox" class="mh-input">\
                                                         </th>\
                                                     </tr>\
                                                 </thead>\
                                                 <tbody>\
                                                     <tr class="mh-datagrid-row">\
                                                         <td class="mh-datagrid-cell">\
-                                                            <div class="mh-cell-checkbox-container">\
-                                                                <input type="checkbox" class="mh-input">\
-                                                            </div>\
-                                                            <div class="mh-cell-content"></div>\
-                                                            <div class="mh-cell-buttons-container">\
-                                                                <a class="mh-button">\
-                                                                    <span class="mh-title"></span>\
-                                                                </a>\
-                                                            </div>\
                                                         </td>\
                                                     </tr>\
                                                 </tbody>\
                                             </table>\
+                                            <div class="mh-header-content-templates">\
+                                                <div class="mh-title-header-container">\
+                                                    <span class="mh-title"></span>\
+                                                </div>\
+                                                <div class="mh-checkbox-header-container">\
+                                                    <span class="mh-title"></span> <input type="checkbox" class="mh-input">\
+                                                </div>\
+                                            </div>\
+                                            <div class="mh-cell-content-templates">\
+                                                <div class="mh-cell-checkbox-container">\
+                                                    <input type="checkbox" class="mh-input">\
+                                                </div>\
+                                                <div class="mh-cell-content"></div>\
+                                                <div class="mh-cell-buttons-container">\
+                                                    <a class="mh-button">\
+                                                        <span class="mh-title"></span>\
+                                                    </a>\
+                                                </div>\
+                                            </div>\
                                         </div>';
             return "";
         },
@@ -71,6 +79,14 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
 
+                var headersContainer = renderedTemplate.find(".mh-datagrid-headers-container");
+                var headerTemplate = headersContainer.find(".mh-datagrid-header");
+                headerTemplate.remove();
+
+                var row = renderedTemplate.find(".mh-datagrid-row");
+                var cellTemplate = row.find(".mh-datagrid-cell");
+                cellTemplate.remove();
+
                 var responsiveTableContainer = renderedTemplate.find(".mh-responsive-table-container");
                 if(isResponsiveTable != "false")
                 {
@@ -90,6 +106,14 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                             angular.extend(col.content[j].styles, { cursor : "pointer" });
                         }
                     }
+
+                    var colHeaderTemplate = headerTemplate.clone();
+                    colHeaderTemplate.attr("data-mh-name", col.name);
+                    headersContainer.append(colHeaderTemplate);
+
+                    var colCellTemplate = cellTemplate.clone();
+                    colCellTemplate.attr("data-mh-name", col.name);
+                    row.append(colCellTemplate);
                 }
 
                 return renderedTemplate.html();

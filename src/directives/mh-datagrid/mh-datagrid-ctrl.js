@@ -133,23 +133,27 @@ angular
         {
             var scope = self.scope;
 
-            //retrieve elements to be cloned
-            var headersContainer = templateElem.find(".mh-datagrid-headers-container");
-            var header = headersContainer.find(".mh-datagrid-header");
-            header.remove();
-
             var row = templateElem.find(".mh-datagrid-row");
-            var cell = row.find(".mh-datagrid-cell");
-            var cellParent = cell.parent();
-            cell.remove();
 
-            var cellCheckboxContainer = cell.find(".mh-cell-checkbox-container");
+            var headerContentTemplates = templateElem.find(".mh-header-content-templates");
+            headerContentTemplates.remove();
+
+            var titleHeaderContainer = headerContentTemplates.find(".mh-title-header-container");
+            titleHeaderContainer.remove();
+
+            var checkboxHeaderContainer = headerContentTemplates.find(".mh-checkbox-header-container");
+            checkboxHeaderContainer.remove();
+
+            var cellContentTemplates = templateElem.find(".mh-cell-content-templates");
+            cellContentTemplates.remove();
+
+            var cellCheckboxContainer = cellContentTemplates.find(".mh-cell-checkbox-container");
             cellCheckboxContainer.remove();
 
-            var cellContent = cell.find(".mh-cell-content");
+            var cellContent = cellContentTemplates.find(".mh-cell-content");
             cellContent.remove();
 
-            var cellButtonsContainer = cell.find(".mh-cell-buttons-container");
+            var cellButtonsContainer = cellContentTemplates.find(".mh-cell-buttons-container");
             cellButtonsContainer.remove();
 
             var cellButton = cellButtonsContainer.find(".mh-button");
@@ -162,28 +166,29 @@ angular
                 var col = scope.mhCols[i];
                 MHValidationHelper.validateType(col, col.name, MHDatagridCol);
 
-                var colHeader = header.clone();
-
-                var colHeaderTitle = colHeader.find(".mh-title");
-                colHeaderTitle.attr("mh-compile","mhCols["+i+"].title");
-                var selectAllCheckbox = colHeader.find(".mh-input");
+                var colHeader = templateElem.find(".mh-datagrid-header[data-mh-name="+col.name+"]");
+                var colHeaderContainer = null;
 
                 if(typeof(col.content) == "string" && col.content=="checkbox")
                 {
-                    
+                    colHeaderContainer = checkboxHeaderContainer.clone();
+                    var selectAllCheckbox = colHeaderContainer.find(".mh-input");
                     selectAllCheckbox.attr("ng-change","controller.toggleSelectAll()");
                     selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
                     selectAllCheckbox.attr("ng-show", "controller.internalCollection.length > 0");
                 }
                 else
                 {
-                    selectAllCheckbox.remove();
+                    colHeaderContainer = titleHeaderContainer.clone();                    
                 }
-                
-                colHeader.attr("ng-show","mhCols["+i+"].visible !== false");
-                headersContainer.append(colHeader);
 
-                var colCell = cell.clone();
+                var colHeaderTitle = colHeaderContainer.find(".mh-title");
+                colHeaderTitle.attr("mh-compile","mhCols["+i+"].title");
+
+                colHeader.append(colHeaderContainer);
+                colHeader.attr("ng-show","mhCols["+i+"].visible !== false");
+
+                var colCell = row.find(".mh-datagrid-cell[data-mh-name="+col.name+"]");
                 if(col.content instanceof Array)
                 {
                     var colCellButtonsContainer = cellButtonsContainer.clone();
@@ -219,7 +224,6 @@ angular
                 }
 
                 colCell.attr("ng-show","mhCols["+i+"].visible !== false");
-                cellParent.append(colCell);
             }
 
             var row = templateElem.find(".mh-datagrid-row");
