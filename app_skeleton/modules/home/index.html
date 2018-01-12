@@ -1,18 +1,19 @@
-<div style="margin-top:60px"></div>
+<div style="margin-top:100px"></div>
 <mh-navbar mh-navbar-theme-bs mh-navbar-title="title" mh-navbar-elements="[menuButtons[0]]" mh-navbar-elements-right="menuRightButtons">
 </mh-navbar>
 </style>
 <section>
 <div class="container">
-	<mh-bs-panel mh-header-title="'Ganado'">
-		<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="user" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
-		</mh-form>
-	</mh-bs-panel>
-	<mh-bs-panel mh-header-title="'Ganado'">
+	<mh-bs-panel mh-header-title="'Inmuebles'">
+		<mh-datagrid mh-datagrid-theme-mosaic
+			mh-cols = "datagridCols"
+			mh-row-buttons = "rowButtons"
+			mh-collection = "collection"
+			mh-rows-selected-change="gridRowsSelected(rows)">
+		</mh-datagrid>
 		<mh-datagrid mh-datagrid-theme-bs
 			mh-cols = "datagridCols"
 			mh-row-buttons = "rowButtons"
-			mh-enable-row-buttons = "true"
 			mh-collection = "collection"
 			mh-rows-selected-change="gridRowsSelected(rows)">
 		</mh-datagrid>
@@ -25,5 +26,9 @@
 			>
 			</mh-paginator>
 		</div>
+	</mh-bs-panel>
+	<mh-bs-panel mh-header-title="'Información de inmueble'">
+		<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="selectedObject" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
+		</mh-form>
 	</mh-bs-panel>
 </div>

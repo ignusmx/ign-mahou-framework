@@ -140,12 +140,16 @@ angular
 
             var row = templateElem.find(".mh-datagrid-row");
             var cell = row.find(".mh-datagrid-cell");
+            var cellParent = cell.parent();
             cell.remove();
+
+            var cellCheckboxContainer = cell.find(".mh-cell-checkbox-container");
+            cellCheckboxContainer.remove();
 
             var cellContent = cell.find(".mh-cell-content");
             cellContent.remove();
 
-            var cellButtonsContainer = cell.find(".mh-cell-buttons-container")
+            var cellButtonsContainer = cell.find(".mh-cell-buttons-container");
             cellButtonsContainer.remove();
 
             var cellButton = cellButtonsContainer.find(".mh-button");
@@ -159,7 +163,23 @@ angular
                 MHValidationHelper.validateType(col, col.name, MHDatagridCol);
 
                 var colHeader = header.clone();
-                colHeader.find(".mh-title").attr("mh-compile","mhCols["+i+"].title");
+
+                var colHeaderTitle = colHeader.find(".mh-title");
+                colHeaderTitle.attr("mh-compile","mhCols["+i+"].title");
+                var selectAllCheckbox = colHeader.find(".mh-input");
+
+                if(typeof(col.content) == "string" && col.content=="checkbox")
+                {
+                    
+                    selectAllCheckbox.attr("ng-change","controller.toggleSelectAll()");
+                    selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
+                    selectAllCheckbox.attr("ng-show", "controller.internalCollection.length > 0");
+                }
+                else
+                {
+                    selectAllCheckbox.remove();
+                }
+                
                 colHeader.attr("ng-show","mhCols["+i+"].visible !== false");
                 headersContainer.append(colHeader);
 
@@ -182,6 +202,15 @@ angular
 
                     colCell.append(colCellButtonsContainer);
                 }
+                else if(typeof(col.content) == "string" && col.content=="checkbox")
+                {
+                    var colCellCheckboxContainer = cellCheckboxContainer.clone();
+                    var rowCheckbox = colCellCheckboxContainer.find(".mh-input");
+                    rowCheckbox.attr("ng-change","controller.toggleRowSelect(row)");
+                    rowCheckbox.attr("ng-model", "row.selected");
+
+                    colCell.append(colCellCheckboxContainer);
+                }
                 else
                 {
                     var colCellContent = cellContent.clone();
@@ -190,26 +219,11 @@ angular
                 }
 
                 colCell.attr("ng-show","mhCols["+i+"].visible !== false");
-                row.append(colCell);
+                cellParent.append(colCell);
             }
 
-            var checkboxHeader = templateElem.find(".mh-datagrid-checkbox-header");
-            checkboxHeader.attr("ng-if","mhEnableRowSelect !== false");
-
-            var selectAllCheckbox = templateElem.find(".mh-input");
-            selectAllCheckbox.attr("ng-change","controller.toggleSelectAll()");
-            selectAllCheckbox.attr("ng-model","controller.allRowsSelected");
-            selectAllCheckbox.attr("ng-show", "controller.internalCollection.length > 0");
-
             var row = templateElem.find(".mh-datagrid-row");
-            row.attr("ng-repeat", "row in controller.internalCollection");
-
-            var checkboxCell = templateElem.find(".mh-datagrid-checkbox-cell");
-            checkboxCell.attr("ng-if","mhEnableRowSelect !== false");
-
-            var rowCheckbox = templateElem.find(".mh-datagrid-row-checkbox");
-            rowCheckbox.attr("ng-change","controller.toggleRowSelect(row)");
-            rowCheckbox.attr("ng-model", "row.selected");            
+            row.attr("ng-repeat", "row in controller.internalCollection");          
 
             directiveElem.replaceWith($compile(templateElem)(scope));
         }

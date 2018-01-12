@@ -8,11 +8,11 @@
 		{
 			var self = this;
 			
-			$scope.editClick = function(model, form)
+			$scope.editClick = function(model)
 			{
-				alert("edit clicke!");
-				console.log("model to edit is:", form);
-				form.$setPristine();
+				$scope.selectedObject = model;
+				console.log($scope.selectedObject);
+
 			}
 
 			$scope.deleteClick = function(model)
@@ -23,16 +23,20 @@
 
 			$scope.action = function(){alert("title")}
 
-			var homeDropDowns = [ 
-									new MHButton({name:"calendario", title:"Calendario", action:"eee"}),
-									new MHButton({name:"ganado", title:"Ganado", action:function(){ console.log("btns:",$scope.menuButtons)}}),
-									new MHButton({name:"about_usss", title:"Bitácoras", function(){ alert("nosotres seleccionado")}}),
-									new MHButton({name:"about_ussss", title:"Nuevo sub menu", function(){ alert("nosotres seleccionado")}})
+			var leftDropDowns = [ 
+									new MHButton({name:"housing", title:"Inmuebles"}),
+									new MHButton({name:"contacts", title:"Contactos", action:function(){ console.log("btns:",$scope.menuButtons)}}),
+									new MHButton({name:"about_usss", title:"Actividades", function(){ alert("nosotres seleccionado")}})
+								];
+
+			var rightDropDowns = [ 
+									new MHButton({name:"users", title:"Usuarios", action:"eee"}),
+									new MHButton({name:"roles", title:"Roles y permisos", action:function(){ console.log("btns:",$scope.menuButtons)}}),
 								];
 
 
-			var homeButton = new MHDropdownButton({name:"home", title:"Ganado", action:function(){ console.log("home seleccionado")}, dropdownButtons:homeDropDowns});
-			var rightButton = new MHDropdownButton({name:"right", title:"Derecha", action:function(){ console.log("home seleccionado")}, dropdownButtons:homeDropDowns});
+			var homeButton = new MHDropdownButton({name:"left", title:"Catálogo", action:function(){ console.log("home seleccionado")}, dropdownButtons:leftDropDowns});
+			var rightButton = new MHDropdownButton({name:"right", title:"Configuración", action:function(){ console.log("home seleccionado")}, dropdownButtons:rightDropDowns});
 
 			$scope.menuButtons = [
 									homeButton
@@ -43,22 +47,30 @@
 									];
 
 			var collection = [
-								{id:"33", name : "Vaca 1", images: ["https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2"], age:new Date(), email : "reg34554095", address:{city:"Macho", ctry:"pais", fierro:"url"}},
-								{id:"12", name : "Vaca 2", images: ["https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2"], email : "asd23452345234", address:{city:"Hembra", ctry:"mx"}}
+								{id:"33", name : "Penthouse cerca de andares", images: ["https://twistedsifter.files.wordpress.com/2010/06/st-regis-hotel-penthouse-san-francisco.jpg"], age:new Date(), email : "reg34554095", address:{city:"Guadalajara", state:"Jalisco", fierro:"url"}, price:5900000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000},
+								{id:"12", name : "Casa en solares", images: ["http://casasenventaenguadalajara.com/images/casa-valeira-habitat-paseo-solares-zapopan.jpg"], email : "asd23452345234", address:{city:"Zapopan", state:"Jalisco"}, price:2500000}
 							];
+
 			$scope.status = "no se pudo";
 
-			$scope.rowButtons = [new MHButton({ name: "edit", title:"a", action : "eee", cssClasses:"btn btn-danger" }),
-					new MHButton({ name: "delete", title:"b", action : $scope.deleteClick })];
+			$scope.rowButtons = [new MHButton({ name: "delete", title:MHDecorator.decorateIcon("", "glyphicon glyphicon-pencil", "i"), action : $scope.editClick, cssClasses:"btn btn-primary", styles:{"margin-right":"10px"} }),
+								 new MHButton({ name: "edit", title:MHDecorator.decorateIcon("", "glyphicon glyphicon-trash", "i"), action : "eee", cssClasses:"btn btn-danger" })
+								];
 
 			$scope.datagridCols = 
 				[
-				new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
-					new MHDatagridCol({ name:"id", title : '<span style="color:#0FFF0F">'+MHDecorator.decorateIcon("id", "glyphicon glyphicon-plus", "i")+"</span>", content : '<span style="color:#0FFF0F">'+MHDecorator.decorateEval('row.model.id')+"<span>"}),
+					new MHDatagridCol({ name:"id", title : "id", content : MHDecorator.decorateEval('row.model.id')}),
 					new MHDatagridCol({ name:"name", title : "nombre", content :  MHDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateResponsiveImage(MHDecorator.decorateEval('row.model.images[0]'))}),
-					new MHDatagridCol({ name:"email", title : "no. registro", content : MHDecorator.decorateEval('row.model.email') }),
-					new MHDatagridCol({ name:"address", title : "dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.ctry") }),
+					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateCSS(MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),{"ngf-thumbnail" : "row.model.images[0]"}), null, {maxWidth:"200px"})}),
+					new MHDatagridCol({ name:"price", title : "Precio", content : MHDecorator.decorateEval('row.model.price | currency') }),
+					new MHDatagridCol({ name:"address", title : "Dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.state") }),
+					new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
+					new MHDatagridCol({ name:"checkbox", content : "checkbox"}),
 					
 				]
 				
@@ -68,26 +80,29 @@
 			$scope.enableRowSelect = true;
 
 			//FORM CONFIG:
-			$scope.user = collection[0];
+			$scope.selectedObject = collection[0];
 
 			$scope.pageSelected = function(page)
 			{
 				console.log("page:",page);
 			}
 
-			$scope.title = "{{$parent.user.name}}";
+			$scope.title = "Inmobiliaria App";
 
 			$scope.toggleLeft = function()
 			{
 				$mdSidenav("left").toggle();
 			}
 
-			$scope.imagesPreview = new MHFormFilesPreview({name:"imagesPreview", title:"Imágenes", model:"images", direction:MHFormFilesPreviewDirection.VERTICAL, previewType:'detail'});
+			$scope.imagesPreview = new MHFormFilesPreview({name:"imagesPreview", title:"Imágenes", model:"images", direction:MHFormFilesPreviewDirection.HORIZONTAL, previewType:'detail'});
 
+			console.log(MHDecorator.decorateAttributes("ngf-thumbnail",MHDecorator.decorateResponsiveImage("{{model.images[0]}}")))
 			$scope.formElements = [
-				new MHFormLabel({ name : "image", title:MHDecorator.decorateResponsiveImage("https://scontent.fgdl4-1.fna.fbcdn.net/v/t1.0-9/21730881_1308579019264089_2141273733422467777_n.jpg?oh=00acfee51ce92a1f866319ace44dc362&oe=5ACE89F2")}),
-				new MHFormFieldMDAutocomplete({ name : 'user_name', title:"asdasd", model:"address.city", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
-				new MHFormFieldDropfile({ name : 'eee', title:"asdasd", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true }),
+				new MHFormLabel({ name : "image", title:MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),{"ngf-thumbnail" : "model.images[0]"})}),
+				new MHFormFieldInputText({ name : 'name', title:"Nombre de la propiedad", model:"name", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
+				new MHFormFieldInputNumber({name:"price", title:"Precio", model:"price", required:true, invalidMessage:"error, debe especificar un precio"}),
+				new MHFormFieldMDSelect({name:"city", title:"Ciudad", model:"address.city", options:["Guadalajara", "Zapopan"]}),
+				new MHFormFieldDropfile({ name : 'photos', title:"Agregar fotos", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 
@@ -115,17 +130,18 @@
 
 
 
-			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[1]], colWidth:12, fill:false})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.imagesPreview], colWidth:12, fill:true})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]})];
+			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[3]], colWidth:12, flex:true, fill:true, vAlign:"bottom"})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[4]], colWidth:12, fill:true})]}),
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.imagesPreview], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	
 									new MHFormBSRow({elements : [
-										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:2, vAlign:"middle", minHeight:70}),
-										new MHFormBSCol({elements:profileRows, colWidth:4, vAlign:"middle", minHeight:70})
+										new MHFormBSCol({elements:[$scope.formElements[0]], colWidth:4, vAlign:"middle", minHeight:70}),
+										new MHFormBSCol({elements:profileRows, colWidth:8, vAlign:"middle", minHeight:70})
 
 										]}),
-									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[5], $scope.formElements[6]], colWidth:12, flex:true, hAlign:"center"})]})
+									new MHFormBSRow({name:"testRow",elements: [new MHFormBSCol({ elements: [$scope.formElements[7], $scope.formElements[8]], colWidth:12, flex:true, hAlign:"center"})]})
 								];
 
 			$scope.gridRowsSelected = function(rows)
