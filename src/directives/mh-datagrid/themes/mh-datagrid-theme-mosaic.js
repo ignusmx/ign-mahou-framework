@@ -103,7 +103,7 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
                         }
                     }
 
-                    if(typeof(col.content) == "string" && col.content=="checkbox")
+                    if(col instanceof MHDatagridCheckboxCol)
                     {
                         var colHeaderTemplate = headerTemplate.clone();
                         colHeaderTemplate.attr("data-mh-name", col.name);

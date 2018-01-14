@@ -169,7 +169,7 @@ angular
                 var colHeader = templateElem.find(".mh-datagrid-header[data-mh-name="+col.name+"]");
                 var colHeaderContainer = null;
 
-                if(typeof(col.content) == "string" && col.content=="checkbox")
+                if(col instanceof MHDatagridCheckboxCol)
                 {
                     colHeaderContainer = checkboxHeaderContainer.clone();
                     var selectAllCheckbox = colHeaderContainer.find(".mh-input");
@@ -207,7 +207,7 @@ angular
 
                     colCell.append(colCellButtonsContainer);
                 }
-                else if(typeof(col.content) == "string" && col.content=="checkbox")
+                else if(col instanceof MHDatagridCheckboxCol)
                 {
                     var colCellCheckboxContainer = cellCheckboxContainer.clone();
                     var rowCheckbox = colCellCheckboxContainer.find(".mh-input");

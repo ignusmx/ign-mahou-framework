@@ -287,6 +287,11 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     }
                     else if(element instanceof MHFormFieldDropfile)
                     {
+                        if(element.dragOverClass == null)
+                        {
+                            element.dragOverClass = "'mh-bs-dropfile-dragover'";
+                        }
+                        
                         newElementContainer = ngfDropContainer.clone();
                     }
                     else if(element instanceof MHFormFilesPreview)

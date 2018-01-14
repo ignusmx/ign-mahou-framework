@@ -228,10 +228,6 @@ angular
             }
             else if(field instanceof MHFormFieldDropfile)
             {
-                if(field.dragOverClass == null)
-                {
-                    field.dragOverClass = "'mh-bs-dropfile-dragover'";
-                }
                 inputElem.attr("ngf-drag-over-class", field.dragOverClass);
                 inputElem.attr("ngf-multiple", field.multiple);
                 inputElem.attr("ngf-allow-dir", field.allowDir);
