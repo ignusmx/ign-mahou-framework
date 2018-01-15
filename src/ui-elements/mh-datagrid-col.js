@@ -18,7 +18,7 @@ function MHDatagridCol(config)
 
 	if(this.content instanceof Array)
 	{
-		MHValidationHelper.validateTypes(this.content, "elements", MHButton);
+		MHValidationHelper.validateTypes(this.content, "elements", [MHButton, MHFilePreview]);
 	}
 }
 

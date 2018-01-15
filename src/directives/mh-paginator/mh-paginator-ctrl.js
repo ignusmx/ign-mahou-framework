@@ -108,7 +108,7 @@ angular
             }
             
             var i;
-            for(i=0; i<groupEnd; i++)
+            for(i=groupInit; i<groupEnd; i++)
             {
                 pages.push(i+1);
             };

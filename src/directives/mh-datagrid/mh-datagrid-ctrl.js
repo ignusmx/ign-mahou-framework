@@ -153,11 +153,14 @@ angular
             var cellContent = cellContentTemplates.find(".mh-cell-content");
             cellContent.remove();
 
-            var cellButtonsContainer = cellContentTemplates.find(".mh-cell-buttons-container");
-            cellButtonsContainer.remove();
+            var cellElementsContainer = cellContentTemplates.find(".mh-cell-elements-container");
+            cellElementsContainer.remove();
 
-            var cellButton = cellButtonsContainer.find(".mh-button");
+            var cellButton = cellElementsContainer.find(".mh-button");
             cellButton.remove();
+
+            var imageFilePreview = cellElementsContainer.find(".mh-image-file-preview");
+            imageFilePreview.remove();
 
 
             //validate colTypes:
@@ -191,21 +194,39 @@ angular
                 var colCell = row.find(".mh-datagrid-cell[data-mh-name="+col.name+"]");
                 if(col.content instanceof Array)
                 {
-                    var colCellButtonsContainer = cellButtonsContainer.clone();
+                    var colCellElementsContainer = cellElementsContainer.clone();
 
                     for(var j = 0; j < col.content.length; j++)
                     {
-                        var button = col.content[j];
-                        MHValidationHelper.validateType(button, button.name, MHButton);
-                        var colCellButton = cellButton.clone();
-                        MHDecorator.decorateEltCSS(colCellButton, button.cssClasses, button.styles);
-                        colCellButton.attr("data-mh-name", button.name);
-                        colCellButton.attr("ng-click", "controller.executeStateOrAction(mhCols["+i+"].content["+j+"].action, row.model)");
-                        colCellButton.find(".mh-title").attr("mh-compile", "mhCols["+i+"].content["+j+"].title");
-                        colCellButtonsContainer.append(colCellButton);
+                        var contentElement = col.content[j];
+                        MHValidationHelper.validateType(contentElement, contentElement.name, [MHButton, MHFilePreview]);
+
+                        var newElement = null;
+                        if(contentElement instanceof MHButton)
+                        {
+                            var button = contentElement;
+                            var colCellButton = cellButton.clone();
+                            colCellButton.attr("data-mh-name", button.name);
+                            colCellButton.attr("ng-click", "controller.executeStateOrAction(mhCols["+i+"].content["+j+"].action, row.model)");
+                            colCellButton.find(".mh-title").attr("mh-compile", "mhCols["+i+"].content["+j+"].title");
+                            newElement = colCellButton;
+                        }
+                        else if(contentElement instanceof MHFilePreview)
+                        {
+                            var filePreview = contentElement;
+                            var colFilePreview = imageFilePreview.clone();
+                            colFilePreview.attr("ngf-thumbnail", filePreview.file);
+                            colFilePreview.css("width", filePreview.thumbnailSize.width+"px");
+                            colFilePreview.css("height", filePreview.thumbnailSize.height+"px");
+                            colFilePreview.attr("ngf-size", JSON.stringify(filePreview.thumbnailSize));
+                            newElement = colFilePreview;
+                        }
+
+                        MHDecorator.decorateEltCSS(newElement, contentElement.cssClasses, contentElement.styles);
+                        colCellElementsContainer.append(newElement);
                     }
 
-                    colCell.append(colCellButtonsContainer);
+                    colCell.append(colCellElementsContainer);
                 }
                 else if(col instanceof MHDatagridCheckboxCol)
                 {

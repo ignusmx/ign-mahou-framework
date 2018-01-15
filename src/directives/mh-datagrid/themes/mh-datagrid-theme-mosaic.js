@@ -30,8 +30,8 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
                                                     </div>\
                                                 </div>\
                                             </div>\
-                                            <div class="row">\
-                                                <div class="col-md-4 mh-datagrid-row">\
+                                            <div class="mh-rows-container">\
+                                                <div class="mh-datagrid-row">\
                                                     <div style="padding:10px">\
                                                         <div class="mh-datagrid-cell">\
                                                         </div>\
@@ -51,10 +51,11 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
                                                     <input type="checkbox" class="mh-input">\
                                                 </div>\
                                                 <div class="mh-cell-content"></div>\
-                                                <div class="mh-cell-buttons-container">\
+                                                <div class="mh-cell-elements-container">\
                                                     <a class="mh-button">\
                                                         <span class="mh-title"></span>\
                                                     </a>\
+                                                    <img class="mh-image-file-preview">\
                                                 </div>\
                                             </div>\
                                         </div>';
@@ -64,9 +65,11 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
         {
             var directiveCtrl = ctrls[0];
             var themeCtrl = ctrls[1];
+
+            var direction = attrs.mhDirection;
             
             var templateElem = 
-            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, directiveCtrl.scope));
+            $(themeCtrl.renderTheme(this.mhRawInnerTemplate, directiveCtrl.scope, direction));
             directiveCtrl.compileTemplate(templateElem, el, themeCtrl.formElements);
         },
         controller : function($scope, $element, $attrs)
@@ -74,7 +77,7 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
             var self = this;
             self.formElements = [];
 
-            this.renderTheme = function(template, scope)
+            this.renderTheme = function(template, scope, direction)
             {
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
@@ -83,11 +86,21 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
                 var headerTemplate = headersContainer.find(".mh-datagrid-header");
                 headerTemplate.remove();
 
-                var row = renderedTemplate.find(".mh-datagrid-row");
+                var rowsContainer = renderedTemplate.find(".mh-rows-container");
+                var row = rowsContainer.find(".mh-datagrid-row");
                 var cellTemplate = row.find(".mh-datagrid-cell");
                 var cellTemplateParent = cellTemplate.parent();
 
                 cellTemplate.remove();
+
+                if(direction == MHDatagridMosaicDirection.VERTICAL)
+                {
+                    rowsContainer.css("flex-direction", "column");
+                }
+                else
+                {
+                    rowsContainer.css("flex-direction", "row");
+                }
 
                 for(var i = 0; i < scope.mhCols.length; i++)
                 {
@@ -119,4 +132,17 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
             }
         }
     };
-})
+});
+
+ /** 
+* Defines the type of preview of {@link Themes.mhDatagridThemeBs mhDatagridThemeBs}
+* @enum {string}
+* @memberof Enumerators
+*/
+var MHDatagridMosaicDirection = 
+{
+    /** value: "horizontal" (align items horizontally) */
+    HORIZONTAL : "horizontal",
+    /** value: "vertical" (align items vertically)  */
+    VERTICAL : "vertical", 
+}

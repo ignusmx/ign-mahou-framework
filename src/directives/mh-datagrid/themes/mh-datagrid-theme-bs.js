@@ -49,10 +49,11 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                                                     <input type="checkbox" class="mh-input">\
                                                 </div>\
                                                 <div class="mh-cell-content"></div>\
-                                                <div class="mh-cell-buttons-container">\
+                                                <div class="mh-cell-elements-container">\
                                                     <a class="mh-button">\
                                                         <span class="mh-title"></span>\
                                                     </a>\
+                                                    <img class="mh-image-file-preview" style="width:100%; height:100%">\
                                                 </div>\
                                             </div>\
                                         </div>';

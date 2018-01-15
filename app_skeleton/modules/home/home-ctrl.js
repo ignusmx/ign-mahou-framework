@@ -66,7 +66,7 @@
 				[
 					new MHDatagridCol({ name:"id", title : "id", content : MHDecorator.decorateEval('row.model.id')}),
 					new MHDatagridCol({ name:"name", title : "nombre", content :  MHDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateCSS(MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),{"ngf-thumbnail" : "row.model.images[0]"}), null, {maxWidth:"200px"})}),
+					new MHDatagridCol({ name:"image", title : "imagen", content : [new MHFilePreview({file:'row.model.images[0]'})]}),
 					new MHDatagridCol({ name:"price", title : "Precio", content : MHDecorator.decorateEval('row.model.price | currency') }),
 					new MHDatagridCol({ name:"address", title : "Dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.state") }),
 					new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
