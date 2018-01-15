@@ -21,7 +21,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
         require : ['mhForm', 'mhFormThemeBs'],
         template : function(el)
         {
-            this.mhRawInnerTemplate =  '<form class="form-horizontal" novalidate>\
+            this.mhRawInnerTemplate =  '<ng-form class="form-horizontal" novalidate>\
                                             <div class="mh-form-elements-container">\
                                                 <div class="form-group mh-form-row">\
                                                     <div class="mh-form-col"></div>\
@@ -99,7 +99,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </button>\
                                                 </div>\
                                             </div>\
-                                        </form>';
+                                        </ng-form>';
             return "";
         },
         link : function(scope, el, attrs, ctrls)
@@ -124,7 +124,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                 var renderedTemplate = $("<div></div>");
                 renderedTemplate.append(template);
 
-                var form = renderedTemplate.find("form");
+                var form = renderedTemplate.find("ng-form");
                 var elementsContainer = form.find(".mh-form-elements-container");
 
                 var formRow = form.find(".mh-form-row");
@@ -291,7 +291,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         {
                             element.dragOverClass = "'mh-bs-dropfile-dragover'";
                         }
-                        
+
                         newElementContainer = ngfDropContainer.clone();
                     }
                     else if(element instanceof MHFormFilesPreview)

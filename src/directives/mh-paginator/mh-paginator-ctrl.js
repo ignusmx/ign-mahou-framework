@@ -54,7 +54,9 @@ angular
 
             templateElem.find(".mh-prev-button-container").attr("ng-class", "{'"+self.scope.mhClassDisabled+"' : controller.pageGroup === 0}");
             templateElem.find(".mh-next-button-container").attr("ng-class", "{'"+self.scope.mhClassDisabled+"' : controller.pageGroup == controller.lastGroup}");
-            directiveElem.replaceWith($compile(templateElem)(scope));
+            
+            directiveElem.append(templateElem);
+            $compile(directiveElem.contents())(scope);
         }
 
         /** @function setCurrentPage

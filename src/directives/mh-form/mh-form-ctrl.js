@@ -81,7 +81,9 @@ angular
                 }
         	}
 
-            directiveElem.replaceWith($compile(templateElem)(scope));
+            directiveElem.append(templateElem);
+            $compile(directiveElem.contents())(scope);
+            
             if(scope.mhOnFormInit != null)
              {
                 scope.mhOnFormInit({ disableForm: function(){

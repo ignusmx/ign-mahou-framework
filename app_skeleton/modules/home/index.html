@@ -28,7 +28,15 @@
 		</div>
 	</mh-bs-panel>
 	<mh-bs-panel mh-header-title="'Información de inmueble'">
-		<mh-form mh-form-theme-bs mh-form-name="'testForm'" ng-model="selectedObject" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
-		</mh-form>
+		asd:{{aaa.$valid}}
+		<form name="aaa">
+			<ng-form name="popo">
+				<input type="text" name="asd" ng-model="gg" required>
+			</ng-form>
+		
+			<mh-form mh-form-theme-bs mh-form-name="'testForm'" parent-form="aaa" ng-model="selectedObject" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
+			</mh-form>
+		</form>
+		
 	</mh-bs-panel>
 </div>

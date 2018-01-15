@@ -83,8 +83,9 @@ angular
                     } 
                 }               
             }
-
-            directiveElem.replaceWith($compile(templateElem)(scope));
+            
+            directiveElem.append(templateElem);
+            $compile(directiveElem.contents())(scope);
         }
 
         /** @function executeStateOrAction
