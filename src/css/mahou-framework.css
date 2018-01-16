@@ -35,7 +35,7 @@ md-autocomplete input:not(.md-input) {
     font-weight: bold;
 }
 
-.mh-files-preview-container, .mh-rows-container{
+.mh-rows-container{
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;

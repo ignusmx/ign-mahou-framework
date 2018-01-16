@@ -13,7 +13,7 @@ function MHDatagridCol(config)
 {
 	//inherit from MHAbstractUIElement
 	MHAbstractUIElement.call(this, config);
-	this.content = MHValidationHelper.safeClassAttribute(config, "content", [String, Array], null, false);
+	this.content = MHValidationHelper.safeClassAttribute(config, "content", [String, MHButton, MHFilePreview, Array], null, false);
 	this.visible = MHValidationHelper.safeClassAttribute(config, "visible", Boolean, null, false, true);
 
 	if(this.content instanceof Array)

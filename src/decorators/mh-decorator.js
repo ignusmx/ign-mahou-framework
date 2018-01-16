@@ -79,6 +79,23 @@ MHDecorator.decorateCSS = function(string, cssClasses, styles)
 }
 
 /** @memberof Decorators.MHDecorator
+ * @param element 	 	{$} jQuery object to be decorated
+ * @param attributes 	{object} object with the attributes to be added (e.g. { "data-some-attr" : "attribute value" })
+ * @description applies given attributes to root Element of the given string.
+ */
+MHDecorator.decorateFilePreview = function(string, size)
+{
+	size = size || {width: 100, height: 100, quality: 0.2, centerCrop:false};
+	var attributes = {
+						"ngf-thumbnail" : string, 
+						"ngf-size" : JSON.stringify(size)
+					};
+	var html = MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),attributes);
+
+	return MHDecorator.decorateCSS(html, null, {"width" : size.width, "height" : size.height});
+}
+
+/** @memberof Decorators.MHDecorator
  * @param element 	 	{$} jQuery element to be decorated
  * @param cssClasses 	{string} string with classes to be applied, separated by space
  * @param styles 		{object} object with list of all styles to be applied (e.g. { "minWidth" : "200px" })

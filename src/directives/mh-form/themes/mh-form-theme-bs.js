@@ -86,13 +86,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </ngf-drop>\
                                                     <div ngf-no-file-drop class="mh-input-error-message"></div>\
                                                 </div>\
-                                                <div class="mh-files-preview-container">\
-                                                    <div class="mh-input" style="padding:5px;">\
-                                                        <img class="mh-image-preview" style="width:100%; height:100%">\
-                                                        <div class="mh-title" style="word-wrap: break-word"></div>\
-                                                    </div>\
-                                                </div>\
-                                                </div>\
                                                 <div class="mh-button-container">\
                                                     <button class="btn btn-default mh-form-button">\
                                                         <span class="mh-title"></span>\
@@ -153,9 +146,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
 
                 var ngfDropContainer = elementsContainer.find(".mh-dropfiles-container");
                 ngfDropContainer.remove();
-
-                var filesPreviewContainer = elementsContainer.find(".mh-files-preview-container");
-                filesPreviewContainer.remove();
 
                 var buttonContainer = form.find(".mh-button-container");
                 buttonContainer.remove();
@@ -293,10 +283,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         }
 
                         newElementContainer = ngfDropContainer.clone();
-                    }
-                    else if(element instanceof MHFormFilesPreview)
-                    {
-                        newElementContainer = filesPreviewContainer.clone();
                     }
                     else
                     {

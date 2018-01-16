@@ -192,6 +192,12 @@ angular
                 colHeader.attr("ng-show","mhCols["+i+"].visible !== false");
 
                 var colCell = row.find(".mh-datagrid-cell[data-mh-name="+col.name+"]");
+
+                if(col.content instanceof MHButton || col.content instanceof MHFilePreview)
+                {
+                    col.content =[col.content];
+                }
+
                 if(col.content instanceof Array)
                 {
                     var colCellElementsContainer = cellElementsContainer.clone();
@@ -215,7 +221,9 @@ angular
                         {
                             var filePreview = contentElement;
                             var colFilePreview = imageFilePreview.clone();
-                            colFilePreview.attr("ngf-thumbnail", filePreview.file);
+                            colFilePreview.attr("data-mh-name", filePreview.name);
+
+                            colFilePreview.attr("ngf-thumbnail", "mhCols["+i+"].content["+j+"].file");
                             colFilePreview.css("width", filePreview.thumbnailSize.width+"px");
                             colFilePreview.css("height", filePreview.thumbnailSize.height+"px");
                             colFilePreview.attr("ngf-size", JSON.stringify(filePreview.thumbnailSize));

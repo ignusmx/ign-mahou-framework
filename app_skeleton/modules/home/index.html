@@ -29,15 +29,18 @@
 		</div>
 	</mh-bs-panel>
 	<mh-bs-panel mh-header-title="'Información de inmueble'">
-		asd:{{aaa}}
+		<div mh-compile="'<b>$eval(collection[0])</b>'"></div>
 		<form name="aaa">
-			<ng-form name="popo">
-				<input type="text" name="asd" ng-model="gg" required>
-			</ng-form>
-		
 			<mh-form mh-form-theme-bs mh-form-name="'testForm'" parent-form="aaa" ng-model="selectedObject" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
 			</mh-form>
 		</form>
+		<mh-datagrid mh-datagrid-theme-mosaic
+			mh-direction="horizontal"
+			mh-cols = "thumbCols"
+			mh-row-buttons = "rowButtons"
+			mh-collection = "collection[0].images"
+			mh-rows-selected-change="gridRowsSelected(rows)">
+		</mh-datagrid>
 		
 	</mh-bs-panel>
 </div>

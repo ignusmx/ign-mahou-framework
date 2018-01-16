@@ -62,19 +62,28 @@
 								 new MHButton({ name: "edit", title:MHDecorator.decorateIcon("", "glyphicon glyphicon-trash", "i"), action : "eee", cssClasses:"btn btn-danger" })
 								];
 
+			$scope.fileprev = new MHFilePreview({file:collection[0].images[0]});
 			$scope.datagridCols = 
 				[
 					new MHDatagridCol({ name:"id", title : "id", content : MHDecorator.decorateEval('row.model.id')}),
 					new MHDatagridCol({ name:"name", title : "nombre", content :  MHDecorator.decorateEval('row.model.name') }),
-					new MHDatagridCol({ name:"image", title : "imagen", content : [new MHFilePreview({file:'row.model.images[0]'})]}),
+					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateFilePreview('row.model.images[0]')}),
 					new MHDatagridCol({ name:"price", title : "Precio", content : MHDecorator.decorateEval('row.model.price | currency') }),
 					new MHDatagridCol({ name:"address", title : "Dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.state") }),
 					new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
 					new MHDatagridCheckboxCol({ name:"checkbox"}),
 					
+				];
+
+			$scope.thumbCols = 
+				[
+					new MHDatagridCol({ name:"name", title : "nombre", content :  MHDecorator.decorateEval('row.model.name') }),
+					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateFilePreview('row.model')}),
+					
 				]
 				
-			
+				
+
 	
 			$scope.collection = collection;
 			$scope.enableRowSelect = true;
@@ -93,10 +102,6 @@
 			{
 				$mdSidenav("left").toggle();
 			}
-
-			$scope.imagesPreview = new MHFormFilesPreview({name:"imagesPreview", title:"Imágenes", model:"images", direction:MHFormFilesPreviewDirection.HORIZONTAL, previewType:'detail'});
-
-			console.log(MHDecorator.decorateAttributes("ngf-thumbnail",MHDecorator.decorateResponsiveImage("{{model.images[0]}}")))
 			$scope.formElements = [
 				new MHFormLabel({ name : "image", title:MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),{"ngf-thumbnail" : "model.images[0]"})}),
 				new MHFormFieldInputText({ name : 'name', title:"Nombre de la propiedad", model:"name", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
@@ -132,8 +137,7 @@
 
 			var profileRows = [new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[1]], colWidth:12, fill:true})]}),
 							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[2], $scope.formElements[3]], colWidth:12, flex:true, fill:true, vAlign:"bottom"})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[4]], colWidth:12, fill:true})]}),
-							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.imagesPreview], colWidth:12, fill:true})]})];
+							   new MHFormBSRow({elements:[new MHFormBSCol({ elements: [$scope.formElements[4]], colWidth:12, fill:true})]})];
 
 			$scope.formLayout = [	
 									new MHFormBSRow({elements : [

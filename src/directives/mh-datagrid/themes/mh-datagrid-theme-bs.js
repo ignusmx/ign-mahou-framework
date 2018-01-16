@@ -53,7 +53,7 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                                                     <a class="mh-button">\
                                                         <span class="mh-title"></span>\
                                                     </a>\
-                                                    <img class="mh-image-file-preview" style="width:100%; height:100%">\
+                                                    <img class="mh-image-file-preview">\
                                                 </div>\
                                             </div>\
                                         </div>';
