@@ -26,7 +26,7 @@
 			var leftDropDowns = [ 
 									new MHButton({name:"housing", title:"Inmuebles"}),
 									new MHButton({name:"contacts", title:"Contactos", action:function(){ console.log("btns:",$scope.menuButtons)}}),
-									new MHButton({name:"about_usss", title:"Actividades", function(){ alert("nosotres seleccionado")}})
+									new MHButton({name:"about_usss", title:"Actividades", action:function(){ alert("nosotres seleccionado")}})
 								];
 
 			var rightDropDowns = [ 
@@ -71,7 +71,7 @@
 					new MHDatagridCol({ name:"price", title : "Precio", content : MHDecorator.decorateEval('row.model.price | currency') }),
 					new MHDatagridCol({ name:"address", title : "Dirección", content : MHDecorator.decorateEval("row.model.address.city + ', ' + row.model.address.state") }),
 					new MHDatagridCol({ name:"actions", title : "Acciones", content : $scope.rowButtons}),
-					new MHDatagridCheckboxCol({ name:"checkbox"}),
+					new MHDatagridCheckboxCol({ name:"checkbox"})
 					
 				];
 
@@ -107,14 +107,14 @@
 				new MHFormFieldInputText({ name : 'name', title:"Nombre de la propiedad", model:"name", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", querySearch:function(s){ return ["1","2","3"]} }),
 				new MHFormFieldInputNumber({name:"price", title:"Precio", model:"price", required:true, invalidMessage:"error, debe especificar un precio"}),
 				new MHFormFieldMDSelect({name:"city", title:"Ciudad", model:"address.city", options:["Guadalajara", "Zapopan"]}),
-				new MHFormFieldDropfile({ name : 'photos', title:"Agregar fotos", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true }),
+				new MHFormFieldDropfile({ name : 'photos', title:"Agregar fotos", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true, accept:".pdf" }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 
 				new MHFormButton({name : "accept", title : "Guardar", action : function(){
 					console.log($scope.user.images)
 				}, cssClasses : "btn-primary"}),
-				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, formInvalid"}),
+				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, parentFormInvalid"}),
 			];
 
 			$scope.onFormInit = function(api)
@@ -157,7 +157,7 @@
 			{
 			
 				$scope.collection.push(
-								{id:"10", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail2@mail.com"},
+								{id:"10", name : "https://media.giphy.com/media/eCHyG8RD7ezFC/giphy.gif", email : "elmail2@mail.com"}
 								);
 			}
 		}

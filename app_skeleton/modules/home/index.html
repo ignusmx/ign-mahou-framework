@@ -33,6 +33,7 @@
 		<form name="aaa">
 			<mh-form mh-form-theme-bs mh-form-name="'testForm'" parent-form="aaa" ng-model="selectedObject" mh-form-layout="formLayout" mh-on-form-init="onFormInit">
 			</mh-form>
+			<input type="text" ng-model="test" required>
 		</form>
 		<mh-datagrid mh-datagrid-theme-mosaic
 			mh-direction="horizontal"
@@ -41,6 +42,11 @@
 			mh-collection = "collection[0].images"
 			mh-rows-selected-change="gridRowsSelected(rows)">
 		</mh-datagrid>
-		
+		<input type="file" id="profile_pic" name="profile_pic"
+          accept=".jpg, .jpeg, .png">
+
+          <div ngf-drop ngf-select class="drop-box"
+  ngf-drag-over-class="'dragover'" ngf-multiple="true"
+  ngf-pattern="'image/*,application/pdf'">Drop Images or PDFs files here</div>
 	</mh-bs-panel>
 </div>

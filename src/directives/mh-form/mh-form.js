@@ -43,6 +43,7 @@ angular.module('ign.Mahou').directive('mhForm', function ( $templateRequest ) {
             mhClassInvalid : '=?',
             mhOnFormInit : '=?'
         },
+        require : ["?^form"],
         compile : function(elem,attrs)
         {
             //search for a theme directive for proper compiling
@@ -61,6 +62,11 @@ angular.module('ign.Mahou').directive('mhForm', function ( $templateRequest ) {
             {
                 throw new Error("Could not compile mhForm: no mhFormTheme directive was found. Please specify one.");
             }
+
+            return  function(scope, el, attrs, ctrls)
+            {
+                scope.parentForm = ctrls[0];
+            }
         },
         controller: 'MHFormCtrl',
         controllerAs : 'controller'
@@ -77,7 +83,11 @@ var MHFormStatus =
     /** value: "formValid" (form is valid) */
     FORM_VALID : "formValid",
     /** value: "formInvalid" (form is invalid)  */
-    FORM_INVALID : "formInvalid", 
+    FORM_INVALID : "formInvalid",
+    /** value: "parentFormValid" (parentForm is valid) */
+    PARENT_FORM_VALID : "parentFormValid",
+    /** value: "parentFormInvalid" (parentForm is invalid)  */
+    PARENT_FORM_INVALID : "parentFormInvalid", 
     /** value: "modelChanged" (model has changed)  */
     MODEL_CHANGED : "modelChanged",
     /** value: "modelUnchanged" (model has not changed) */

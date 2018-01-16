@@ -19,7 +19,7 @@ function MHFormFieldDropfile(config)
 	this.dragOverClass = MHValidationHelper.safeClassAttribute(config, "dragOverClass", String);
 	this.multiple = MHValidationHelper.safeClassAttribute(config, "multiple", Boolean);
 	this.allowDir = MHValidationHelper.safeClassAttribute(config, "allowDir", Boolean);
-	this.pattern = MHValidationHelper.safeClassAttribute(config, "pattern", String);
+	this.accept = MHValidationHelper.safeClassAttribute(config, "accept", String);
 	this.requiredTags = "ngf-drop";
 }
 

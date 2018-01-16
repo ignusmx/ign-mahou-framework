@@ -87,7 +87,7 @@ MHDecorator.decorateFilePreview = function(string, size)
 {
 	size = size || {width: 100, height: 100, quality: 0.2, centerCrop:false};
 	var attributes = {
-						"ngf-thumbnail" : string, 
+						"ngf-thumbnail" : string+" || 'https://twistedsifter.files.wordpress.com/2010/06/st-regis-hotel-penthouse-san-francisco.jpg'", 
 						"ngf-size" : JSON.stringify(size)
 					};
 	var html = MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),attributes);

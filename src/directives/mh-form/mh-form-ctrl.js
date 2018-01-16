@@ -24,6 +24,7 @@ angular
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
         self.formElements = null;
+        console.log(self.scope);
 
         /** @function executeStateOrAction
          * @memberof Controllers.MHFormCtrl
@@ -233,7 +234,7 @@ angular
                 inputElem.attr("ngf-drag-over-class", field.dragOverClass);
                 inputElem.attr("ngf-multiple", field.multiple);
                 inputElem.attr("ngf-allow-dir", field.allowDir);
-                inputElem.attr("ngf-pattern", field.pattern);
+                inputElem.attr("accept", field.accept);
             }
         }
 
@@ -267,7 +268,11 @@ angular
                     {
                         case MHFormStatus.FORM_VALID : disabledExpression += formName+".$valid";
                         break;
-                        case MHFormStatus.FORM_INVALID : disabledExpression += "!"+formName+".$valid";
+                        case MHFormStatus.FORM_INVALID : disabledExpression += formName+".$invalid";
+                        break;
+                        case MHFormStatus.PARENT_FORM_VALID : disabledExpression += "(parentForm == null || parentForm.$valid)";
+                        break;
+                        case MHFormStatus.PARENT_FORM_INVALID : disabledExpression += "(parentForm != null && parentForm.$invalid)";
                         break;
                         case MHFormStatus.MODEL_CHANGED : disabledExpression += "controller.modelChanged()";
                         break;

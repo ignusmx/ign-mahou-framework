@@ -103,7 +103,15 @@ MHValidationHelper.validateType = function(property, propertyName, acceptedTypes
 		}
 		else
 		{
-			return typeof(property) == type.prototype.constructor.name.toLowerCase();
+			function functionName(fun) {
+			  var ret = fun.toString();
+			  ret = ret.substr('function '.length);
+			  ret = ret.substr(0, ret.indexOf('('));
+			  return ret.trim();
+			}
+
+			var className = functionName(type.prototype.constructor);
+			return typeof(property) == className.toLowerCase();
 		}
     }
 
