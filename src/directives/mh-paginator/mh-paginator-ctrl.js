@@ -45,12 +45,12 @@ angular
             groupPages();
             var pageButtonContainer = templateElem.find(".mh-page-button-container");
             pageButtonContainer.attr("ng-repeat", "page in mhPages");
-            pageButtonContainer.attr("ng-class", "{'"+self.scope.mhClassActive+"' : page == mhCurrentPage}")
+            pageButtonContainer.attr("ng-class", "{'"+self.scope.mhClassActive+"' : page == mhCurrentPage}");
             pageButtonContainer.find(".mh-title").html("{{page}}");
-            pageButtonContainer.find(".mh-page-button").attr("ng-click", "controller.setCurrentPage(page)")
+            pageButtonContainer.find(".mh-page-button").attr("ng-click", "controller.setCurrentPage(page)");
 
-            templateElem.find(".mh-prev-button").attr("ng-click", "controller.setCurrentPage(controller.groupInitPage - 1)");
-            templateElem.find(".mh-next-button").attr("ng-click", "controller.setCurrentPage(controller.groupLastPage + 1)");
+            templateElem.find(".mh-prev-button").attr("ng-click", "controller.pageGroup > 0 && controller.setCurrentPage(controller.groupInitPage - 1)");
+            templateElem.find(".mh-next-button").attr("ng-click", "controller.pageGroup < controller.lastGroup && controller.setCurrentPage(controller.groupLastPage + 1)");
 
             templateElem.find(".mh-prev-button-container").attr("ng-class", "{'"+self.scope.mhClassDisabled+"' : controller.pageGroup === 0}");
             templateElem.find(".mh-next-button-container").attr("ng-class", "{'"+self.scope.mhClassDisabled+"' : controller.pageGroup == controller.lastGroup}");
@@ -77,13 +77,6 @@ angular
             else if(self.scope.mhCurrentPage > self.scope.mhLastPage)
             {
                 self.scope.mhCurrentPage = self.scope.mhLastPage;
-            }
-
-            groupPages();
-
-            if(self.scope.mhOnPageSelected != null)
-            {
-                self.scope.mhOnPageSelected({page : self.scope.mhCurrentPage});
             }
         }
 
@@ -120,6 +113,15 @@ angular
             self.lastGroup = pagesGroupsCount-1;
         }
 
+        function onCurrentPageUpdated()
+        {
+            groupPages();
+
+            if(self.scope.mhOnPageSelected != null)
+            {
+                self.scope.mhOnPageSelected({page : self.scope.mhCurrentPage});
+            }
+        }
 
         $scope.$watch("mhLastPage", 
         function( newValue, oldValue ) 
@@ -130,7 +132,7 @@ angular
         $scope.$watch("mhCurrentPage", 
         function( newValue, oldValue ) 
         {
-            self.setCurrentPage(newValue);
+            onCurrentPageUpdated(newValue);
         });
     }
 );

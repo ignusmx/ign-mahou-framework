@@ -127,7 +127,7 @@ angular
 
         /** 
          * @memberof Controllers.MHFormCtrl
-         * @param model {string} the model propoerty as string to be converted to array style
+         * @param model {string} the model property as string to be converted to array style
          * @description converts a dot notation access to array style
          * @access private
          */
@@ -255,16 +255,15 @@ angular
             if(button.disabledStatuses != null)
             {
                 var disabledExpression = "";
-                var disabledStatuses = button.disabledStatuses.split(",");
 
-                for(var j = 0; j < disabledStatuses.length; j++)
+                for(var j = 0; j < button.disabledStatuses.length; j++)
                 {
                     if(j > 0)
                     {
                         disabledExpression +=" || ";
                     }
 
-                    switch(disabledStatuses[j].trim())
+                    switch(button.disabledStatuses[j].trim())
                     {
                         case MHFormStatus.FORM_VALID : disabledExpression += formName+".$valid";
                         break;

@@ -2,9 +2,9 @@
  * @class MHDatagridCol
  * @memberof UIElements
  * @classdesc
- * Defines a column to be renderedin a mhDatagrid directive.
+ * Defines a column with a checkbox to be rendered in a mhDatagrid directive.
  * 
- * @property {string}   content  	- data to be rendered inside the column (can be a string with any angular expression including html or an array of MHButtons). Use "row" inside value to access element being rendered on the current row
+ * @property {string}   content  	- this is null, since this column's content is a checkbox.
  * @property {boolean}	visible     - sets column visibility.
  * @augments UIElements.MHAbstractUIElement
  *

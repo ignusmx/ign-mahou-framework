@@ -10,7 +10,6 @@
  * #### ** Controller: ** {@link Controllers.MHDatagridCtrl MHDatagridCtrl}
  * ### ** HTML declaration **
     <mh-datagrid {mh-datagrid-theme-directive} 
-        mh-enable-row-select="{boolean}"
         mh-cols="{DatagridColsArray}"
         mh-collection="{dataArray}"
         mh-rows-selected-change="{rowsSelectedChangeCallback(rows)}">
@@ -25,7 +24,6 @@
  * - **{@link Themes.mhDatagridThemeCustom mh-datagrid-theme-custom}** (directive for custom UI html)
  * - ** {@link Themes.mhDatagridThemeBs mh-datagrid-theme-bs}** (directive with bootstrap table UI)
  *
- * @property {boolean}                mhEnableRowSelect        - shows checkboxs and enable row selection. 
  * @property {MHDatagridCol[]}        mhCols                   - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
  * @property {Object[]}               mhCollection             - an array of objects to be displayed on the datagrid
  * @property {Function}               mhRowsSelectedChange     - callback action to be executed when one or more row checkbox have been selected
@@ -36,7 +34,6 @@ angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templa
         restrict: 'E',
         scope: 
         { 
-            mhEnableRowSelect : "=",
             mhCols : "=",
             mhCollection : "=",
             mhRowsSelectedChange : "&"

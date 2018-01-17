@@ -81,10 +81,7 @@
 					new MHDatagridCol({ name:"image", title : "imagen", content : MHDecorator.decorateFilePreview('row.model')}),
 					
 				]
-				
-				
-
-	
+			
 			$scope.collection = collection;
 			$scope.enableRowSelect = true;
 
@@ -114,7 +111,7 @@
 				new MHFormButton({name : "accept", title : "Guardar", action : function(){
 					console.log($scope.user.images)
 				}, cssClasses : "btn-primary"}),
-				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : "modelUnchanged, parentFormInvalid"}),
+				new MHFormButton({name : "cancel", title : "Cancelar", action : $scope.deleteClick, disabledStatuses : ["modelUnchanged", "parentFormInvalid"]}),
 			];
 
 			$scope.onFormInit = function(api)

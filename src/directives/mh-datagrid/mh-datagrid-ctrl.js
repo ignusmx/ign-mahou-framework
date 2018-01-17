@@ -7,7 +7,6 @@
  * #### ** Directive: ** {@link Directives.mhDatagrid mhDatagrid}
  *
  * @property {object}                 scope                                     - Isolated scope.
- * @property {boolean}                scope.mhEnableRowSelect                   - shows checkboxs and enable row selection. 
  * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content.
  * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid.
  * @property {Function}               scope.mhRowsSelectedChange                - callback action to be executed when one or more row checkbox have been selected.

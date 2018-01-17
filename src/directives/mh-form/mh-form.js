@@ -4,6 +4,10 @@
  * @classdesc
  * use this directive to create a fully functional AngularJS form.<br>
  * Includes fields validation, events callbacks and UI customization using themes.
+ * This directive uses ng-form internally therefore you can use multiple mhForm in a single view.
+ * Wrap multiples mhForms inside a regular <form> tag to connect multiple forms.
+ * This allows you to split a complex form into small mhForms with custom html in between.
+ * Since the parent from is shared among mhForm, form buttons can be disabled or enabled depending of parent form state.
  * **directive types:** Element only
  *
  * @description 
@@ -87,7 +91,7 @@ var MHFormStatus =
     /** value: "parentFormValid" (parentForm is valid) */
     PARENT_FORM_VALID : "parentFormValid",
     /** value: "parentFormInvalid" (parentForm is invalid)  */
-    PARENT_FORM_INVALID : "parentFormInvalid", 
+    PARENT_FORM_INVALID : "parentFormInvalid",
     /** value: "modelChanged" (model has changed)  */
     MODEL_CHANGED : "modelChanged",
     /** value: "modelUnchanged" (model has not changed) */

@@ -79,20 +79,20 @@ MHDecorator.decorateCSS = function(string, cssClasses, styles)
 }
 
 /** @memberof Decorators.MHDecorator
- * @param element 	 	{$} jQuery object to be decorated
- * @param attributes 	{object} object with the attributes to be added (e.g. { "data-some-attr" : "attribute value" })
+ * @param string {string} 	 	string 				- string value to be used as file source.
+ * @property {string} 	 		thumbnailSize		- Object defining size of thumbnail. e.g. "{width: 100, height: 100, quality: 0.9, centerCrop:true}"
  * @description applies given attributes to root Element of the given string.
  */
-MHDecorator.decorateFilePreview = function(string, size)
+MHDecorator.decorateFilePreview = function(string, thumbnailSize)
 {
-	size = size || {width: 100, height: 100, quality: 0.2, centerCrop:false};
+	thumbnailSize = thumbnailSize || {width: 100, height: 100, quality: 0.2, centerCrop:false};
 	var attributes = {
-						"ngf-thumbnail" : string+" || 'https://twistedsifter.files.wordpress.com/2010/06/st-regis-hotel-penthouse-san-francisco.jpg'", 
-						"ngf-size" : JSON.stringify(size)
+						"ngf-thumbnail" : string, 
+						"ngf-size" : JSON.stringify(thumbnailSize)
 					};
 	var html = MHDecorator.decorateAttributes(MHDecorator.decorateResponsiveImage(""),attributes);
 
-	return MHDecorator.decorateCSS(html, null, {"width" : size.width, "height" : size.height});
+	return MHDecorator.decorateCSS(html, null, {"width" : thumbnailSize.width, "height" : thumbnailSize.height});
 }
 
 /** @memberof Decorators.MHDecorator

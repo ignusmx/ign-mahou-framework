@@ -7,6 +7,7 @@
  * @property {string}   	   		name             	- name of the UI element.
  * @property {string}   	   		title          		- title of the element.
  * @property {string}   	   	   	cssClasses			- additional css classes to be applied to the element (separeted by single space or comma)
+ * @property {object}   	   	   	styles				- object with additional styles to be applied to the element
  * @property {string|string[]}   	requiredTags		- some elements require to be rendered under specific HTML tags. Use this to specify those tags. (can be a string of a single tag or an array of tags. e.g: "span" or ["span", "div", "p"])
  *
  */

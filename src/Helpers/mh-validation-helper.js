@@ -53,7 +53,7 @@ MHValidationHelper.validateRequiredTags = function(mhUIElement, htmlElement)
  * @param config 		{Object} 		the config object of the mhUIElement which contians the attribute to be validated 
  * @param attributeName {string} 		the name of the attribute to be validated
  * @param acceptedTypes {class|class[]} class or array of classes accepted by this parameter (must be native javascript classes)
- * @param acceptedTypes {class|class[]} class or array of classes not accepted by this parameter (must be native javascript classes)
+ * @param rejectedTypes {class|class[]} class or array of classes not accepted by this parameter (must be native javascript classes)
  * @param required 		{boolean} 		sets this parameter as required
  * @param defaultValue  {Object} 		the default value if the parameter is required
  * @description validates attribute of an htmlElement
@@ -90,7 +90,7 @@ MHValidationHelper.safeClassAttribute = function(config, attributeName, accepted
  * @param property 		{Object} 		the property to be validated
  * @param propertyName  {string} 		the name of the property to be displayed on the error stack trace
  * @param acceptedTypes {class|class[]} class or array of classes accepted by this property (must be native javascript classes)
- * @param acceptedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
+ * @param rejectedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
  * @description validates if a property (object) is of a valid type and not of a rejected type.
  */
 MHValidationHelper.validateType = function(property, propertyName, acceptedTypes, rejectedTypes)
@@ -225,7 +225,7 @@ MHValidationHelper.validateType = function(property, propertyName, acceptedTypes
  * @param propertiesArray 		{object[]} array of properties to be validated 
  * @param arrayName  {string} 		the name of the array to be displayed on the error stack trace
  * @param acceptedTypes {class|class[]} class or array of classes accepted by this property (must be native javascript classes)
- * @param acceptedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
+ * @param rejectedTypes {class|class[]} class or array of classes not accepted by this property (must be native javascript classes)
  * @description validates if properties in an array (objects) is of a valid type and not of a rejected type.
  */
 MHValidationHelper.validateTypes = function(propertiesArray, arrayName, acceptedTypes, rejectedTypes)

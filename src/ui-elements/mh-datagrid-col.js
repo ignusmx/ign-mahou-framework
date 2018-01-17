@@ -4,7 +4,9 @@
  * @classdesc
  * Defines a column to be renderedin a mhDatagrid directive.
  * 
- * @property {string}   content  	- data to be rendered inside the column (can be a string with any angular expression including html or an array of MHButtons). Use "row" inside value to access element being rendered on the current row
+ * @property {string}   content  	- data to be rendered inside the column. Can be a string (with any angular expression including html) 
+ 									  or an object or array of objects of supported {@link UIElements.MHAbstractUIElement MHAbstractUIElement} classes 
+ 									  ({@link UIElements.MHButton MHButton}, {@link UIElements.MHFilePreview MHFilePreview}). Use "row" inside value to access element being rendered on the current row.
  * @property {boolean}	visible     - sets column visibility.
  * @augments UIElements.MHAbstractUIElement
  *

@@ -1,18 +1,17 @@
  /**
- * @class mhDatagridThemeBs
+ * @class mhDatagridThemeMosaic
  * @memberof Themes
  * @classdesc
- * A theme for {@link Directives.mhDatagrid mhDatagrid} directive. Used to define a bootstrap table theme.
+ * A theme for {@link Directives.mhDatagrid mhDatagrid} directive. Used to define a mosaic grid theme.
  * **directive types:** Attribute only
  *
  * @description 
  * #### ** Directive: ** {@link Directives.mhDatagrid mhDatagrid}
  * ### ** HTML declaration **
-    <mh-datagrid mh-datagrid-theme-bs
+    <mh-datagrid mh-datagrid-theme-mosaic
         {datagrid-attributes}
         mh-responsive="{boolean}">
     </mh-datagrid>
- * @property {boolean}      mhResponsive     - if true, theme will add an extra div container with the bootstrap class "table-responsive"
  */
 angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templateRequest, $parse ) {
     return {
