@@ -36,6 +36,8 @@ var modules_js = [
 					'src/ui-elements/mh-form-field-md-select.js',
 					'src/ui-elements/mh-form-field-md-date.js',
 					'src/ui-elements/mh-form-field-md-autocomplete.js',
+					'src/ui-elements/mh-form-field-dropfile.js',
+					'src/ui-elements/mh-file-preview.js',
 					'src/ui-elements/mh-datagrid-col.js',
 					'src/ui-elements/mh-datagrid-checkbox-col.js',
 					'src/directives/mh-bs-panel/mh-bs-panel.js',
