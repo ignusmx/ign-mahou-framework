@@ -6,7 +6,7 @@
  * 
  * @property {string} 		dragOverClass	- Class to be applied when user drags files over the container.
  * @property {boolean}		multiple		- Single or multiple file selection.
- * @property {boolean} 		allowDir 		- the property of the option to be used as value (e.g: "option.property"). Default is "option" itself.
+ * @property {boolean} 		allowDir 		- Allow items to be droppped.
  * @property {string} 	 	accept			- string used to limit files to specific formats.
  * @augments UIElements.MHAbstractFormField
  *

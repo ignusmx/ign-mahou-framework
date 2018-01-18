@@ -69,10 +69,11 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     </md-input-container>\
                                                 </div>\
                                                 <div class="mh-md-autocomplete-container">\
+                                                    <label class="mh-title"></label>\
                                                     <md-autocomplete class="mh-input form-control" style="min-width: inherit;">\
-                                                    <md-item-template>\
-                                                      <span></span>\
-                                                    </md-item-template>\
+                                                        <md-item-template>\
+                                                          <span></span>\
+                                                        </md-item-template>\
                                                     <md-not-found>\
                                                       No states matching "{{ctrl.searchText}}" were found.\
                                                       <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>\
@@ -301,7 +302,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     if(parent.fill)
                     {
                         newElementContainer.css("width", "100%");
-                        newElementContainer.css("height", "100%");
                     }
                     
                     return newElementContainer;
