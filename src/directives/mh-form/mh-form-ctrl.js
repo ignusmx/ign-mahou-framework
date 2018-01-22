@@ -210,19 +210,27 @@ angular
             else if(field instanceof MHFormFieldSelect)
             {
                 inputElem.attr("ng-change", "controller.formElements["+elementIndex+"].onChange(model"+getModelAsHash(field.model)+")");
-                if(field.emptyOption == null)
+                if(field.emptyOption == null || field instanceof MHFormFieldMDSelect)
                 {
                     inputElem.find(".mh-select-empty-option").remove();
                 }
                 else
                 {
-                    inputElem.find(".mh-select-empty-option").attr("ng-value","null");
+                    inputElem.find(".mh-select-empty-option").attr("value", "");
                     inputElem.find(".mh-select-empty-option").html("{{controller.formElements["+elementIndex+"].emptyOption}}");
                 }
                 
-                inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
-                inputElem.find(".mh-select-option").attr("ng-value","$eval(controller.formElements["+elementIndex+"].value)");
-                inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
+                if(field instanceof MHFormFieldMDSelect)
+                {
+                    inputElem.attr("ng-model-options", "{trackBy: '$value.id'}");
+                    inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
+                    inputElem.find(".mh-select-option").attr("ng-value","$eval(controller.formElements["+elementIndex+"].value)");
+                    inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
+                }
+                else
+                {
+                    inputElem.attr("ng-options", "option as option.name for option in controller.formElements["+elementIndex+"].options track by option.id"); 
+                }
             }
             else if(field instanceof MHFormFieldTextArea)
             {

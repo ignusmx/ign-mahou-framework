@@ -42,8 +42,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                     <label class="mh-title"></label>\
                                                     <select class="form-control mh-input">\
                                                         <option class="mh-select-empty-option"></option>\
-                                                        <option class="mh-select-option">\
-                                                        </option>\
                                                     </select>\
                                                     <div class="errors">\
                                                         <div class="mh-input-error-message" ng-message="required"></div>\
