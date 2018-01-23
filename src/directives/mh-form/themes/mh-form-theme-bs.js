@@ -286,10 +286,11 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                     else
                     {
                         newElementContainer = inputContainer.clone();
-                        if(element.title == null)
-                        {
-                            newElementContainer.find("label").remove();
-                        }
+                    }
+
+                    if(element.title == null)
+                    {
+                        newElementContainer.find("label").remove();
                     }
 
                     newElementContainer.attr("data-mh-name", element.name);
