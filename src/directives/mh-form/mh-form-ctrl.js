@@ -222,14 +222,14 @@ angular
                 
                 if(field instanceof MHFormFieldMDSelect)
                 {
-                    inputElem.attr("ng-model-options", "{trackBy: '$value.id'}");
+                    inputElem.attr("ng-model-options", "{trackBy: '$value."+field.trackBy+"'}");
                     inputElem.find(".mh-select-option").attr("ng-repeat","option in controller.formElements["+elementIndex+"].options");
                     inputElem.find(".mh-select-option").attr("ng-value","$eval(controller.formElements["+elementIndex+"].value)");
                     inputElem.find(".mh-select-option").html("{{$eval(controller.formElements["+elementIndex+"].text)}}");
                 }
                 else
                 {
-                    inputElem.attr("ng-options", "option as option.name for option in controller.formElements["+elementIndex+"].options track by option.id"); 
+                    inputElem.attr("ng-options", "option as option.name for option in controller.formElements["+elementIndex+"].options track by option."+field.trackBy); 
                 }
             }
             else if(field instanceof MHFormFieldTextArea)
