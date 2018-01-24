@@ -24,7 +24,6 @@ angular
         self.scope = $scope;
         self.modelCopy = angular.copy(self.scope.model);
         self.formElements = null;
-        console.log(self.scope);
 
         /** @function executeStateOrAction
          * @memberof Controllers.MHFormCtrl

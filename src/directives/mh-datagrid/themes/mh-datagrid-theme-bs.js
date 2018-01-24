@@ -50,9 +50,9 @@ angular.module('ign.Mahou').directive('mhDatagridThemeBs', function ( $templateR
                                                 </div>\
                                                 <div class="mh-cell-content"></div>\
                                                 <div class="mh-cell-elements-container">\
-                                                    <a class="mh-button">\
+                                                    <span class="mh-button">\
                                                         <span class="mh-title"></span>\
-                                                    </a>\
+                                                    </span>\
                                                     <img class="mh-image-file-preview">\
                                                 </div>\
                                             </div>\
