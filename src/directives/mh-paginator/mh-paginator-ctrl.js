@@ -126,13 +126,19 @@ angular
         $scope.$watch("mhLastPage", 
         function( newValue, oldValue ) 
         {
-            groupPages();
+            if(newValue != oldValue)
+            {
+                groupPages();
+            }
         });
 
         $scope.$watch("mhCurrentPage", 
         function( newValue, oldValue ) 
         {
-            onCurrentPageUpdated(newValue);
+            if(newValue != oldValue)
+            {
+                onCurrentPageUpdated(newValue);
+            }
         });
     }
 );
