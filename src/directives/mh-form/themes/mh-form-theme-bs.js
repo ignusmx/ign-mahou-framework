@@ -72,10 +72,6 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                         <md-item-template>\
                                                           <span></span>\
                                                         </md-item-template>\
-                                                    <md-not-found>\
-                                                      No states matching "{{ctrl.searchText}}" were found.\
-                                                      <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>\
-                                                    </md-not-found>\
                                                   </md-autocomplete>\
                                                   <div class="mh-input-error-message help-block">mensaje de error</div>\
                                                 </div>\

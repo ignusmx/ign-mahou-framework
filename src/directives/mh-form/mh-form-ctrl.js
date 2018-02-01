@@ -205,6 +205,7 @@ angular
                 inputElem.attr("md-require-match", field.required);
                 inputElem.attr("md-input-name", field.name);
                 inputElem.attr("md-no-cache", !field.cache);
+                inputElem.attr("md-delay", field.delay);
                 inputElem.find("md-item-template > span").html("{{"+field.itemText+"}}");
             }
             else if(field instanceof MHFormFieldSelect)

@@ -18,6 +18,7 @@ function MHFormFieldMDAutocomplete(config)
 	this.itemText = MHValidationHelper.safeClassAttribute(config, "itemText", String, null, true);
 	this.minLength = MHValidationHelper.safeClassAttribute(config, "minLength", Number, null, false, 0);
 	this.cache = MHValidationHelper.safeClassAttribute(config, "cache", Boolean, null, false, false);
+	this.delay = MHValidationHelper.safeClassAttribute(config, "delay", Number, null, false, 0);
 	this.requiredTags = "md-autocomplete";
 }
 
