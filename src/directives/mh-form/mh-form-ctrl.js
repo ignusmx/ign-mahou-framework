@@ -204,6 +204,7 @@ angular
                 inputElem.attr("placeholder", field.placeholder);
                 inputElem.attr("md-require-match", field.required);
                 inputElem.attr("md-input-name", field.name);
+                inputElem.attr("md-no-cache", !field.cache);
                 inputElem.find("md-item-template > span").html("{{"+field.itemText+"}}");
             }
             else if(field instanceof MHFormFieldSelect)
