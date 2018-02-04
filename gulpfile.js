@@ -45,6 +45,7 @@ var modules_js = [
 					'src/directives/mh-datagrid/mh-datagrid.js',
 					'src/directives/mh-datagrid/themes/mh-datagrid-theme-custom.js',
 					'src/directives/mh-datagrid/themes/mh-datagrid-theme-bs.js',
+					'src/directives/mh-datagrid/themes/mh-datagrid-theme-mosaic.js',
 					'src/directives/mh-form/mh-form-ctrl.js',
 					'src/directives/mh-form/mh-form.js',
 					'src/directives/mh-form/themes/mh-form-theme-custom.js',
