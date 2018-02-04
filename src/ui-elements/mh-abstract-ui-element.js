@@ -23,5 +23,5 @@ function MHAbstractUIElement(config)
 	this.cssClasses = MHValidationHelper.safeClassAttribute(config, "cssClasses", String, null, false);
 	this.styles = MHValidationHelper.safeClassAttribute(config, "styles", Object, null, false);
 	this.requiredTags = MHValidationHelper.safeClassAttribute(config, "requiredTags", [String, Array], null, false);
-	this.attributes = MHValidationHelper,safeClassAttribute(config, "attributes", Object, null, false);
+	this.attributes = MHValidationHelper.safeClassAttribute(config, "attributes", Object, null, false);
 }
