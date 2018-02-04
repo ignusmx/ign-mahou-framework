@@ -59,6 +59,7 @@ angular
                 if(button.length > 0)
                 {
                     MHDecorator.decorateEltCSS(button, config.cssClasses, config.styles);
+                    MHDecorator.decorateEltAttributes(button, config.attributes);
                     MHValidationHelper.validateRequiredTags(config, button);
 
                     button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].action)");
@@ -75,6 +76,7 @@ angular
                             if(button.length > 0)
                             {
                                 MHDecorator.decorateEltCSS(button, dropdownConfig.cssClasses, dropdownConfig.styles);
+                                MHDecorator.decorateEltAttributes(button, dropdownConfig.attributes);
                                 MHValidationHelper.validateRequiredTags(dropdownConfig, button);
                                 button.attr("ng-click", "controller.executeStateOrAction(controller.allNavbarElements["+i+"].dropdownButtons["+j+"].action)");
                                 button.find(".mh-title").attr("mh-compile","controller.allNavbarElements["+i+"].dropdownButtons["+j+"].title");

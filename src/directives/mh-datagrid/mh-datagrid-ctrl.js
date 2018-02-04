@@ -230,6 +230,7 @@ angular
                         }
 
                         MHDecorator.decorateEltCSS(newElement, contentElement.cssClasses, contentElement.styles);
+                        MHDecorator.decorateEltAttributes(newElement, contentElement.attributes);
                         colCellElementsContainer.append(newElement);
                     }
 

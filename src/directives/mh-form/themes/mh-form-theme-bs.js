@@ -162,6 +162,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         var rowContainer = element;
                         var newFormRow = formRow.clone();
                         MHDecorator.decorateEltCSS(newFormRow, element.cssClasses, element.styles);
+                        MHDecorator.decorateEltAttributes(newFormRow, element.attributes);
                         group.append(newFormRow);
 
                         if(rowContainer.elements != null)
@@ -178,7 +179,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                         var container  = element;
                         var newFormCol = formCol.clone();
                         MHDecorator.decorateEltCSS(newFormCol, element.cssClasses, element.styles);
-
+                        MHDecorator.decorateEltAttributes(newFormCol, element.attributes);
                         if(element.flex)
                         {
                             var flexAlign = 'flex-start';

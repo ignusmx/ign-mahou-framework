@@ -160,6 +160,7 @@ angular
         {
             var inputElem = elementTemplate.find(".mh-input");
             MHDecorator.decorateEltCSS(inputElem, field.cssClasses, field.styles);
+            MHDecorator.decorateEltAttributes(inputElem, field.attributes);
 
             MHValidationHelper.validateRequiredTags(field, inputElem);
 
@@ -260,6 +261,7 @@ angular
         {
             var buttonElement = elementTemplate.find(".mh-form-button");
             MHDecorator.decorateEltCSS(buttonElement, button.cssClasses, button.styles);
+            MHDecorator.decorateEltAttributes(buttonElement, button.attributes);
 
             if(button.disabledStatuses != null)
             {
