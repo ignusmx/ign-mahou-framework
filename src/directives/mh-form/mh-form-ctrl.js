@@ -291,7 +291,8 @@ angular
                     }
                 }
                 
-                buttonElement.attr("ng-disabled", disabledExpression);    
+                var ngDisabledAttrVal = buttonElement.attr("ng-disabled");
+                buttonElement.attr("ng-disabled", ngDisabledAttrVal + " || " + disabledExpression);    
             }
             
             buttonElement.attr("ng-click", "controller.executeStateOrAction(controller.formElements["+elementIndex+"].action, model, "+formName+")");
