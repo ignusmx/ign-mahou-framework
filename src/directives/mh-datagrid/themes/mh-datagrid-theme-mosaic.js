@@ -42,7 +42,7 @@ angular.module('ign.Mahou').directive('mhDatagridThemeMosaic', function ( $templ
                                                     <span class="mh-title"></span>\
                                                 </div>\
                                                 <div class="mh-checkbox-header-container">\
-                                                    <span class="mh-title"></span> <input type="checkbox" class="mh-input">\
+                                                    <input type="checkbox" class="mh-input"> <span class="mh-title"></span>\
                                                 </div>\
                                             </div>\
                                             <div class="mh-cell-content-templates">\
