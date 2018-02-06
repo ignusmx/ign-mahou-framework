@@ -108,7 +108,7 @@ angular
                 return false;
             }
 
-			return field.$invalid && (field.$dirty || field.$touched || form.$submitted);
+			return field.$invalid && (field.$dirty || field.$touched || form.$submitted ||  (self.scope.parentForm != null && self.scope.parentForm.$submitted));
 		}
 
         /** @function modelChanged
