@@ -231,7 +231,7 @@ angular
                 }
                 else
                 {
-                    inputElem.attr("ng-options", "option as option.name for option in controller.formElements["+elementIndex+"].options track by option."+field.trackBy); 
+                    inputElem.attr("ng-options", "option as "+field.text+" for option in controller.formElements["+elementIndex+"].options track by option."+field.trackBy); 
                 }
             }
             else if(field instanceof MHFormFieldTextArea)
