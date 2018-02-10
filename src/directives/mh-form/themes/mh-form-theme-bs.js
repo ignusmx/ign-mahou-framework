@@ -149,6 +149,7 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                 label.remove();
 
                 //RENDER LAYOUT
+                formScope.mhFormLayout = formScope.mhFormLayout || [];
                 for(var i = 0; i < formScope.mhFormLayout.length; i++)
                 {
                     var element = formScope.mhFormLayout[i];
