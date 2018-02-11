@@ -260,7 +260,6 @@ angular
 
             var row = templateElem.find(".mh-datagrid-row");
             row.attr("ng-repeat", "row in controller.internalCollection");
-            console.log(self.scope.mhRowClasses);   
             row.addClass(self.scope.mhRowClasses);      
 
             directiveElem.append(templateElem);
