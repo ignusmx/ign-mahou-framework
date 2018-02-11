@@ -25,7 +25,7 @@ angular
         var self = this;
         self.scope = $scope;
         self.allRowsSelected = false;
-        self.collection = $scope.mhCollection;
+        self.collection = $scope.mhCollection || [];
         self.selectedRows = [];
         self.internalCollection = [];
 
