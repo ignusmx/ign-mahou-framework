@@ -26,6 +26,7 @@
  *
  * @property {MHDatagridCol[]}        mhCols                   - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content
  * @property {Object[]}               mhCollection             - an array of objects to be displayed on the datagrid
+ * @property {String}               mhRowClasses             - css classes to be added to rows
  * @property {Function}               mhRowsSelectedChange     - callback action to be executed when one or more row checkbox have been selected
  */
 angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templateRequest ) {
@@ -36,6 +37,7 @@ angular.module('ign.Mahou').directive('mhDatagrid', function ( $compile, $templa
         { 
             mhCols : "=",
             mhCollection : "=",
+            mhRowClasses : "=",
             mhRowsSelectedChange : "&"
         },
         compile : function(elem,attrs)

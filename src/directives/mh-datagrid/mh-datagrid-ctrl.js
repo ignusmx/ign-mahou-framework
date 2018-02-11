@@ -10,7 +10,7 @@
  * @property {MHDatagridCol[]}        scope.mhCols                              - An array of {@link UIElements.MHDatagridCol MHDatagridCol} to be used for display content.
  * @property {Object[]}               scope.mhCollection                        - an array of objects to be displayed on the datagrid.
  * @property {Function}               scope.mhRowsSelectedChange                - callback action to be executed when one or more row checkbox have been selected.
- * @property {string}                 scope.mhRowClasses                        - css classes to be added to rows
+ * @property {String}                 scope.mhRowClasses                        - css classes to be added to rows
  * @property {boolean}                allRowsSelected                           - true when all rows checkboxes are selected, false otherwise.
  * @property {object[]}               selectedRows                              - keeps the list of the selected rows (updated eachtime a checkbox is selected).
  * @property {object[]}               internalCollection                        - An internal collection used to keep all rows so we can mark them as selected without modifying the models of the original mhCollection.
@@ -259,7 +259,8 @@ angular
             }
 
             var row = templateElem.find(".mh-datagrid-row");
-            row.attr("ng-repeat", "row in controller.internalCollection");    
+            row.attr("ng-repeat", "row in controller.internalCollection");
+            console.log(self.scope.mhRowClasses);   
             row.addClass(self.scope.mhRowClasses);      
 
             directiveElem.append(templateElem);
