@@ -23,9 +23,11 @@ angular
     function MHDatagridCtrl($scope, $element, $attrs, $compile, $state) 
     {
         var self = this;
+        $scope.mhCollection = $scope.mhCollection || [];
+        $scope.mhCols = $scope.mhCols || [];
         self.scope = $scope;
         self.allRowsSelected = false;
-        self.collection = $scope.mhCollection || [];
+        self.collection = $scope.mhCollection;
         self.selectedRows = [];
         self.internalCollection = [];
 
