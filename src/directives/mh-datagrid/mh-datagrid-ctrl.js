@@ -41,28 +41,31 @@ angular
             function( newCollection, oldCollection ) 
             {
                 var tempInternalCollection = [];
-                for(var i = 0; i < newCollection.length; i++)
+                if(newCollection != null)
                 {
-                    var existingRow = null;
-                    for(var j = 0; j < self.internalCollection.length; j++)
+                    for(var i = 0; i < newCollection.length; i++)
                     {
-                        var internalRow = self.internalCollection[j];
-                        var internalModel = internalRow.model;
-                        if(internalModel === newCollection[i])
+                        var existingRow = null;
+                        for(var j = 0; j < self.internalCollection.length; j++)
                         {
-                            existingRow = internalRow;
-                            break;
+                            var internalRow = self.internalCollection[j];
+                            var internalModel = internalRow.model;
+                            if(internalModel === newCollection[i])
+                            {
+                                existingRow = internalRow;
+                                break;
+                            }
                         }
-                    }
 
-                    if(existingRow == null)
-                    {
-                        tempInternalCollection.push({ selected : false, model : newCollection[i]});
-                    }
-                    else
-                    {
-                        existingRow.selected = false;
-                        tempInternalCollection.push(existingRow);
+                        if(existingRow == null)
+                        {
+                            tempInternalCollection.push({ selected : false, model : newCollection[i]});
+                        }
+                        else
+                        {
+                            existingRow.selected = false;
+                            tempInternalCollection.push(existingRow);
+                        }
                     }
                 }
 

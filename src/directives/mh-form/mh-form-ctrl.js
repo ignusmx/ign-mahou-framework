@@ -245,6 +245,7 @@ angular
                 inputElem.attr("ngf-multiple", field.multiple);
                 inputElem.attr("ngf-allow-dir", field.allowDir);
                 inputElem.attr("accept", field.accept);
+                inputElem.find(".mh-placeholder").html(field.placeholder);
             }
         }
 

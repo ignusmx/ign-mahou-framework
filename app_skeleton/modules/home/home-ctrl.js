@@ -104,7 +104,7 @@
 				new MHFormFieldInputText({ name : 'name', title:"Nombre de la propiedad", model:"name", required:true, invalidMessage:"error, nombre es requerido", itemText:"item",placeholder:"wers", searchQuery:function(s){ return ["1","2","3"]} }),
 				new MHFormFieldInputNumber({name:"price", title:"Precio", model:"price", required:true, invalidMessage:"error, debe especificar un precio"}),
 				new MHFormFieldMDSelect({name:"city", title:"Ciudad", model:"address.city", options:["Guadalajara", "Zapopan"]}),
-				new MHFormFieldDropfile({ name : 'photos', title:"Agregar fotos", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true, accept:".jpg", allowDir:false }),
+				new MHFormFieldDropfile({ name : 'photos', title:"Agregar fotos", model:"images", required:true, invalidMessage:"error, nombre es requerido", placeholder:"wers", multiple:true, accept:".jpg", allowDir:true }),
 				new MHFormFieldMDDate({ name : 'date', title : "Fecha", model : "age", required:true, placeholder:"eee" }),
 				new MHFormFieldInputEmail({ name : 'mail', title : "No. registro", model : "email", required : true, invalidMessage : "escriba por favor un correo valido" }),
 

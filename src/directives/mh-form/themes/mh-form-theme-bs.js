@@ -76,8 +76,9 @@ angular.module('ign.Mahou').directive('mhFormThemeBs', function ( $templateReque
                                                   <div class="mh-input-error-message help-block">mensaje de error</div>\
                                                 </div>\
                                                 <div class="mh-dropfiles-container">\
+                                                    <label class="mh-title"></label>\
                                                     <ngf-drop ngf-select class="mh-bs-dropfile mh-input">\
-                                                        <span class="mh-title"></span>\
+                                                        <span class="mh-placeholder"></span>\
                                                     </ngf-drop>\
                                                     <div ngf-no-file-drop class="mh-input-error-message"></div>\
                                                 </div>\
