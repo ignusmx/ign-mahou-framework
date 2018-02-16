@@ -237,6 +237,9 @@ angular
 
                         MHDecorator.decorateEltCSS(newElement, contentElement.cssClasses, contentElement.styles);
                         MHDecorator.decorateEltAttributes(newElement, contentElement.attributes);
+
+                        MHDecorator.decorateEltCSS(colCellElementsContainer, col.cssClasses, col.styles);
+                        MHDecorator.decorateEltAttributes(colCellElementsContainer, col.attributes);
                         colCellElementsContainer.append(newElement);
                     }
 
