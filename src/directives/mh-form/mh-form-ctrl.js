@@ -174,7 +174,7 @@ angular
             {
                 inputErrorMessage.html("{{controller.formElements["+elementIndex+"].invalidMessage}}")
                 inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+field.name+", "+formName+") && controller.formElements["+elementIndex+"].invalidMessage != null");
-                inputElem.attr("required", true);
+                inputElem.attr("ng-required", field.required);
 
                 if(self.scope.mhClassInvalid != null)
                 {
