@@ -23,6 +23,7 @@ function MHAbstractFormField(config)
 	this.model = MHValidationHelper.safeClassAttribute(config, "model", String, null, false);
 	this.placeholder = MHValidationHelper.safeClassAttribute(config, "placeholder", String, null, false);
 	this.required = MHValidationHelper.safeClassAttribute(config, "required", [Boolean, String], null, false);
+	this.customValidation = MHValidationHelper.safeClassAttribute(config, "customValidation", Function, null, false);
 	this.invalidMessage = MHValidationHelper.safeClassAttribute(config, "invalidMessage", String, null, false);
 }
 

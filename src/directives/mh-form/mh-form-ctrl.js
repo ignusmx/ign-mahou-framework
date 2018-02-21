@@ -170,11 +170,12 @@ angular
             }
 
             var inputErrorMessage = elementTemplate.find(".mh-input-error-message");
-            if(field.required)
+            if(field.required || field.customValidation)
             {
                 inputErrorMessage.html("{{controller.formElements["+elementIndex+"].invalidMessage}}")
                 inputErrorMessage.attr("ng-show", "controller.fieldIsInvalid("+formName+"."+field.name+", "+formName+") && controller.formElements["+elementIndex+"].invalidMessage != null");
                 inputElem.attr("ng-required", field.required);
+                inputElem.attr("mh-custom-field-validation", "controller.formElements["+elementIndex+"].customValidation(modelValue)");
 
                 if(self.scope.mhClassInvalid != null)
                 {

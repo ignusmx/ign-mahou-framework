@@ -16,6 +16,7 @@ var modules_js = [
 					'src/helpers/**/*.js',
 					'src/helpers/mh-validation-helper.js',
 					'src/directives/mh-compile.js',
+					'src/directives/mh-custom-field-validation.js',
 					'src/decorators/mh-decorator.js',
 					'src/ui-elements/mh-abstract-ui-element.js',
 					'src/ui-elements/mh-form-bs-row.js',
