@@ -203,8 +203,8 @@ angular
             else if(field instanceof MHFormFieldMDAutocomplete)
             {
                 inputElem.attr("md-selected-item", "model"+getModelAsHash(field.model));
-                inputElem.attr("md-search-text", field.name+"SearchText");
-                inputElem.attr("md-items", "item in controller.formElements["+elementIndex+"].searchQuery("+field.name+"SearchText)");
+                inputElem.attr("md-search-text", field.searchText);
+                inputElem.attr("md-items", "item in controller.formElements["+elementIndex+"].searchQuery(controller.formElements["+elementIndex+"].searchText)");
                 inputElem.attr("md-item-text", field.itemText);
                 inputElem.attr("md-min-length", field.minLength);
                 inputElem.attr("placeholder", field.placeholder);
