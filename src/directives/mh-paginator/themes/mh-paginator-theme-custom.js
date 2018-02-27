@@ -25,7 +25,6 @@ angular.module('ign.Mahou').directive('mhPaginatorThemeCustom', function ( $temp
         template : function(el)
         {
             this.mhRawInnerTemplate = el.html();
-            console.log(this.mhRawInnerTemplate);
             return "";
         },
         link : function(scope, el, attrs, ctrls)
