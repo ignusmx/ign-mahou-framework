@@ -36,37 +36,37 @@ angular.module('ign.Mahou').directive('mhNavbarThemeBs', function ( $templateReq
                                                     <span class="icon-bar"></span>\
                                                     <span class="icon-bar"></span>\
                                                   </button>\
-                                                  <a class="navbar-brand mh-brand" href="#"><span class="mh-title"></span></a>\
+                                                  <a class="navbar-brand mh-brand" href="#" onclick="return false;"><span class="mh-title"></span></a>\
                                                 </div>\
                                                 <!-- Collect the nav links, forms, and other content for toggling -->\
                                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">\
                                                   <ul class="nav navbar-nav">\
                                                     <li>\
-                                                        <a class="mh-navbar-button" href="#">\
+                                                        <a class="mh-navbar-button" href="#" onclick="return false;">\
                                                             <span class="mh-title"></span>\
                                                         </a>\
                                                     </li>\
                                                     <li class="dropdown">\
-                                                      <a href="#" class="dropdown-toggle mh-navbar-button" \
+                                                      <a href="#" onclick="return false;" class="dropdown-toggle mh-navbar-button" \
                                                       data-toggle="dropdown" role="button" aria-haspopup="true" \
                                                       aria-expanded="false"><span class="mh-title"></span> <span class="caret"></span></a>\
                                                       <ul class="dropdown-menu">\
-                                                        <li><a href="#" class="mh-navbar-button"><span class="mh-title"></span></a></li>\
+                                                        <li><a href="#" onclick="return false;" class="mh-navbar-button"><span class="mh-title"></span></a></li>\
                                                       </ul>\
                                                     </li>\
                                                   </ul>\
                                                   <ul class="nav navbar-nav navbar-right">\
                                                     <li>\
-                                                        <a class="mh-navbar-button" href="#">\
+                                                        <a class="mh-navbar-button" href="#" onclick="return false;">\
                                                             <span class="mh-title"></span>\
                                                         </a>\
                                                     </li>\
                                                     <li class="dropdown">\
-                                                      <a href="#" class="dropdown-toggle mh-navbar-button" \
+                                                      <a href="#" onclick="return false;" class="dropdown-toggle mh-navbar-button" \
                                                       data-toggle="dropdown" role="button" aria-haspopup="true" \
                                                       aria-expanded="false"><span class="mh-title"></span> <span class="caret"></span></a>\
                                                       <ul class="dropdown-menu">\
-                                                        <li><a href="#" class="mh-navbar-button"><span class="mh-title"></span></a></li>\
+                                                        <li><a href="#" onclick="return false;" class="mh-navbar-button"><span class="mh-title"></span></a></li>\
                                                       </ul>\
                                                     </li>\
                                                   </ul>\

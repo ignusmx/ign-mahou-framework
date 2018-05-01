@@ -22,7 +22,7 @@ angular.module('ign.Mahou').directive('mhPaginatorThemeBs', function ( $template
             this.mhRawInnerTemplate =   '<nav aria-label="Page navigation">\
                                           <ul class="pagination">\
                                             <li class="mh-prev-button-container">\
-                                              <a href="#" aria-label="Previous" class="mh-prev-button">\
+                                              <a href="#" onclick="return false;" aria-label="Previous" class="mh-prev-button">\
                                                 <span aria-hidden="true">&laquo;</span>\
                                               </a>\
                                             </li>\
@@ -32,7 +32,7 @@ angular.module('ign.Mahou').directive('mhPaginatorThemeBs', function ( $template
                                                 </a>\
                                             </li>\
                                             <li class="mh-next-button-container">\
-                                              <a href="#" aria-label="Next" class="mh-next-button">\
+                                              <a href="#" onclick="return false;" aria-label="Next" class="mh-next-button">\
                                                 <span aria-hidden="true">&raquo;</span>\
                                               </a>\
                                             </li>\
