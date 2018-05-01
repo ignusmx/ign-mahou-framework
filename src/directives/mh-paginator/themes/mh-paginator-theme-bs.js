@@ -27,7 +27,7 @@ angular.module('ign.Mahou').directive('mhPaginatorThemeBs', function ( $template
                                               </a>\
                                             </li>\
                                             <li class="mh-page-button-container">\
-                                                <a class="mh-page-button" href="#">\
+                                                <a class="mh-page-button" href="#" onclick="return false;">\
                                                     <span class="mh-title"></span>\
                                                 </a>\
                                             </li>\
