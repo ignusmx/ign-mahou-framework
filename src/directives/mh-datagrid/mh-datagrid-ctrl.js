@@ -257,6 +257,7 @@ angular
                 else
                 {
                     var colCellContent = cellContent.clone();
+                    MHDecorator.decorateEltCSS(colCellContent, col.cssClasses, col.styles);
                     colCellContent.attr("mh-compile", "mhCols["+i+"].content");
                     colCell.append(colCellContent);
                 }

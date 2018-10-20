@@ -1,0 +1,43 @@
+md-autocomplete.form-control
+{
+	padding:0px;
+}
+
+.md-whiteframe-1dp, .md-whiteframe-z1 
+{
+    box-shadow: none;
+}
+
+md-autocomplete md-autocomplete-wrap {
+    height: inherit;
+}
+
+md-autocomplete input:not(.md-input) {
+    height: inherit;
+}
+
+.mh-bs-dropfile{
+	background: #F8F8F8;
+    border: 3px dashed #DDD;
+    padding: 10px;
+    width:100%; 
+    height:100%; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mh-bs-dropfile-dragover {
+    background: #fcf8e3;
+    border: 3px dashed #faebcc;
+    color: #8a6d3b;
+    font-weight: bold;
+}
+
+.mh-rows-container{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
